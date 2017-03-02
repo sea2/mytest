@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.example.test.mytestdemo">
+
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <application
+        android:name=".application.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".activity.MainActivity"
+            android:theme="@style/AppThemeBackgroundTransparent">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.PermissionsActivity">
+        </activity>
+        <activity
+            android:name=".activity.SpannableStringActivity"
+            android:label="@string/title_activity_base"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".notifications.NotificationMainActivity"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".notifications.ProgressAcitivty"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".notifications.CustomActivity"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".activity.HorizontalScrollViewActivity"
+            android:launchMode="singleInstance">
+        </activity>
+        <activity android:name=".webview.WebViewTestActivity"/>
+        <activity android:name=".activity.ThreadActivity"/>
+        <activity android:name=".broadcast.BroadcastActivity">
+        </activity>
+
+        <receiver
+            android:name=".broadcast.MyReceiver"
+            android:enabled="true"
+            android:exported="true">
+
+            <!-- 静态注册广播 -->
+            <!-- intent过滤器,指定可以匹配哪些intent, 一般需要定义action 可以是自定义的也可是系统的 -->
+            <intent-filter>
+
+                <!-- action -->
+                <action android:name="com.broadcast.test"/>
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".aidl.AdditionService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+
+        <activity android:name=".aidl.HelloSumAidlActivity">
+        </activity>
+
+        <service
+            android:name=".service.MyService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+        <service
+            android:name=".service.MyIntentService"
+            android:exported="false">
+        </service>
+
+        <activity android:name=".service.ServiceTestActivity">
+        </activity>
+
+        <service
+            android:name=".service.MyService2"
+            android:enabled="true"
+            android:exported="true">
+        </service>
+
+        <activity android:name=".activity.SwipeBackActivity">
+        </activity>
+        <activity android:name=".activity.RxjavaActivity">
+        </activity>
+        <activity android:name=".activity.AnimationActivity">
+        </activity>
+    </application>
+
+</manifest>

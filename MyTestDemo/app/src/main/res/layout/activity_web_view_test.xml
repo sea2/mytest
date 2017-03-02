@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_web_view_test"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.test.mytestdemo.webview.WebViewTestActivity">
+
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></WebView>
+
+
+    <Button
+        android:id="@+id/btn_js"
+        android:layout_width="wrap_content"
+        android:text="js"
+        android:layout_height="wrap_content"/>
+
+
+    <Button
+        android:id="@+id/btn_next_page"
+        android:layout_toRightOf="@+id/btn_js"
+        android:layout_width="wrap_content"
+        android:text="js"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

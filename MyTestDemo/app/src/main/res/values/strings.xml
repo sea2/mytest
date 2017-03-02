@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">我的测试</string>
+    <string name="title_activity_base">BaseActivity</string>
+
+
+    <!-- 页面名称 -->
+    <string name="main_navigation_home">首页</string>
+    <string name="main_navigation_im">选房清单</string>
+    <string name="main_navigation_interest">看房日程</string>
+    <string name="main_navigation_user">我的</string>
+
+    <string name="hello">Hello Sum AIDL</string>
+    <string name="result">Result</string>
+
+    <string name="plus">+</string>
+    <string name="equal">=</string>
+
+    <string name="hint1">Value 1</string>
+    <string name="hint2">Value 2</string>
+</resources>

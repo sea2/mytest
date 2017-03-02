@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.test.mytestdemo.activity.HorizontalScrollViewActivity">
+
+    <Button
+        android:id="@+id/btn_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="event"/>
+
+    <com.example.test.mytestdemo.ui.MyHorizontalScrollView
+        android:id="@+id/activity_horizontal_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:background="#AA444444"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/id_gallery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="400dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorAccent"/>
+
+            <TextView
+                android:layout_width="400dp"
+                android:layout_height="match_parent"
+                android:background="@color/footer_text_color_selected"/>
+
+            <TextView
+                android:layout_width="400dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorCommonBg"/>
+
+            <TextView
+                android:layout_width="400dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryDark"/>
+
+        </LinearLayout>
+    </com.example.test.mytestdemo.ui.MyHorizontalScrollView>
+
+</RelativeLayout>
