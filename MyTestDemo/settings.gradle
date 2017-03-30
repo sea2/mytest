@@ -1,1 +1,1 @@
-include ':app', ':swipebackhelper'
+include ':test', ':swipebackhelper', ':xview'
