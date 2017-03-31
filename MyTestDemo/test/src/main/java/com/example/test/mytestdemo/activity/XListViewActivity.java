@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ArrayAdapter;
 
-import com.pulltorefresh.xview.R;
+import com.example.test.mytestdemo.R;
 import com.pulltorefresh.xview.XListView;
 
 import java.text.SimpleDateFormat;
