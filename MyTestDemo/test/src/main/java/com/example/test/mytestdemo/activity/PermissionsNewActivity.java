@@ -164,4 +164,8 @@ public class PermissionsNewActivity extends BaseActivity {
         startActivity(intent);
     }
 
+
+
+
+
 }

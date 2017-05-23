@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.example.test.mytestdemo"
-        minSdkVersion 10
+        minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -37,7 +37,7 @@ android {
             minifyEnabled false
             zipAlignEnabled false
             shrinkResources false
-          //  applicationIdSuffix ".test"
+            //  applicationIdSuffix ".test"
             manifestPlaceholders << [CHANNEL_KEY: "1"]
             manifestPlaceholders << [APP_NAME: "我的测试-test"]
             signingConfig signingConfigs.debug
@@ -68,14 +68,17 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.0'
-    compile 'com.android.support:design:25.3.0'
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:multidex:1.0.1'
-    compile 'de.greenrobot:eventbus:3.0.0-beta1'
-    compile 'io.reactivex.rxjava2:rxjava:2.0.0'
-    compile 'org.reactivestreams:reactive-streams:1.0.0'
-    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
     compile project(':swipebackhelper')
     compile project(':xview')
+    compile 'com.android.support:appcompat-v7:25.3.0'
+    compile 'com.android.support:design:25.3.0'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'de.greenrobot:eventbus:3.0.0-beta1'
+    compile 'io.reactivex:rxjava:1.2.3'
+    compile 'com.trello:rxlifecycle:0.3.0'
+    compile 'com.trello:rxlifecycle-components:0.3.0'
+    compile 'org.reactivestreams:reactive-streams:1.0.0'
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta3'
+    testCompile 'junit:junit:4.12'
 }
