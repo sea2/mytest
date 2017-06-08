@@ -1,1 +1,1 @@
-include ':test', ':swipebackhelper', ':xview'
+include ':test', ':swipebackhelper', ':xview', 'module:myThread'

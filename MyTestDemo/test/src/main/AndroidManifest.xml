@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".rxJava.RxJavaActivity"
+            android:name=".xmlPull.PullTestActivity"
             android:theme="@style/AppThemeBackgroundTransparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -102,6 +102,7 @@
         </activity>
         <activity android:name=".activity.AnimationActivity">
         </activity>
+        <activity android:name=".ui.recyclerview.StaggeredGridLayoutActivity"/>
     </application>
 
 </manifest>

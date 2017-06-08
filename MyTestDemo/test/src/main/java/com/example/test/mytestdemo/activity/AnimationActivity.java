@@ -54,7 +54,5 @@ public class AnimationActivity extends AppCompatActivity {
         });
 
 
-
-
     }
 }

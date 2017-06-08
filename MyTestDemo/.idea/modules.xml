@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MyTestDemo.iml" filepath="$PROJECT_DIR$/MyTestDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module/module.iml" filepath="$PROJECT_DIR$/module/module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module/myThread/myThread.iml" filepath="$PROJECT_DIR$/module/myThread/myThread.iml" />
       <module fileurl="file://$PROJECT_DIR$/swipebackhelper/swipebackhelper.iml" filepath="$PROJECT_DIR$/swipebackhelper/swipebackhelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
       <module fileurl="file://$PROJECT_DIR$/xview/xview.iml" filepath="$PROJECT_DIR$/xview/xview.iml" />

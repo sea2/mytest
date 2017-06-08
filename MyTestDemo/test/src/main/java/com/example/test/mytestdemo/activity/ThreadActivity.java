@@ -63,7 +63,6 @@ public class ThreadActivity extends BaseActivity {
         task.execute(1);*/
 
 
-
     }
 
     //终止线程的办法
@@ -78,7 +77,7 @@ public class ThreadActivity extends BaseActivity {
             }
 
 
-            Log.e("tag", mthread.isInterrupted()+"");
+            Log.e("tag", mthread.isInterrupted() + "");
             // 通过Handler获得Message对象
             if (mhandler != null) {
                 Message msg = mhandler.obtainMessage();
@@ -131,13 +130,17 @@ public class ThreadActivity extends BaseActivity {
         }
     };
 
-
+    /**
+     * 1、 AsyncTask的本质是一个静态的线程池，AsyncTask派生出的子类可以实现不同的异步任务，这些任务都是提交到静态的线程池中执行。
+     * 2、线程池中的工作线程执行doInBackground(mParams)方法执行异步任务
+     * 3、当任务状态改变之后，工作线程会向UI线程发送消息，AsyncTask内部的InternalHandler响应这些消息，并调用相关的回调函数
+     */
     private class DialogHelper extends AsyncTask<Integer, Void, Integer> {
 
         @Override
         protected void onPreExecute() {
             // 该方法是运行在主线程中的,执行早于下面的方法
-           // showToast("开始进度");
+            // showToast("开始进度");
         }
 
 
@@ -163,6 +166,12 @@ public class ThreadActivity extends BaseActivity {
 
         @Override
         protected void onPostExecute(Integer result) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                }
+            });
             switch (result) {
                 case 1:
                     if (progressInt < 100) {
@@ -193,4 +202,6 @@ public class ThreadActivity extends BaseActivity {
             task.cancel(true); // 如果Task还在运行，则先取消它
         }
     }
+
+
 }

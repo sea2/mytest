@@ -19,6 +19,8 @@ import com.example.test.mytestdemo.test.IAdditionService;
 import com.example.test.mytestdemo.utils.StringUtils;
 import com.example.test.mytestdemo.utils.ToastUtils;
 
+import static com.example.test.mytestdemo.R.id.tv_name;
+
 public class HelloSumAidlActivity extends AppCompatActivity {
     IAdditionService service;
     AdditionServiceConnection connection;
@@ -36,7 +38,7 @@ public class HelloSumAidlActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hello_sum_aidl);
         this.buttonCalc = (Button) findViewById(R.id.buttonCalc);
         this.TextView01 = (TextView) findViewById(R.id.TextView01);
-        this.tvname = (TextView) findViewById(R.id.tv_name);
+        this.tvname = (TextView) findViewById(tv_name);
         initService();
 
         Button buttonCalc = (Button) findViewById(R.id.buttonCalc);
@@ -44,7 +46,6 @@ public class HelloSumAidlActivity extends AppCompatActivity {
         value1 = (EditText) findViewById(R.id.value1);
         value2 = (EditText) findViewById(R.id.value2);
         tvname.setText(name + "买豆");
-
         buttonCalc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
