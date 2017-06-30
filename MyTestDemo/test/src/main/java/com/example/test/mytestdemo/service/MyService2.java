@@ -31,6 +31,7 @@ public class MyService2 extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
+        Log.i(TAG, "onBind() executed");
         return mBinder;
     }
 

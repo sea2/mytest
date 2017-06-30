@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -104,10 +105,6 @@ public class WebViewTestActivity extends BaseActivity {
         });
 
 
-
-
-
-
         btnnextpage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,6 +139,60 @@ public class WebViewTestActivity extends BaseActivity {
     }
 
 
+
+
+/*
+7、使用独立进程跑WebView
+    有一定使用WebView经验的老司机可能都把项目中的WebView模块抽取出来，并跑在独立的进程中去。例如在manifest文件中使用属性process指定独立的进程。
+
+<!-- Web 页面 -->
+<activity
+    android:name=".UI.CommonUI.Activity.WebBrowserActivity"
+    android:configChanges="orientation|screenSize|keyboardHidden"
+    android:hardwareAccelerated="true"
+    android:label=""
+    android:process=":web"
+    android:screenOrientation="portrait" />
+    这样做的是因为WebView在以前的版本的底层实现中会发生内存泄漏，导致页面关闭但是依然没有释放内存，而在独立进程中的WebView模块就可以很好解决此问题，在关闭WebView的时候就关闭进程，这样就可以释放相关的内存了。
+
+    但是使用多进程架构，进程间数据共享就是一个问题了。例如进程A设置了cookie，同样我也要在进程B共享这个cookie。目前AC认为可行的解决方案是使用ContentProvider来共享数据。此问题AC没有写相应的Demo，希望有老司机可以带路。
+
+            8、WebView生命周期回调
+
+    WebView也有生命周期回调方法，这些方法需要在Activity或Fragment相应的生命方法中回调。主要是onResume(),onPasuse()和onDestory()（或者onDestoryView()）这几个方法的回调实现。
+*/
+
+    @Override
+    public void onResume() {
+        if (webview != null) {
+            webview.resumeTimers();
+            webview.onResume();
+        }
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        if (webview != null) {
+            webview.pauseTimers();
+            webview.onPause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        if (webview != null) {
+            webview.stopLoading();
+            ((ViewGroup) webview.getParent()).removeView(webview);
+            webview.removeAllViews();
+            webview.setWebChromeClient(null);
+            webview.setWebViewClient(null);
+            unregisterForContextMenu(webview);
+            webview.destroy();
+        }
+        super.onDestroy();
+    }
 
 
 }

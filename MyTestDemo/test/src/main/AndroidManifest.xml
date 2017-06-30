@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".xmlPull.PullTestActivity"
+            android:name=".ui.recyclerview.RecyclerViewHomeActivity"
             android:theme="@style/AppThemeBackgroundTransparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -51,7 +51,6 @@
             android:name=".activity.HorizontalScrollViewActivity"
             android:launchMode="singleInstance">
         </activity>
-        <activity android:name=".webview.WebViewTestActivity"/>
         <activity android:name=".activity.ThreadActivity"/>
         <activity android:name=".broadcast.BroadcastActivity">
         </activity>
@@ -89,8 +88,6 @@
             android:exported="false">
         </service>
 
-        <activity android:name=".service.ServiceTestActivity">
-        </activity>
 
         <service
             android:name=".service.MyService2"
@@ -98,6 +95,13 @@
             android:exported="true">
         </service>
 
+        <activity
+            android:name=".webview.WebViewTestActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:hardwareAccelerated="true"
+            android:label=""
+            android:process=":web"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activity.SwipeBackActivity">
         </activity>
         <activity android:name=".activity.AnimationActivity">

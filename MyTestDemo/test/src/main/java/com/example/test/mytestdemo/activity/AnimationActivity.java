@@ -1,5 +1,8 @@
 package com.example.test.mytestdemo.activity;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +19,7 @@ public class AnimationActivity extends AppCompatActivity {
     private android.widget.Button btnstart;
     private android.widget.Button btnstop;
     private android.widget.LinearLayout activityanimation;
-    AnimationDrawable anim;
+    private AnimationDrawable anim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,5 +57,47 @@ public class AnimationActivity extends AppCompatActivity {
         });
 
 
+    }
+
+     //值变化
+    private void setObjectAnimator(float last, float current) {
+
+        ValueAnimator progressAnimator = ValueAnimator.ofFloat(last, current);
+        progressAnimator.setDuration(300);
+        progressAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+            }
+        });
+        progressAnimator.start();
+
+   }
+
+    private void setValueAnimation() {
+        //属性动画
+        ObjectAnimator animator = ObjectAnimator.ofFloat(ivanimation, "translationX", 1000, 0f);
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        animator.setDuration(400);
+        animator.start();
     }
 }

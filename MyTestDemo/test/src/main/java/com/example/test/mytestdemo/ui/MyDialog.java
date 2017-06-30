@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.test.mytestdemo.R;
 
 /**
+ * 自定义dialog的位置
  * Created by Administrator on 2017/1/5.
  */
 

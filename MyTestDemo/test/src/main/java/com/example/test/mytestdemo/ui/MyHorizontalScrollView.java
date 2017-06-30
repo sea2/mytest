@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.widget.HorizontalScrollView;
 
 /**
+ * 横向的scrollview
  * Created by Administrator on 2016/12/30.
  */
 
