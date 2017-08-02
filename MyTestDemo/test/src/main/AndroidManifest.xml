@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.recyclerview.RecyclerViewHomeActivity"
+            android:name=".activity.AnimationActivity"
             android:theme="@style/AppThemeBackgroundTransparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -103,8 +103,6 @@
             android:process=":web"
             android:screenOrientation="portrait"/>
         <activity android:name=".activity.SwipeBackActivity">
-        </activity>
-        <activity android:name=".activity.AnimationActivity">
         </activity>
         <activity android:name=".ui.recyclerview.StaggeredGridLayoutActivity"/>
     </application>

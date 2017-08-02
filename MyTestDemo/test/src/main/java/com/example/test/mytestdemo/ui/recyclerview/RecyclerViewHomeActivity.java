@@ -45,7 +45,6 @@ public class RecyclerViewHomeActivity extends ActionBarActivity {
 
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL));
         mRecyclerView.setAdapter(mAdapter);
-
         mRecyclerView.addItemDecoration(new DividerGridItemDecoration(this));
         // 设置item动画
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());

@@ -46,6 +46,12 @@ public class AnimationActivity extends AppCompatActivity {
         btnstart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(AnimationActivity.this);
+                builder.setTitle("Material Design Dialog");
+                builder.setMessage("这是 android.support.v7.app.AlertDialog 中的样式");
+                builder.setNegativeButton("取消", null);
+                builder.setPositiveButton("确定", null);
+                builder.show();
                 anim.start();
             }
         });
@@ -59,7 +65,7 @@ public class AnimationActivity extends AppCompatActivity {
 
     }
 
-     //值变化
+    //值变化
     private void setObjectAnimator(float last, float current) {
 
         ValueAnimator progressAnimator = ValueAnimator.ofFloat(last, current);
@@ -72,7 +78,7 @@ public class AnimationActivity extends AppCompatActivity {
         });
         progressAnimator.start();
 
-   }
+    }
 
     private void setValueAnimation() {
         //属性动画
