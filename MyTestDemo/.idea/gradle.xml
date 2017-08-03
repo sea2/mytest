@@ -10,7 +10,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/module" />
             <option value="$PROJECT_DIR$/module/contentprovider" />
-            <option value="$PROJECT_DIR$/module/iosdialog" />
+            <option value="$PROJECT_DIR$/module/dialog" />
+            <option value="$PROJECT_DIR$/module/glide" />
             <option value="$PROJECT_DIR$/module/kotlin" />
             <option value="$PROJECT_DIR$/module/myThread" />
             <option value="$PROJECT_DIR$/module/rxjava" />
