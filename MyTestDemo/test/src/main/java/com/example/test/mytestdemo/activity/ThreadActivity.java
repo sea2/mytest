@@ -25,13 +25,24 @@ public class ThreadActivity extends BaseActivity {
     private android.widget.Button btnhorizontalscrollView;
     private android.widget.Button btnthread;
     private android.widget.ProgressBar pbtest;
-    int progressInt = 0;
-    DialogHelper task;
+    private int progressInt = 0;
+    private DialogHelper task;
+    private boolean flag;
+    private Button btnbroadcast;
+    private Button btnaidl;
+    private Button btnservice;
+    private Button btnswipeback;
+    private Button btnanimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_one);
+        setContentView(R.layout.activity_thread_layout);
+        this.btnanimation = (Button) findViewById(R.id.btn_animation);
+        this.btnswipeback = (Button) findViewById(R.id.btn_swipeback);
+        this.btnservice = (Button) findViewById(R.id.btn_service);
+        this.btnaidl = (Button) findViewById(R.id.btn_aidl);
+        this.btnbroadcast = (Button) findViewById(R.id.btn_broadcast);
         this.pbtest = (ProgressBar) findViewById(R.id.pb_test);
         pbtest.setVisibility(View.VISIBLE);
         this.btnthread = (Button) findViewById(R.id.btn_thread);
@@ -51,6 +62,7 @@ public class ThreadActivity extends BaseActivity {
                 mthread2.start();*/
             }
         });
+
         btnhorizontalscrollView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,25 +77,28 @@ public class ThreadActivity extends BaseActivity {
 
     }
 
+
     //终止线程的办法
     Thread mthread = new Thread(new Runnable() {
         @Override
         public void run() {
-            try {
-                Log.e("tag", Thread.currentThread().getName());
-                Thread.sleep(3000);
-            } catch (Exception err) {
-                err.printStackTrace();
-            }
+            while (!Thread.currentThread().isInterrupted() && flag) {
+                try {
+                    Log.e("tag", Thread.currentThread().getName());
+                    Thread.sleep(3000);
+                } catch (Exception err) {
+                    err.printStackTrace();
+                }
 
 
-            Log.e("tag", mthread.isInterrupted() + "");
-            // 通过Handler获得Message对象
-            if (mhandler != null) {
-                Message msg = mhandler.obtainMessage();
-                msg.obj = "任务执行完毕";
-                // 发送到Handler，在UI线程里处理Message
-                mhandler.sendEmptyMessage(1);
+                Log.e("tag", mthread.isInterrupted() + "");
+                // 通过Handler获得Message对象
+                if (mhandler != null) {
+                    Message msg = mhandler.obtainMessage();
+                    msg.obj = "任务执行完毕";
+                    // 发送到Handler，在UI线程里处理Message
+                    mhandler.sendEmptyMessage(1);
+                }
             }
         }
     });

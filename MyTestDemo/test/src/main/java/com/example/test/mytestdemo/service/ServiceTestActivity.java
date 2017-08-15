@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -23,6 +24,7 @@ public class ServiceTestActivity extends BaseActivity {
     private android.widget.Button btnunbindservice;
     private android.widget.TextView tvservice2;
     private android.widget.LinearLayout activityservicetest;
+    private MyHandler myHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class ServiceTestActivity extends BaseActivity {
         this.tvservice1 = (TextView) findViewById(R.id.tv_service1);
         this.btnstopservice = (Button) findViewById(R.id.btn_stopservice);
         this.btnstartservice = (Button) findViewById(R.id.btn_startservice);
-
+        myHandler = new MyHandler(this);
 
         btnstartservice.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,8 +74,6 @@ public class ServiceTestActivity extends BaseActivity {
     }
 
 
-
-
     private MyService2.MyBinder myBinder;
     private ServiceConnection connection = new ServiceConnection() {
 
@@ -84,8 +84,20 @@ public class ServiceTestActivity extends BaseActivity {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             myBinder = (MyService2.MyBinder) service;
-            myBinder.startDownload();
+            myBinder.setCallBackHandler(myHandler);
         }
     };
+
+
+    public class MyHandler extends BaseHandler {
+        public MyHandler(Object o) {
+            super(o);
+        }
+
+        @Override
+        public void handleMessage(Message msg, Object o) {
+
+        }
+    }
 
 }

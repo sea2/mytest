@@ -92,7 +92,7 @@ public class HelloSumAidlActivity extends AppCompatActivity {
     }
 
 
-    private void initService() {
+    private void initService() {//绑定service
         connection = new AdditionServiceConnection();
         Intent i = new Intent(HelloSumAidlActivity.this, AdditionService.class);
         bindService(i, connection, Context.BIND_AUTO_CREATE);

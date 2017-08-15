@@ -60,7 +60,6 @@ public class GlideTestActivity extends Activity {
 
         Log.e("tag", GlideUtil.getCacheSize(this));
 
-
     }
 
 
@@ -96,8 +95,8 @@ public class GlideTestActivity extends Activity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            ;
-
         }
     }
+
+
 }

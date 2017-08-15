@@ -23,7 +23,7 @@ public class AdditionService extends Service {
     }
 
 
-    //中间人
+    //IAdditionService.Stub 它向上转型成了IBinder
     IBinder myIBinder = new IAdditionService.Stub() {
         @Override
         public boolean callPay(String name, String pwd, int money) throws RemoteException {
