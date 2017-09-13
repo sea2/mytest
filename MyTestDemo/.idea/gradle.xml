@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/module/kotlin" />
             <option value="$PROJECT_DIR$/module/myThread" />
             <option value="$PROJECT_DIR$/module/rxjava" />
+            <option value="$PROJECT_DIR$/module/statusbarutil" />
             <option value="$PROJECT_DIR$/swipebackhelper" />
             <option value="$PROJECT_DIR$/test" />
             <option value="$PROJECT_DIR$/xview" />

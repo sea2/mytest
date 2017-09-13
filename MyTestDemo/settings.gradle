@@ -1,1 +1,1 @@
-include ':test', ':swipebackhelper', ':xview', 'module:glide', 'module:dialog', 'module:contentprovider', 'module:rxjava', 'module:kotlin', 'module:myThread'
+include ':test', ':swipebackhelper', ':xview', 'module:statusbarutil', 'module:glide', 'module:dialog', 'module:contentprovider', 'module:rxjava', 'module:kotlin', 'module:myThread'

@@ -31,6 +31,7 @@ public class AnimationActivity extends AppCompatActivity {
         this.ivanimation = (ImageView) findViewById(R.id.iv_animation);
 
 
+
 /*--------------------逐帧-----------------------------*/
        /* void start()：开始播放逐帧动画。
         void stop()：停止播放逐帧动画。
