@@ -106,5 +106,9 @@ public class AnimationActivity extends AppCompatActivity {
         });
         animator.setDuration(400);
         animator.start();
+
+
+      /*  animator.cancel();*/
+
     }
 }

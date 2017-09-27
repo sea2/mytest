@@ -31,11 +31,21 @@ public class MyService2 extends Service {
         Log.i(TAG, "onCreate() executed");
     }
 
+
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i(TAG, "onStartCommand() executed");
         return super.onStartCommand(intent, flags, startId);
     }
+
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        Log.i(TAG, "onBind() executed");
+        return mBinder;
+    }
+
 
     @Override
     public void onDestroy() {
@@ -44,10 +54,14 @@ public class MyService2 extends Service {
     }
 
     @Override
-    public IBinder onBind(Intent intent) {
-        Log.i(TAG, "onBind() executed");
-        return mBinder;
+    public boolean onUnbind(Intent intent) {
+        return super.onUnbind(intent);
     }
+
+
+
+
+
 
 
     public class MyBinder extends Binder {
@@ -82,6 +96,7 @@ public class MyService2 extends Service {
             myHandler = myHandler;
         }
     }
+
 
 
 }

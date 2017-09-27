@@ -34,6 +34,8 @@ public class ThreadActivity extends BaseActivity {
     private Button btnswipeback;
     private Button btnanimation;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,6 +146,15 @@ public class ThreadActivity extends BaseActivity {
             }
         }
     };
+
+
+    Handler mmhandler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+        }
+    };
+
 
     /**
      * 1、 AsyncTask的本质是一个静态的线程池，AsyncTask派生出的子类可以实现不同的异步任务，这些任务都是提交到静态的线程池中执行。

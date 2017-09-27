@@ -16,6 +16,8 @@ public class MyService extends Service {
         Log.i(TAG, "onCreate() executed");
     }
 
+
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i(TAG, "onStartCommand() executed");

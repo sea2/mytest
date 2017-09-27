@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.test.mytestdemo.ui.MyScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+  >
+
+    <LinearLayout
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:text="按钮"
+            android:textColor="@color/cardview_dark_background"/>
+
+        <com.example.test.mytestdemo.ui.MyListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            android:background="#c0e4"/>
+
+
+    </LinearLayout>
+
+
+</com.example.test.mytestdemo.ui.MyScrollView>
+
+

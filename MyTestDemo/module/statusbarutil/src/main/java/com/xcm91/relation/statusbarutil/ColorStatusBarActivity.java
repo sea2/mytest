@@ -77,11 +77,13 @@ public class ColorStatusBarActivity extends BaseActivity {
         mSbChangeAlpha.setProgress(StatusBarUtil.DEFAULT_STATUS_BAR_ALPHA);
     }
 
-    @Override
+   @Override
     protected void setStatusBar() {
         mColor = getResources().getColor(R.color.colorPrimary);
         StatusBarUtil.setColor(this, mColor);
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

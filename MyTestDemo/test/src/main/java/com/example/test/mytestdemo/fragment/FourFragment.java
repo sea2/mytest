@@ -29,6 +29,7 @@ public class FourFragment extends LazyFragment{
     }
 
 
+
     @Override
     protected void lazyLoad() {
         if(!isPrepared || !isVisible) {
@@ -36,4 +37,7 @@ public class FourFragment extends LazyFragment{
         }
         Log.e("TAG" , "fourFragment--lazyLoad");
     }
+
+
+
 }

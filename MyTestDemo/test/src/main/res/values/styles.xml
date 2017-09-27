@@ -9,11 +9,8 @@
 
     </style>
 
-    <style name="AppThemeBackgroundTransparent" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppThemeBackgroundTransparent" parent="Theme.AppCompat.Light">
 
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:colorBackground">@android:color/transparent</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.recyclerview.RecyclerViewHomeActivity"
+            android:name=".activity.TouchActionActivity"
             android:theme="@style/AppThemeBackgroundTransparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -88,8 +88,6 @@
             android:name=".service.MyIntentService"
             android:exported="false">
         </service>
-
-
         <service
             android:name=".service.MyService2"
             android:enabled="true"

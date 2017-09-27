@@ -14,6 +14,18 @@ import com.example.test.mytestdemo.app.BaseActivity;
 import com.example.test.mytestdemo.utils.StringUtils;
 import com.example.test.mytestdemo.utils.ToastUtils;
 
+/**
+ * 总结:
+
+ 1)静态注册：在AndroidManifest.xml注册，android不能自动销毁广播接收器，也就是说当应用程序关闭后，还是会接收广播。
+ 2)动态注册：在代码中通过registerReceiver()手工注册.当程序关闭时,该接收器也会随之销毁。当然，也可手工调用unregisterReceiver()进行销毁。
+
+ android:enabled:
+ 这个属性用于定义系统是否能够实例化这个广播接收器，如果设置为true，则能够实例化，如果设置为false，则不能被实例化。默认值是true。
+
+ android:exported:
+ 这个属性用于指示该广播接收器是否能够接收来自应用程序外部的消息，
+ */
 public class BroadcastActivity extends BaseActivity {
 
     private android.widget.Button btnbroadcast;

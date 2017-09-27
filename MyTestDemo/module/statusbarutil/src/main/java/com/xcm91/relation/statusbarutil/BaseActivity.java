@@ -2,9 +2,6 @@ package com.xcm91.relation.statusbarutil;
 
 import android.support.v7.app.AppCompatActivity;
 
-import com.jaeger.library.StatusBarUtil;
-import com.xcm91.relation.statusbar.R;
-
 
 /**
  * Created by Jaeger on 16/2/14.
@@ -21,6 +18,8 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void setStatusBar() {
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
+
     }
+
+
 }

@@ -175,5 +175,12 @@ public class MainActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+
+    }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
     }
 }
