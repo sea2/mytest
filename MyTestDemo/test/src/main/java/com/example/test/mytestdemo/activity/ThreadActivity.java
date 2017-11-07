@@ -13,6 +13,8 @@ import android.widget.ProgressBar;
 import com.example.test.mytestdemo.R;
 import com.example.test.mytestdemo.app.BaseActivity;
 
+import java.lang.ref.WeakReference;
+
 /**
  * Created by lhy on 2017/1/13.
  */
@@ -33,7 +35,6 @@ public class ThreadActivity extends BaseActivity {
     private Button btnservice;
     private Button btnswipeback;
     private Button btnanimation;
-
 
 
     @Override
@@ -149,7 +150,27 @@ public class ThreadActivity extends BaseActivity {
     };
 
 
-    Handler mmhandler=new Handler(){
+    /**
+     * 合理的声明handler
+     */
+    private static class MyHandler extends Handler {
+        private WeakReference<ThreadActivity> activityWeakReference;
+
+        public MyHandler(ThreadActivity activity) {
+            activityWeakReference = new WeakReference<ThreadActivity>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            ThreadActivity activity = activityWeakReference.get();
+            if (activity != null) {
+
+            }
+        }
+    }
+
+
+    Handler mmhandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -165,7 +186,7 @@ public class ThreadActivity extends BaseActivity {
      * 5，声明多个对象调用execute也是串行执行的，不是并行的
      * 综上只能做简单的异步任务，对于复杂的异步还是自定义线程池
      * 1．   AsyncTask.THREAD_POOL_EXECUTOR, 异步线程池
-     2．    AsyncTask.SERIAL_EXECUTOR ，同步线程池
+     * 2．    AsyncTask.SERIAL_EXECUTOR ，同步线程池
      */
     private class DialogHelper extends AsyncTask<Integer, Void, Integer> {
 
