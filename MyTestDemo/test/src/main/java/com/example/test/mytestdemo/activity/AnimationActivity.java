@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.graphics.drawable.AnimationDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,6 +21,7 @@ public class AnimationActivity extends AppCompatActivity {
     private android.widget.Button btnstop;
     private android.widget.LinearLayout activityanimation;
     private AnimationDrawable anim;
+    private ValueAnimator clickStart2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,7 @@ public class AnimationActivity extends AppCompatActivity {
 
     }
 
+
     private void setValueAnimation() {
         //属性动画
         ObjectAnimator animator = ObjectAnimator.ofFloat(ivanimation, "translationX", 1000, 0f);
@@ -111,4 +114,45 @@ public class AnimationActivity extends AppCompatActivity {
       /*  animator.cancel();*/
 
     }
+
+
+
+
+    /**
+     * 取消
+     */
+    public void cancel() {
+        if (clickStart2 != null) {
+            clickStart2.removeAllUpdateListeners();
+            clickStart2.cancel();
+            clickStart2 = null;
+        }
+    }
+
+
+    /**
+     * 暂停
+     */
+    public void stop() {
+        if (clickStart2 != null&&clickStart2.isRunning()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                clickStart2.pause();
+            }
+        }
+    }
+    /**
+     * 恢复
+     */
+    public void restart() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if (clickStart2 != null&&clickStart2.isPaused()) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    clickStart2.resume();
+                }
+            }
+        }
+    }
+
+
+
 }

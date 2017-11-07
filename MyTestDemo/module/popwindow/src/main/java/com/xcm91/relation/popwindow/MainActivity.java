@@ -18,7 +18,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.zhouwei.library.CustomPopWindow;
+
 
 import java.util.ArrayList;
 import java.util.List;

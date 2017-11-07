@@ -23,7 +23,7 @@ import java.util.List;
  * <p>
  * 除此之外，RecyclerView的动画配以局部刷新也是它比较出色的地方
  * <p>
- * 回收 ViewHolder  复用converview
+ * 回收 ViewHolder  复用convertview
  *
  *   CardView  http://www.jianshu.com/p/33b1d21d6ba6
  */

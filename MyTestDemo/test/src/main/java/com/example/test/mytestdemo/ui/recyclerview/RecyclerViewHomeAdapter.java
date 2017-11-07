@@ -86,12 +86,12 @@ class RecyclerViewHomeAdapter extends RecyclerView.Adapter<RecyclerViewHomeAdapt
         notifyItemRemoved(position);
     }
 
-    class MyViewHolder extends ViewHolder {
+    static class MyViewHolder extends ViewHolder {
 
         TextView tv;
         CardView cardview; //http://www.jianshu.com/p/33b1d21d6ba6
 
-        public MyViewHolder(View view) {
+        MyViewHolder(View view) {
             super(view);
             tv = (TextView) view.findViewById(R.id.id_num);
 

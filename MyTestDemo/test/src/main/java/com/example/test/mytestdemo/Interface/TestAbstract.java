@@ -10,6 +10,7 @@ public abstract class TestAbstract {
     int testAbs2 = 123;
 
     void testBas() {
+
     }
 
     abstract void testBas2();

@@ -28,7 +28,7 @@ public class GlideUtil {
                     @Override
                     public void run() {
                         Glide.get(context).clearDiskCache();
-// BusUtil.getBus().post(new GlideCacheClearSuccessEvent());
+              // BusUtil.getBus().post(new GlideCacheClearSuccessEvent());
                     }
                 }).start();
             } else {

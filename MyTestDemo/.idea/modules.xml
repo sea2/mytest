@@ -8,8 +8,10 @@
       <module fileurl="file://$PROJECT_DIR$/module/glide/glide.iml" filepath="$PROJECT_DIR$/module/glide/glide.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/kotlin/kotlin.iml" filepath="$PROJECT_DIR$/module/kotlin/kotlin.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/module.iml" filepath="$PROJECT_DIR$/module/module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module/mvp/mvp.iml" filepath="$PROJECT_DIR$/module/mvp/mvp.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/myThread/myThread.iml" filepath="$PROJECT_DIR$/module/myThread/myThread.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/popwindow/popwindow.iml" filepath="$PROJECT_DIR$/module/popwindow/popwindow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module/refreshview/refreshview.iml" filepath="$PROJECT_DIR$/module/refreshview/refreshview.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/rxjava/rxjava.iml" filepath="$PROJECT_DIR$/module/rxjava/rxjava.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/statusbarutil/statusbarutil.iml" filepath="$PROJECT_DIR$/module/statusbarutil/statusbarutil.iml" />
       <module fileurl="file://$PROJECT_DIR$/swipebackhelper/swipebackhelper.iml" filepath="$PROJECT_DIR$/swipebackhelper/swipebackhelper.iml" />

@@ -13,8 +13,10 @@
             <option value="$PROJECT_DIR$/module/dialog" />
             <option value="$PROJECT_DIR$/module/glide" />
             <option value="$PROJECT_DIR$/module/kotlin" />
+            <option value="$PROJECT_DIR$/module/mvp" />
             <option value="$PROJECT_DIR$/module/myThread" />
             <option value="$PROJECT_DIR$/module/popwindow" />
+            <option value="$PROJECT_DIR$/module/refreshview" />
             <option value="$PROJECT_DIR$/module/rxjava" />
             <option value="$PROJECT_DIR$/module/statusbarutil" />
             <option value="$PROJECT_DIR$/swipebackhelper" />

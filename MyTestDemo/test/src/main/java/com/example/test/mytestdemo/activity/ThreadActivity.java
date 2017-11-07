@@ -51,6 +51,7 @@ public class ThreadActivity extends BaseActivity {
         this.btnhorizontalscrollView = (Button) findViewById(R.id.btn_horizontalscrollView);
         this.btnwebview = (Button) findViewById(R.id.btn_webview);
         this.btnnotification = (Button) findViewById(R.id.btn_notification);
+
         Log.e("tag", Thread.currentThread().getName());
 
 
@@ -160,6 +161,11 @@ public class ThreadActivity extends BaseActivity {
      * 1、 AsyncTask的本质是一个静态的线程池，AsyncTask派生出的子类可以实现不同的异步任务，这些任务都是提交到静态的线程池中执行。
      * 2、线程池中的工作线程执行doInBackground(mParams)方法执行异步任务
      * 3、当任务状态改变之后，工作线程会向UI线程发送消息，AsyncTask内部的InternalHandler响应这些消息，并调用相关的回调函数
+     * 4，声明一个对象不能同时多个execute
+     * 5，声明多个对象调用execute也是串行执行的，不是并行的
+     * 综上只能做简单的异步任务，对于复杂的异步还是自定义线程池
+     * 1．   AsyncTask.THREAD_POOL_EXECUTOR, 异步线程池
+     2．    AsyncTask.SERIAL_EXECUTOR ，同步线程池
      */
     private class DialogHelper extends AsyncTask<Integer, Void, Integer> {
 
