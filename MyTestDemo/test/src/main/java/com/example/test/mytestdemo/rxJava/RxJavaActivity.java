@@ -117,5 +117,8 @@ public class RxJavaActivity extends RxFragmentActivity {
     };
 
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

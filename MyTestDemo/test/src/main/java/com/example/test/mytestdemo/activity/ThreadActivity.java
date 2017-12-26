@@ -153,19 +153,18 @@ public class ThreadActivity extends BaseActivity {
     /**
      * 合理的声明handler
      */
-    private static class MyHandler extends Handler {
-        private WeakReference<ThreadActivity> activityWeakReference;
+    private static class NoLeakHandler extends Handler {
+        private WeakReference<ThreadActivity> mActivity;
 
-        public MyHandler(ThreadActivity activity) {
-            activityWeakReference = new WeakReference<ThreadActivity>(activity);
+        public NoLeakHandler(ThreadActivity activity) {
+            mActivity = new WeakReference<>(activity);
         }
 
         @Override
         public void handleMessage(Message msg) {
-            ThreadActivity activity = activityWeakReference.get();
-            if (activity != null) {
+            super.handleMessage(msg);
+          //  mActivity.get()
 
-            }
         }
     }
 
@@ -248,7 +247,11 @@ public class ThreadActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        //mhandler.removeMessages(msg.what);
+        // mhandler.removeCallbacks(runnable);
         mhandler = null;
+
         mthread.interrupt();
 
         if (task != null && task.getStatus() == AsyncTask.Status.RUNNING) {

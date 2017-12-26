@@ -66,11 +66,12 @@ public class AnimationActivity extends AppCompatActivity {
         });
 
 
+
+
     }
 
     //值变化
     private void setObjectAnimator(float last, float current) {
-
         ValueAnimator progressAnimator = ValueAnimator.ofFloat(last, current);
         progressAnimator.setDuration(300);
         progressAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -116,8 +117,6 @@ public class AnimationActivity extends AppCompatActivity {
     }
 
 
-
-
     /**
      * 取消
      */
@@ -134,25 +133,25 @@ public class AnimationActivity extends AppCompatActivity {
      * 暂停
      */
     public void stop() {
-        if (clickStart2 != null&&clickStart2.isRunning()) {
+        if (clickStart2 != null && clickStart2.isRunning()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 clickStart2.pause();
             }
         }
     }
+
     /**
      * 恢复
      */
     public void restart() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            if (clickStart2 != null&&clickStart2.isPaused()) {
+            if (clickStart2 != null && clickStart2.isPaused()) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     clickStart2.resume();
                 }
             }
         }
     }
-
 
 
 }

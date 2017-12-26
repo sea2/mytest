@@ -42,6 +42,10 @@ public class WelcomeActivity extends BaseActivity {
                 finish();
             }
         });
+
+        
+
+
     }
 
     protected void initData() {

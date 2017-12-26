@@ -51,7 +51,6 @@ public class MainActivity extends BaseActivity {
             initFromSavedInstantsState(savedInstanceState);
         }
 
-
         FileUtils.getApplicationDirectories(this);
         FileUtils.getEnvironmentDirectories();
     }

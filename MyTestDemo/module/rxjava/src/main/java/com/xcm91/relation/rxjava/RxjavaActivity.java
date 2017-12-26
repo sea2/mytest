@@ -1,6 +1,5 @@
 package com.xcm91.relation.rxjava;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -10,8 +9,7 @@ import java.util.List;
 import rx.Observable;
 import rx.Subscriber;
 
-public class RxjavaActivity extends Activity implements PullListener {
-
+public class RxjavaActivity extends BaseActivity implements PullListener {
 
 
     @Override
@@ -20,8 +18,6 @@ public class RxjavaActivity extends Activity implements PullListener {
         setContentView(R.layout.activity_rxjava);
 
         final List<String> list = Arrays.asList(new String[]{"one", "two", "three"});
-
-
 
 
         Observable observable = Observable.create(new Observable.OnSubscribe<List<String>>() {
@@ -33,22 +29,22 @@ public class RxjavaActivity extends Activity implements PullListener {
         });
 
 
+
+
+
+
+
         PullInfo mPullInfo = new PullInfo();
         mPullInfo.setOnClickListener(this);
 
 
-
     }
-
-
 
 
     @Override
     public void doSomething() {
         Log.e("test", "doSomething");
     }
-
-
 
 
 }

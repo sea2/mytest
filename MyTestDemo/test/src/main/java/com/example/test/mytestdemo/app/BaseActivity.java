@@ -9,8 +9,8 @@ import android.util.Log;
 import com.example.test.mytestdemo.ui.ToastShow;
 
 
-public abstract class BaseActivity extends FragmentActivity{
-    protected ToastShow toastShow;
+public abstract class BaseActivity extends FragmentActivity {
+    public ToastShow toastShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +19,6 @@ public abstract class BaseActivity extends FragmentActivity{
         toastShow = new ToastShow(this);
 
     }
-
-
 
 
     @Override
