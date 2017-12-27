@@ -7,4 +7,14 @@
     android:layout_height="match_parent"
     tools:context="com.xcm91.relation.rxjava.RxjavaActivity">
 
+    <TextView
+        android:id="@+id/tv_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="#f89080"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </android.support.constraint.ConstraintLayout>
