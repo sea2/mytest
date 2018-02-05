@@ -38,7 +38,6 @@ public class HorizontalScrollViewActivity extends BaseActivity {
             System.out.print(i + "");
         }
 
-
     }
 
     @Override

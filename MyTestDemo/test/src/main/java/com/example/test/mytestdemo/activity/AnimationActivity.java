@@ -21,7 +21,7 @@ public class AnimationActivity extends AppCompatActivity {
     private android.widget.Button btnstop;
     private android.widget.LinearLayout activityanimation;
     private AnimationDrawable anim;
-    private ValueAnimator clickStart2;
+    private ValueAnimator mAnimator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +49,6 @@ public class AnimationActivity extends AppCompatActivity {
         btnstart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(AnimationActivity.this);
-                builder.setTitle("Material Design Dialog");
-                builder.setMessage("这是 android.support.v7.app.AlertDialog 中的样式");
-                builder.setNegativeButton("取消", null);
-                builder.setPositiveButton("确定", null);
-                builder.show();
                 anim.start();
             }
         });
@@ -64,6 +58,12 @@ public class AnimationActivity extends AppCompatActivity {
                 anim.stop();
             }
         });
+
+
+
+
+
+
 
 
 
@@ -111,8 +111,20 @@ public class AnimationActivity extends AppCompatActivity {
         animator.setDuration(400);
         animator.start();
 
-
+      /*  ObjectAnimator animX = ObjectAnimator.ofFloat(this,
+                "translationX", x, 0f);
+        ObjectAnimator animY = ObjectAnimator.ofFloat(this,
+                "translationY", y, 0f);
+        AnimatorSet animSet = new AnimatorSet();
+        animSet.play(animX).with(animY);
+        //  animSet.play(anim4).after(anim3);
+        animSet.setDuration(1000);
+        animSet.start();*/
       /*  animator.cancel();*/
+
+
+
+
 
     }
 
@@ -121,10 +133,10 @@ public class AnimationActivity extends AppCompatActivity {
      * 取消
      */
     public void cancel() {
-        if (clickStart2 != null) {
-            clickStart2.removeAllUpdateListeners();
-            clickStart2.cancel();
-            clickStart2 = null;
+        if (mAnimator != null) {
+            mAnimator.removeAllUpdateListeners();
+            mAnimator.cancel();
+            mAnimator = null;
         }
     }
 
@@ -133,9 +145,9 @@ public class AnimationActivity extends AppCompatActivity {
      * 暂停
      */
     public void stop() {
-        if (clickStart2 != null && clickStart2.isRunning()) {
+        if (mAnimator != null && mAnimator.isRunning()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                clickStart2.pause();
+                mAnimator.pause();
             }
         }
     }
@@ -145,9 +157,9 @@ public class AnimationActivity extends AppCompatActivity {
      */
     public void restart() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            if (clickStart2 != null && clickStart2.isPaused()) {
+            if (mAnimator != null && mAnimator.isPaused()) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    clickStart2.resume();
+                    mAnimator.resume();
                 }
             }
         }

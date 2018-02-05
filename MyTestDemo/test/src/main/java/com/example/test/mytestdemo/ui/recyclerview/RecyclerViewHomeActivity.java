@@ -24,8 +24,20 @@ import java.util.List;
  * 除此之外，RecyclerView的动画配以局部刷新也是它比较出色的地方
  * <p>
  * 回收 ViewHolder  复用convertview
- *
- *   CardView  http://www.jianshu.com/p/33b1d21d6ba6
+ * <p>
+ * CardView  http://www.jianshu.com/p/33b1d21d6ba6
+ * 其次介绍一下它的基本属性：
+ * app:cardBackgroundColor这是设置背景颜色
+ * app:cardCornerRadius这是设置圆角大小
+ * app:cardElevation这是设置z轴的阴影
+ * app:cardMaxElevation这是设置z轴的最大高度值
+ * app:cardUseCompatPadding是否使用CompatPadding
+ * app:cardPreventCornerOverlap是否使用PreventCornerOverlap
+ * app:contentPadding 设置内容的padding
+ * app:contentPaddingLeft 设置内容的左padding
+ * app:contentPaddingTop 设置内容的上padding
+ * app:contentPaddingRight 设置内容的右padding
+ * app:contentPaddingBottom 设置内容的底padding
  */
 public class RecyclerViewHomeActivity extends ActionBarActivity {
 

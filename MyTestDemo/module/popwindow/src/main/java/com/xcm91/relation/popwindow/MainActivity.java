@@ -1,6 +1,7 @@
 package com.xcm91.relation.popwindow;
 
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSeekBar;
@@ -14,26 +15,28 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private TextView mButton1,mButton2,mButton3,mButton4,mButton5,mButton6,mButton7;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private TextView mButton1, mButton2, mButton3, mButton4, mButton5, mButton6, mButton7, mButton8;
     private CustomPopWindow mCustomPopWindow;
     private CustomPopWindow mListPopWindow;
     private AppCompatSeekBar mAppCompatSeekBar;
     private CustomPopWindow mPopWindow;
+    private PayPopupWindow addPopWindow;
+    private RelativeLayout viewmain;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        viewmain = (RelativeLayout) findViewById(R.id.view_main);
         mButton1 = (TextView) findViewById(R.id.button1);
         mButton1.setOnClickListener(this);
         mButton2 = (TextView) findViewById(R.id.button2);
@@ -48,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mButton6.setOnClickListener(this);
         mButton7 = (TextView) findViewById(R.id.button7);
         mButton7.setOnClickListener(this);
+        mButton8 = (TextView) findViewById(R.id.button8);
+        mButton8.setOnClickListener(this);
 
 
         mAppCompatSeekBar = (AppCompatSeekBar) findViewById(R.id.seek_bar);
@@ -56,15 +61,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAppCompatSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-               float alpha = seekBar.getProgress() * 1.0f / 100 ;
-                if(alpha < 0.2){
+                float alpha = seekBar.getProgress() * 1.0f / 100;
+                if (alpha < 0.2) {
                     alpha = 0.2f;
                 }
-               Window mWindow = getWindow();
+                Window mWindow = getWindow();
                 WindowManager.LayoutParams params = mWindow.getAttributes();
                 params.alpha = alpha;
                 mWindow.setAttributes(params);
-                Log.e("zhouwei","progress:"+progress);
+                Log.e("zhouwei", "progress:" + progress);
             }
 
             @Override
@@ -77,11 +82,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+        payMobile();
+
+        Log.e("2344", "12");
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.button1:
                 showPopBottom();
                 //test();
@@ -105,28 +113,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button7:
                 touchOutsideDontDisMiss();
                 break;
+            case R.id.button8:
+                payMobile();
+                break;
         }
     }
 
-    private void showPopBottom(){
-         CustomPopWindow popWindow = new CustomPopWindow.PopupWindowBuilder(this)
+    private void showPopBottom() {
+        CustomPopWindow popWindow = new CustomPopWindow.PopupWindowBuilder(this)
                 .setView(R.layout.pop_layout1)
                 .setFocusable(true)
                 .setOutsideTouchable(true)
                 .create();
-         popWindow.showAsDropDown(mButton1,0,10);
+        popWindow.showAsDropDown(mButton1, 0, 10);
 
     }
 
     /**
      * 点击 PopupWindow 之外的地方不消失
      */
-    private void touchOutsideDontDisMiss(){
-        View view = LayoutInflater.from(this).inflate(R.layout.pop_layout_close,null);
+    private void touchOutsideDontDisMiss() {
+        View view = LayoutInflater.from(this).inflate(R.layout.pop_layout_close, null);
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("FK","onClick.....");
+                Log.e("FK", "onClick.....");
                 mPopWindow.dissmiss();
             }
         };
@@ -136,11 +147,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .enableOutsideTouchableDissmiss(false)// 设置点击PopupWindow之外的地方，popWindow不关闭，如果不设置这个属性或者为true，则关闭
                 .create();
 
-        mPopWindow.showAsDropDown(mButton7,0,10);
+        mPopWindow.showAsDropDown(mButton7, 0, 10);
     }
 
-    private void test(){
-        LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    private void test() {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View contentview = inflater.inflate(R.layout.pop_layout1, null);
         final PopupWindow popupWindow = new PopupWindow(contentview, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         //popupWindow
@@ -164,72 +175,72 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         popupWindow.showAsDropDown(mButton1, 0, 10);
     }
 
-    private void showPopTop(){
-      CustomPopWindow popWindow = new CustomPopWindow.PopupWindowBuilder(this)
-              .setView(R.layout.pop_layout2)
-              .create();
-      popWindow .showAsDropDown(mButton2,0,  - (mButton2.getHeight() + popWindow.getHeight()));
-      //popWindow.showAtLocation(mButton1, Gravity.NO_GRAVITY,0,0);
+    private void showPopTop() {
+        CustomPopWindow popWindow = new CustomPopWindow.PopupWindowBuilder(this)
+                .setView(R.layout.pop_layout2)
+                .create();
+        popWindow.showAsDropDown(mButton2, 0, -(mButton2.getHeight() + popWindow.getHeight()));
+        //popWindow.showAtLocation(mButton1, Gravity.NO_GRAVITY,0,0);
     }
 
     /**
      * 显示PopupWindow 同时背景变暗
      */
-    private void showPopTopWithDarkBg(){
-        View contentView = LayoutInflater.from(this).inflate(R.layout.pop_menu,null);
+    private void showPopTopWithDarkBg() {
+        View contentView = LayoutInflater.from(this).inflate(R.layout.pop_menu, null);
         //处理popWindow 显示内容
         handleLogic(contentView);
         //创建并显示popWindow
-        mCustomPopWindow= new CustomPopWindow.PopupWindowBuilder(this)
+        mCustomPopWindow = new CustomPopWindow.PopupWindowBuilder(this)
                 .setView(contentView)
                 .enableBackgroundDark(true) //弹出popWindow时，背景是否变暗
                 .setBgDarkAlpha(0.7f) // 控制亮度
                 .setOnDissmissListener(new PopupWindow.OnDismissListener() {
                     @Override
                     public void onDismiss() {
-                        Log.e("TAG","onDismiss");
+                        Log.e("TAG", "onDismiss");
                     }
                 })
                 .create()
-                .showAsDropDown(mButton5,0,20);
+                .showAsDropDown(mButton5, 0, 20);
     }
 
-    private void useInAndOutAnim(){
+    private void useInAndOutAnim() {
         CustomPopWindow popWindow = new CustomPopWindow.PopupWindowBuilder(this)
                 .setView(R.layout.pop_layout1)
                 .setFocusable(true)
                 .setOutsideTouchable(true)
                 .setAnimationStyle(R.style.CustomPopWindowStyle)
                 .create()
-                .showAsDropDown(mButton6,0,10);
+                .showAsDropDown(mButton6, 0, 10);
     }
 
-    private void showPopMenu(){
-        View contentView = LayoutInflater.from(this).inflate(R.layout.pop_menu,null);
+    private void showPopMenu() {
+        View contentView = LayoutInflater.from(this).inflate(R.layout.pop_menu, null);
         //处理popWindow 显示内容
         handleLogic(contentView);
         //创建并显示popWindow
-        mCustomPopWindow= new CustomPopWindow.PopupWindowBuilder(this)
+        mCustomPopWindow = new CustomPopWindow.PopupWindowBuilder(this)
                 .setView(contentView)
                 .create()
-                .showAsDropDown(mButton3,0,20);
+                .showAsDropDown(mButton3, 0, 20);
 
 
     }
 
-    private void showPopListView(){
-        View contentView = LayoutInflater.from(this).inflate(R.layout.pop_list,null);
+    private void showPopListView() {
+        View contentView = LayoutInflater.from(this).inflate(R.layout.pop_list, null);
         //处理popWindow 显示内容
         handleListView(contentView);
         //创建并显示popWindow
-        mListPopWindow= new CustomPopWindow.PopupWindowBuilder(this)
+        mListPopWindow = new CustomPopWindow.PopupWindowBuilder(this)
                 .setView(contentView)
                 .size(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)//显示大小
                 .create()
-                .showAsDropDown(mButton4,0,20);
+                .showAsDropDown(mButton4, 0, 20);
     }
 
-    private void handleListView(View contentView){
+    private void handleListView(View contentView) {
         RecyclerView recyclerView = (RecyclerView) contentView.findViewById(R.id.recyclerView);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -241,10 +252,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private List<String> mockData(){
+    private List<String> mockData() {
         List<String> data = new ArrayList<>();
-        for (int i=0;i<100;i++){
-            data.add("Item:"+i);
+        for (int i = 0; i < 100; i++) {
+            data.add("Item:" + i);
         }
 
         return data;
@@ -252,17 +263,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 处理弹出显示内容、点击事件等逻辑
+     *
      * @param contentView
      */
-    private void handleLogic(View contentView){
+    private void handleLogic(View contentView) {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mCustomPopWindow!=null){
+                if (mCustomPopWindow != null) {
                     mCustomPopWindow.dissmiss();
                 }
                 String showContent = "";
-                switch (v.getId()){
+                switch (v.getId()) {
                     case R.id.menu1:
                         showContent = "点击 Item菜单1";
                         break;
@@ -276,10 +288,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         showContent = "点击 Item菜单4";
                         break;
                     case R.id.menu5:
-                        showContent = "点击 Item菜单5" ;
+                        showContent = "点击 Item菜单5";
                         break;
                 }
-                Toast.makeText(MainActivity.this,showContent, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, showContent, Toast.LENGTH_SHORT).show();
             }
         };
         contentView.findViewById(R.id.menu1).setOnClickListener(listener);
@@ -288,4 +300,59 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         contentView.findViewById(R.id.menu4).setOnClickListener(listener);
         contentView.findViewById(R.id.menu5).setOnClickListener(listener);
     }
+
+
+    /**
+     * 支付弹框
+     */
+    private void payMobile() {
+        if (addPopWindow == null) {
+            addPopWindow = new PayPopupWindow(this);
+        }
+        //设置popupWindow弹出窗体的背景
+        addPopWindow.setBackgroundDrawable(new BitmapDrawable(null, ""));
+        addPopWindow.setAnimationStyle(R.style.mypopwindow_anim_style);
+        addPopWindow.showPopupWindow(viewmain);
+        addPopWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                recoveryAlpha();
+            }
+        });
+        if (addPopWindow.isShowing()) {
+            // 产生背景变暗效果
+            WindowManager.LayoutParams lp = this.getWindow().getAttributes();
+            lp.alpha = 0.4f;
+            this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+            this.getWindow().setAttributes(lp);
+        }
+    }
+
+    private void recoveryAlpha() {
+        WindowManager.LayoutParams lp = this.getWindow().getAttributes();
+        lp.alpha = 1f;
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        getWindow().setAttributes(lp);
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (addPopWindow != null) {
+            addPopWindow.dismiss();
+            addPopWindow = null;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (addPopWindow != null) {
+            addPopWindow.dismiss();
+            addPopWindow = null;
+        }
+        super.onDestroy();
+    }
+
+
 }

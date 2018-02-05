@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/module/dialog" />
             <option value="$PROJECT_DIR$/module/glide" />
             <option value="$PROJECT_DIR$/module/keyboard" />
+            <option value="$PROJECT_DIR$/module/keyboardlibrary" />
             <option value="$PROJECT_DIR$/module/kotlin" />
             <option value="$PROJECT_DIR$/module/mvp" />
             <option value="$PROJECT_DIR$/module/myThread" />

@@ -163,7 +163,7 @@ public class ThreadActivity extends BaseActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-          //  mActivity.get()
+            //  mActivity.get()
 
         }
     }

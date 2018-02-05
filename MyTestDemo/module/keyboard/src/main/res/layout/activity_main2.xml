@@ -7,7 +7,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-
+    <Button
+        android:id="@+id/btn_custom_keyboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:text="自定义键盘一"
+        />
+    <EditText
+        android:id="@+id/et_custom_keyboard_safe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:hint="自定义键盘二-安全键盘"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            android:text="列表测试"
+            android:text="列表测试-顶起底部按钮"
             />
 
         <ImageView

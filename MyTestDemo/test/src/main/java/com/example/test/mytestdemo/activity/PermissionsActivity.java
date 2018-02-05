@@ -19,7 +19,6 @@ import com.example.test.mytestdemo.app.BaseActivity;
 public class PermissionsActivity extends BaseActivity {
 
     private android.widget.Button btnshen;
-    private android.widget.RelativeLayout activitymain;
     final int REQUEST_CODE_ASK_CALL_PHONE = 1000;
 
     @Override
@@ -28,6 +27,8 @@ public class PermissionsActivity extends BaseActivity {
         btnshen = new Button(this);
         btnshen.setText("申请权限");
         setContentView(btnshen);
+
+        //申请权限
         btnshen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -29,6 +29,9 @@ public class MyService2 extends Service {
     public void onCreate() {
         super.onCreate();
         Log.i(TAG, "onCreate() executed");
+
+
+
     }
 
 

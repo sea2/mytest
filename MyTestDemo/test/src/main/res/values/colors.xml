@@ -12,4 +12,6 @@
     <color name="footer_text_color_selected">#FF601C</color>
     <color name="color_item_press">#ffff0000</color>
     <color name="color_item_normal">#44ff0000</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

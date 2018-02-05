@@ -3,5 +3,6 @@
     <color name="transparent">#00000000</color>
     <color name="background">#F7F4F0</color>
     <color name="title_foot_color">#999999</color>
+    <color name="test">#78e433</color>
 
 </resources>

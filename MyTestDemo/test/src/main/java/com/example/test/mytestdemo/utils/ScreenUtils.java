@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
@@ -48,6 +49,32 @@ public class ScreenUtils {
         DisplayMetrics dm = new DisplayMetrics();// 创建了一张白纸
         windowManager.getDefaultDisplay().getMetrics(dm);// 给白纸设置宽高
         return dm.heightPixels;
+    }
+
+    /**
+     * 获取屏幕应用显示的高度（单位：px）
+     *
+     * @return 屏幕高px
+     */
+    public static int getScreenHeightDisplay() {
+        WindowManager windowManager = (WindowManager) Utils.getContext().getSystemService(Context.WINDOW_SERVICE);
+        Display d = windowManager.getDefaultDisplay();
+        DisplayMetrics realDisplayMetrics = new DisplayMetrics();
+        d.getRealMetrics(realDisplayMetrics);
+        return realDisplayMetrics.heightPixels;
+    }
+
+    /**
+     * 获取屏幕应用显示的高度（单位：px）
+     *
+     * @return 屏幕高px
+     */
+    public static int getScreenWidthDisplay() {
+        WindowManager windowManager = (WindowManager) Utils.getContext().getSystemService(Context.WINDOW_SERVICE);
+        Display d = windowManager.getDefaultDisplay();
+        DisplayMetrics realDisplayMetrics = new DisplayMetrics();
+        d.getRealMetrics(realDisplayMetrics);
+        return realDisplayMetrics.widthPixels;
     }
 
     /**

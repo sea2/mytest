@@ -150,7 +150,7 @@ public class IosDialogActivity extends Activity implements OnClickListener {
                 }).show();
                 break;
             case R.id.btn5:
-              /*  new AlertDialog(IosDialogActivity.this).builder().setMsg("你现在无法接收到新消息提醒。请到系统-设置-通知中开启消息提醒").setNegativeButton("确定", new OnClickListener() {
+             /*   new AlertDialog(IosDialogActivity.this).builder().setMsg("你现在无法接收到新消息提醒。请到系统-设置-通知中开启消息提醒").setNegativeButton("确定", new OnClickListener() {
                     @Override
                     public void onClick(View v) {
 

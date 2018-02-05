@@ -2,12 +2,19 @@ package com.xcm91.relation.glide;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
 
 import java.io.File;
@@ -21,12 +28,12 @@ import static com.xcm91.relation.glide.GlideUtil.getFileSize;
  */
 public class GlideTestActivity extends Activity {
 
-    private android.widget.ImageView iv1;
-    private android.widget.ImageView iv2;
-    private android.widget.ImageView iv3;
-    private android.widget.ImageView iv4;
-    private android.widget.ImageView iv5;
-    private android.widget.ImageView iv6;
+    private ImageView iv2;
+    private ImageView iv1;
+    private ImageView iv3;
+    private ImageView iv4;
+    private ImageView iv5;
+    private ImageView iv6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +41,15 @@ public class GlideTestActivity extends Activity {
 
         setContentView(R.layout.activity_glide_test);
 
-        this.iv1 = (ImageView) findViewById(R.id.iv1);
-        this.iv2 = (ImageView) findViewById(R.id.iv2);
-        this.iv3 = (ImageView) findViewById(R.id.iv3);
-        this.iv4 = (ImageView) findViewById(R.id.iv4);
-        this.iv5 = (ImageView) findViewById(R.id.iv5);
-        this.iv6 = (ImageView) findViewById(R.id.iv6);
+        iv1 = (ImageView) findViewById(R.id.iv1);
+        iv2 = (ImageView) findViewById(R.id.iv2);
+        iv3 = (ImageView) findViewById(R.id.iv3);
+        iv4 = (ImageView) findViewById(R.id.iv4);
+        iv5 = (ImageView) findViewById(R.id.iv5);
+        iv6 = (ImageView) findViewById(R.id.iv6);
 
 
+        String url = "http://imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=ae4e87268d94a4c21e2eef68669d71a0/7c1ed21b0ef41bd5d5a88edd5bda81cb39db3d1b.jpg";
         String url2 = "http://imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=ae4e87268d94a4c21e2eef68669d71a0/7c1ed21b0ef41bd5d5a88edd5bda81cb39db3d1b.jpg";
 
         String url3 = "http://pic49.nipic.com/file/20140927/19617624_230415502002_2.jpg";
@@ -56,6 +64,28 @@ public class GlideTestActivity extends Activity {
         //设置跳过内存缓存
         with(this).load(url2).skipMemoryCache(true).into(iv4);
 
+        Glide.with(this).load(url).placeholder(R.drawable.actionbar_add_icon).into(new GlideDrawableImageViewTarget(iv4) {
+
+            @Override
+            public void onLoadStarted(Drawable placeholder) {
+                // 开始加载图片
+                // progressBar.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                //   progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                super.onResourceReady(resource, glideAnimation);
+                // 图片加载完成
+                iv4.setImageDrawable(resource);
+                //  progressBar.setVisibility(View.GONE);
+            }
+        });
+
 
         //设置下载优先级
         /**  //设置缓存策略
@@ -67,7 +97,7 @@ public class GlideTestActivity extends Activity {
         with(this).load(url2).diskCacheStrategy(DiskCacheStrategy.ALL).into(iv5);
 
 
-        for (int i = 1; i <= 5; i++){
+        for (int i = 1; i <= 5; i++) {
             getImageCacheAsyncTask mgetImageCacheAsyncTask = new getImageCacheAsyncTask(this);
             mgetImageCacheAsyncTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, url2);
         }
@@ -136,4 +166,22 @@ public class GlideTestActivity extends Activity {
     asGif()：Gif 检查，如果是图片且加了判断，则会显示error占位图，否则会显示图片
     asBitmap()：bitmap转化，如果是gif，则会显示第一帧*/
 
+
+    private SimpleTarget target = new SimpleTarget<Bitmap>() {
+        @Override
+        public void onResourceReady(Bitmap bitmap, GlideAnimation glideAnimation) {
+            //图片加载完成
+        }
+
+        @Override
+        public void onStart() {
+            super.onStart();
+        }
+    };
+
+
 }
+
+
+
+

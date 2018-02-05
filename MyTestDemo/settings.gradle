@@ -1,1 +1,1 @@
-include ':test', ':swipebackhelper', 'module:keyboard', 'module:refreshview', 'module:popwindow', ':xview', 'module:statusbarutil', 'module:glide', 'module:dialog', 'module:contentprovider', 'module:rxjava', 'module:mvp', 'module:kotlin', 'module:myThread'
+include ':test', ':swipebackhelper', 'module:keyboardlibrary', 'module:keyboard', 'module:refreshview', 'module:popwindow', ':xview', 'module:statusbarutil', 'module:glide', 'module:dialog', 'module:contentprovider', 'module:rxjava', 'module:mvp', 'module:kotlin', 'module:myThread'

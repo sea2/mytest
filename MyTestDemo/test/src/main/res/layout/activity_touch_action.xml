@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scrollview"
     android:layout_width="match_parent"
-    android:background="@drawable/test_dpi"
     android:layout_height="match_parent"
+    android:background="@drawable/test_dpi"
     >
 
-
     <LinearLayout
-        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="300dp"
+        android:layout_marginTop="50dp">
 
-        <ListView
-            android:id="@+id/sticky_content"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/test_hight"
-            android:background="#c0e4"/>
+        <com.example.test.mytestdemo.ui.MyButton
+            android:id="@+id/btn_test"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:background="@color/test"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="悬浮"/>
 
     </LinearLayout>
 
+    <ListView
+        android:id="@+id/sticky_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/test_hight"
+        android:background="#c0e4"
+        android:visibility="gone"/>
 
 
-</LinearLayout>
+</RelativeLayout>
 
 
