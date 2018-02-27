@@ -40,7 +40,7 @@ public class LooperActivity extends AppCompatActivity {
                 //第一个参数：是自己指定的message代号，方便在handler选择性地接收*-+999999999
                 //第二三个参数没有什么意义
                 //第四个参数需要封装的对象
-                Message msg = handler.obtainMessage(1,1,1,"主线程发消息了");
+                Message msg = handler.obtainMessage(1, 1, 1, "主线程发消息了");
 
                 handler.sendMessage(msg); //发送消息
             }
@@ -57,22 +57,22 @@ public class LooperActivity extends AppCompatActivity {
     }
 
 
-    class MainHandler extends Handler{
+    public class MainHandler extends Handler {
 
-        public MainHandler(Looper looper){
+        public MainHandler(Looper looper) {
             super(looper);
         }
 
-        public void handleMessage(Message msg){
+        public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            tvmain.setText("我是主线程的Handler，收到了消息："+(String)msg.obj);
+            tvmain.setText("我是主线程的Handler，收到了消息：" +  msg.obj);
         }
     }
 
 
-    class MyThread extends Thread{
+   private class MyThread extends Thread {
 
-        public void run(){
+        public void run() {
             Looper.prepare(); //创建该线程的Looper对象，用于接收消息  
 
             //注意了：这里的handler是定义在主线程中的哦，呵呵，  
@@ -90,13 +90,13 @@ public class LooperActivity extends AppCompatActivity {
         }
 
         //定义线程类中的消息处理类  
-        class ThreadHandler extends Handler{
+        class ThreadHandler extends Handler {
 
-            public ThreadHandler(Looper looper){
+            public ThreadHandler(Looper looper) {
                 super(looper);
             }
 
-            public void handleMessage(Message msg){
+            public void handleMessage(Message msg) {
                 Looper looper = Looper.getMainLooper(); //主线程的Looper对象
                 //这里以主线程的Looper对象创建了handler，
                 //所以，这个handler发送的Message会被传递给主线程的MessageQueue。
@@ -106,17 +106,12 @@ public class LooperActivity extends AppCompatActivity {
                 //第一个参数：是自己指定的message代号，方便在handler选择性地接收
                 //第二三个参数没有什么意义
                 //第四个参数需要封装的对象
-                Message msgs = handler.obtainMessage(1,1,1,"其他线程发消息了");
+                Message msgs = handler.obtainMessage(1, 1, 1, "其他线程发消息了");
 
                 handler.sendMessage(msgs); //发送消息
             }
         }
     }
-
-
-
-
-
 
 
 }

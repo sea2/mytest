@@ -231,6 +231,7 @@ public class SpannableStringActivity extends BaseActivity {
         TextView textView = (TextView) findViewById(R.id.mode10);
         textView.setText(spannableString);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
+
     }
 
 

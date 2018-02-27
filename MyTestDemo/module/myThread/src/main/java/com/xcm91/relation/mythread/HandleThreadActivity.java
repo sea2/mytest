@@ -3,6 +3,7 @@ package com.xcm91.relation.mythread;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
@@ -126,6 +127,17 @@ public class HandleThreadActivity extends Activity {
             }
         }
     });
+
+
+    private static class MainLooperHandler extends Handler {
+        public MainLooperHandler() {
+            super(Looper.getMainLooper());
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+        }
+    }
 
 
     Handler handler = new Handler();
