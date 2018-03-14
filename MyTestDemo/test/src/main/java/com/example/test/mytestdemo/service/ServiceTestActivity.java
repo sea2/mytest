@@ -65,8 +65,10 @@ public class ServiceTestActivity extends BaseActivity {
         btnunbindservice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {//关闭
-                unbindService(connection);
-                connection = null;
+              /*  unbindService(connection);
+                connection = null;*/
+
+                myBinder.startDialog();
             }
         });
 

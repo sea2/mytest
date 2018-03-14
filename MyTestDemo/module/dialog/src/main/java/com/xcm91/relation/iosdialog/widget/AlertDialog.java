@@ -15,6 +15,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.xcm91.relation.iosdialog.R;
+import com.xcm91.relation.iosdialog.ScreenUtil;
 
 
 public class AlertDialog {
@@ -60,7 +61,8 @@ public class AlertDialog {
         dialog.setContentView(view);
 
         // 调整dialog背景大小
-        lLayout_bg.setLayoutParams(new FrameLayout.LayoutParams((int) (display.getWidth() * 0.85), LayoutParams.WRAP_CONTENT));
+
+        lLayout_bg.setLayoutParams(new FrameLayout.LayoutParams((int) (new ScreenUtil(context).getWidth() * 0.85), LayoutParams.WRAP_CONTENT));
 
         return this;
     }

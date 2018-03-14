@@ -6,7 +6,7 @@ package com.example.test.mytestdemo.util;
 
 public class Singleton {
 
-    static Singleton instance = null;
+  private   static Singleton instance = null;
 
 
     public static Singleton getInstance() {

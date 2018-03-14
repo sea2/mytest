@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.READ_SMS"/>
     <uses-permission android:name="android.permission.READ_CALL_LOG"/>
     <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name=".application.MyApplication"
@@ -104,6 +105,7 @@
         <activity android:name=".activity.SwipeBackActivity">
         </activity>
         <activity android:name=".ui.recyclerview.StaggeredGridLayoutActivity"/>
+        <activity android:name=".service.ServiceTestActivity"/>
         <activity
             android:name=".activity.intent.FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

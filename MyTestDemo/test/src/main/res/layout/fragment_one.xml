@@ -77,6 +77,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:text="动画"/>
+            <Button
+                android:id="@+id/btn_spannable_String"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="SpannableStringBuilder"/>
 
             <com.example.test.mytestdemo.ui.FlowLayout
                 android:layout_width="fill_parent"

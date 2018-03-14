@@ -7,11 +7,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 
 import com.example.test.mytestdemo.R;
 import com.example.test.mytestdemo.activity.AnimationActivity;
 import com.example.test.mytestdemo.activity.HorizontalScrollViewActivity;
+import com.example.test.mytestdemo.activity.SpannableStringActivity;
 import com.example.test.mytestdemo.activity.SwipeBackActivity;
 import com.example.test.mytestdemo.activity.ThreadActivity;
 import com.example.test.mytestdemo.aidl.HelloSumAidlActivity;
@@ -34,7 +36,7 @@ public class OneFragment extends LazyFragment {
     Button btn_horizontalscrollView;
     Button btn_webview;
     Button btn_thread,btn_swipeback,btn_animation;
-    Button btn_broadcast, btn_aidl, btn_service;
+    Button btn_broadcast, btn_aidl, btn_service,btn_spannable_String;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class OneFragment extends LazyFragment {
             btn_thread = (Button) view.findViewById(R.id.btn_thread);
             btn_aidl = (Button) view.findViewById(R.id.btn_aidl);
             btn_broadcast = (Button) view.findViewById(R.id.btn_broadcast);
+            btn_spannable_String = (Button) view.findViewById(R.id.btn_spannable_String);
             btn_service = (Button) view.findViewById(R.id.btn_service);
             btn_swipeback = (Button) view.findViewById(R.id.btn_swipeback);
             btn_animation = (Button) view.findViewById(R.id.btn_animation);
@@ -129,6 +132,24 @@ public class OneFragment extends LazyFragment {
                 startAc(AnimationActivity.class);
             }
         });
+        btn_spannable_String.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startAc(SpannableStringActivity.class);
+            }
+        });
+
+        ViewTreeObserver vto = btn_animation.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener(){
+            @Override
+            public void onGlobalLayout() {
+                int height =btn_animation.getHeight();
+                int width =btn_animation.getWidth();
+                btn_animation.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+            }
+        });
+
+
     }
 
     private void getinfo() {

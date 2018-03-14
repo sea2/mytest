@@ -12,11 +12,8 @@ public class MyService2 extends Service {
 
     private int progress = 0;
 
-    private MyHandler myHandler;
+    private ServiceTestActivity.MyHandler myHandler;
 
-    public void setHandler(MyHandler handler) {
-        myHandler = handler;
-    }
 
     public int getProgress() {
         return progress;
@@ -31,9 +28,7 @@ public class MyService2 extends Service {
         Log.i(TAG, "onCreate() executed");
 
 
-
     }
-
 
 
     @Override
@@ -60,11 +55,6 @@ public class MyService2 extends Service {
     public boolean onUnbind(Intent intent) {
         return super.onUnbind(intent);
     }
-
-
-
-
-
 
 
     public class MyBinder extends Binder {
@@ -95,11 +85,15 @@ public class MyService2 extends Service {
             }).start();
         }
 
-        public void setCallBackHandler(ServiceTestActivity.MyHandler myHandler) {
-            myHandler = myHandler;
+        public void setCallBackHandler(ServiceTestActivity.MyHandler mHandler) {
+            myHandler = mHandler;
+        }
+
+        public void startDialog() {
+            //自定义一个dialog属性的activty
+
         }
     }
-
 
 
 }

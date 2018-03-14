@@ -8,6 +8,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -60,17 +62,45 @@ public class AnimationActivity extends AppCompatActivity {
         });
 
 
+/*-------------------------------------------补间动画-----------------------------------------------*/
 
+        Animation mRotateAnimation = AnimationUtils.loadAnimation(this, R.anim.refresh_coin_rotate_animation);
+        mRotateAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
 
+            }
 
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                if (btnstart != null) {//清除动画
+                    btnstart.clearAnimation();
+                    btnstart.setAnimation(null);
+                    btnstart.setVisibility(View.GONE);
+                }
+            }
 
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        mRotateAnimation.setFillEnabled(true);
+        mRotateAnimation.setFillAfter(true);
+        btnstart.startAnimation(mRotateAnimation);
 
 
 
 
     }
 
-    //值变化
+
+
+
+
+
+
+    //值变化   属性动画
     private void setObjectAnimator(float last, float current) {
         ValueAnimator progressAnimator = ValueAnimator.ofFloat(last, current);
         progressAnimator.setDuration(300);

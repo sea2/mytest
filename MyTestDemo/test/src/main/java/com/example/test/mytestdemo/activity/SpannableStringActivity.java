@@ -1,13 +1,12 @@
 package com.example.test.mytestdemo.activity;
 
-import android.graphics.BlurMaskFilter;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.Layout;
 import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
-import android.text.TextPaint;
+import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.BackgroundColorSpan;
@@ -23,8 +22,7 @@ import android.widget.Toast;
 
 import com.example.test.mytestdemo.R;
 import com.example.test.mytestdemo.app.BaseActivity;
-import com.example.test.mytestdemo.util.SpannableStringUtils;
-import com.example.test.mytestdemo.util.ToastUtils;
+import com.example.test.mytestdemo.utils.CustomClickableSpan;
 
 
 public class SpannableStringActivity extends BaseActivity {
@@ -44,131 +42,92 @@ public class SpannableStringActivity extends BaseActivity {
         mode10();
 
 
-        ((TextView) findViewById(R.id.mode1)).setText(SpannableStringUtils
-                .getBuilder("测试SpannableStringUtils\n")
-                .setBold().setForegroundColor(Color.YELLOW).setBackgroundColor(Color.GRAY).setAlign(Layout.Alignment.ALIGN_CENTER)
-                .append("测试")
-                .append("前景色").setForegroundColor(Color.GREEN)
-                .append("背景色\n").setBackgroundColor(Color.RED)
-                .append("测试首行缩进\n").setLeadingMargin(30, 50)
-                .append("测试引用\n").setQuoteColor(Color.YELLOW)
-                .append("测试列表项\n").setBullet(30, Color.YELLOW)
-                .append("测试")
-                .append("2倍字体\n").setProportion(2)
-                .append("测试")
-                .append("横向2倍字体\n").setXProportion(2)
-                .append("测试")
-                .append("删除线").setStrikethrough()
-                .append("下划线\n").setUnderline()
-                .append("测试")
-                .append("上标").setSuperscript()
-                .append("下标\n").setSubscript()
-                .append("测试")
-                .append("粗体").setBold()
-                .append("斜体").setItalic()
-                .append("粗斜体\n").setBoldItalic()
-                .append("monospace font\n").setFontFamily("monospace")
-                .append("serif font\n").setFontFamily("serif")
-                .append("sans-serif font\n").setFontFamily("sans-serif")
-                .append("测试正常对齐\n").setAlign(Layout.Alignment.ALIGN_NORMAL)
-                .append("测试居中对齐\n").setAlign(Layout.Alignment.ALIGN_CENTER)
-                .append("测试相反对齐\n").setAlign(Layout.Alignment.ALIGN_OPPOSITE)
-                .append("测试")
-                .append("图片\n").setResourceId(R.mipmap.ic_launcher)
-                .append("测试")
-                .append("点击事件\n").setClickSpan(clickableSpan)
-                .append("测试")
-                .append("Url\n").setUrl("https://github.com/Blankj/AndroidUtilCode")
-                .append("测试")
-                .append("模糊字体\n").setBlur(3, BlurMaskFilter.Blur.NORMAL)
-                .create()
-        );
-
     }
 
-    ClickableSpan clickableSpan = new ClickableSpan() {
-        @Override
-        public void onClick(View widget) {
-            ToastUtils.showShortToast("事件触发了");
-        }
 
-        @Override
-        public void updateDrawState(TextPaint ds) {
-            ds.setColor(Color.BLUE);
-            ds.setUnderlineText(false);
-        }
-    };
 
     /**
      * 使用SpannableStringBuilder设置样式——字体颜色
      */
     private void mode2() {
-        SpannableStringBuilder spannableString = new SpannableStringBuilder();
-        spannableString.append("暗影IV");
-        spannableString.append("已经开始暴走了");
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
+        SpannableString spannableString = new SpannableString("设置样式——字体颜色");
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#009ad6"));
-        spannableString.setSpan(colorSpan, 0, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        ((TextView) findViewById(R.id.mode2)).setText(spannableString);
+        spannableString.setSpan(colorSpan, 6, 10, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableStringBuilder.append(spannableString);
+
+        ((TextView) findViewById(R.id.mode2)).setText(spannableStringBuilder);
     }
 
     /**
      * 使用SpannableStringBuilder设置样式——背景颜色
      */
     private void mode3() {
-        SpannableStringBuilder spannableString = new SpannableStringBuilder();
-        spannableString.append("暗影IV已经开始暴走了");
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
+        SpannableString spannableString = new SpannableString("设置样式——背景颜色");
         BackgroundColorSpan bgColorSpan = new BackgroundColorSpan(Color.parseColor("#009ad6"));
-        spannableString.setSpan(bgColorSpan, 0, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        ((TextView) findViewById(R.id.mode3)).setText(spannableString);
+        spannableString.setSpan(bgColorSpan, 6, 10, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableStringBuilder.append(spannableString);
+
+        ((TextView) findViewById(R.id.mode3)).setText(spannableStringBuilder);
     }
 
     /**
      * 使用SpannableStringBuilder设置样式——字体大小
      */
     private void mode4() {
-        SpannableStringBuilder spannableString = new SpannableStringBuilder();
-        spannableString.append("暗影IV已经开始暴走了");
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
+        SpannableString spannableString = new SpannableString("设置样式——字体大小");
         AbsoluteSizeSpan absoluteSizeSpan = new AbsoluteSizeSpan(20);
-        spannableString.setSpan(absoluteSizeSpan, 0, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        ((TextView) findViewById(R.id.mode4)).setText(spannableString);
+        spannableString.setSpan(absoluteSizeSpan, 6,10, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableStringBuilder.append(spannableString);
+
+        ((TextView) findViewById(R.id.mode4)).setText(spannableStringBuilder);
     }
 
     /**
      * 使用SpannableStringBuilder设置样式——粗体\斜体
      */
     private void mode5() {
-        SpannableStringBuilder spannableString = new SpannableStringBuilder();
-        spannableString.append("暗影IV已经开始暴走了");
+        SpannableStringBuilder spannableStringBuilder  = new SpannableStringBuilder();
+        SpannableString spannableString = new SpannableString("设置样式——粗体\\斜体\\粗斜体");
         //setSpan可多次使用
         StyleSpan styleSpan = new StyleSpan(Typeface.BOLD);//粗体
-        spannableString.setSpan(styleSpan, 0, 3, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableString.setSpan(styleSpan, 6, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         StyleSpan styleSpan2 = new StyleSpan(Typeface.ITALIC);//斜体
-        spannableString.setSpan(styleSpan2, 3, 6, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableString.setSpan(styleSpan2, 9, 11, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         StyleSpan styleSpan3 = new StyleSpan(Typeface.BOLD_ITALIC);//粗斜体
-        spannableString.setSpan(styleSpan3, 6, 9, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        ((TextView) findViewById(R.id.mode5)).setText(spannableString);
+        spannableString.setSpan(styleSpan3, 12, 15, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableStringBuilder.append(spannableString);
+
+
+        ((TextView) findViewById(R.id.mode5)).setText(spannableStringBuilder);
     }
 
     /**
      * 使用SpannableStringBuilder设置样式——删除线
      */
     private void mode6() {
-        SpannableStringBuilder spannableString = new SpannableStringBuilder();
-        spannableString.append("暗影IV已经开始暴走了");
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
+        SpannableString spannableString = new SpannableString("设置样式——删除线");
         StrikethroughSpan strikethroughSpan = new StrikethroughSpan();
         spannableString.setSpan(strikethroughSpan, 0, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        ((TextView) findViewById(R.id.mode6)).setText(spannableString);
+        spannableStringBuilder.append(spannableString);
+
+        ((TextView) findViewById(R.id.mode6)).setText(spannableStringBuilder);
     }
 
     /**
      * 使用SpannableStringBuilder设置样式——下划线
      */
     private void mode7() {
-        SpannableStringBuilder spannableString = new SpannableStringBuilder();
-        spannableString.append("暗影IV已经开始暴走了");
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
         UnderlineSpan underlineSpan = new UnderlineSpan();
-        spannableString.setSpan(underlineSpan, 0, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        ((TextView) findViewById(R.id.mode7)).setText(spannableString);
+        SpannableString spannableString = new SpannableString("设置样式——下划线");
+        spannableString.setSpan(underlineSpan, 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableStringBuilder.append(spannableString);
+
+        ((TextView) findViewById(R.id.mode7)).setText(spannableStringBuilder);
     }
 
     /**
@@ -176,32 +135,36 @@ public class SpannableStringActivity extends BaseActivity {
      */
     private void mode8() {
         SpannableStringBuilder spannableString = new SpannableStringBuilder();
-        spannableString.append("暗影IV已经开始暴走了");
+        spannableString.append("设置样式——图片");
         ImageSpan imageSpan = new ImageSpan(this, R.mipmap.ic_launcher);
         //也可以这样
         //Drawable drawable = getResources().getDrawable(R.mipmap.ic_launcher);
         //drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
         //ImageSpan imageSpan1 = new ImageSpan(drawable);
         //将index为6、7的字符用图片替代
-        spannableString.setSpan(imageSpan, 6, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+
+        spannableString.setSpan(imageSpan, 4, 6, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         ((TextView) findViewById(R.id.mode8)).setText(spannableString);
     }
 
     /**
      * 使用SpannableStringBuilder设置点击事件
+     * 去除下划线可以自定义ClickableSpan
      */
     private void mode9() {
-        SpannableStringBuilder spannableString = new SpannableStringBuilder();
-        spannableString.append("暗影IV已经开始暴走了");
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
+        SpannableString spannableString = new SpannableString("设置点击事件");
         ClickableSpan clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(SpannableStringActivity.this, "请不要点我", Toast.LENGTH_SHORT).show();
             }
         };
-        spannableString.setSpan(clickableSpan, 5, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableString.setSpan(clickableSpan, 0,spannableString.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableStringBuilder.append(spannableString);
+
         TextView textView = (TextView) findViewById(R.id.mode9);
-        textView.setText(spannableString);
+        textView.setText(spannableStringBuilder);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
@@ -209,27 +172,40 @@ public class SpannableStringActivity extends BaseActivity {
      * 使用SpannableStringBuilder事件组合使用
      */
     private void mode10() {
-        SpannableStringBuilder spannableString = new SpannableStringBuilder();
-        spannableString.append("暗影IV已经开始暴走了");
-        //图片
-        ImageSpan imageSpan = new ImageSpan(this, R.mipmap.ic_launcher);
-        spannableString.setSpan(imageSpan, 2, 4, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        //点击事件
-        ClickableSpan clickableSpan = new ClickableSpan() {
+        SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
+
+
+        String text="点击事件";
+        SpannableString spannableString = new SpannableString(text);
+        spannableString.setSpan(new CustomClickableSpan() {
             @Override
-            public void onClick(View view) {
-                Toast.makeText(SpannableStringActivity.this, "请不要点我", Toast.LENGTH_SHORT).show();
+            public void onClick(View widget) {
+                Toast.makeText(SpannableStringActivity.this, "点我我看到了", Toast.LENGTH_SHORT).show();
             }
-        };
-        spannableString.setSpan(clickableSpan, 2, 4, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        },0,text.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#215865")),0,text.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        spannableStringBuilder.append(spannableString);
+
+
+
         //文字颜色
-        ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#FFFFFF"));
-        spannableString.setSpan(colorSpan, 5, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        String textColor="文字颜色";
+        SpannableString spannableStringColor = new SpannableString(textColor);
+        ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#cccccc"));
+        spannableStringColor.setSpan(colorSpan, 0, textColor.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableStringBuilder.append(spannableStringColor);
+
+
         //文字背景颜色
+        String textBgColor="文字背景颜色";
+        SpannableString spannableStringBGColor = new SpannableString(textBgColor);
         BackgroundColorSpan bgColorSpan = new BackgroundColorSpan(Color.parseColor("#009ad6"));
-        spannableString.setSpan(bgColorSpan, 5, 8, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableStringBGColor.setSpan(bgColorSpan, 0,textBgColor.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableStringBuilder.append(spannableStringBGColor);
+
+
         TextView textView = (TextView) findViewById(R.id.mode10);
-        textView.setText(spannableString);
+        textView.setText(spannableStringBuilder);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
 
     }

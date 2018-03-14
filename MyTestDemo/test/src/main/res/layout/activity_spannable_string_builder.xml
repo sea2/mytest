@@ -9,66 +9,89 @@
               android:paddingLeft="@dimen/activity_horizontal_margin"
               android:paddingRight="@dimen/activity_horizontal_margin"
               android:paddingTop="@dimen/activity_vertical_margin"
-             >
+    >
 
-    <TextView
-        android:id="@+id/mode1"
-        android:layout_width="wrap_content"
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:textSize="18dp" />
-    <TextView
-        android:id="@+id/mode2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:textSize="18dp" />
-    <TextView
-        android:id="@+id/mode3"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_height="wrap_content"
-        android:textSize="18dp" />
-    <TextView
-        android:id="@+id/mode4"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_height="wrap_content"
-        android:textSize="18dp" />
-    <TextView
-        android:id="@+id/mode5"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_height="wrap_content"
-        android:textSize="18dp" />
-    <TextView
-        android:id="@+id/mode6"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_height="wrap_content"
-        android:textSize="18dp" />
-    <TextView
-        android:id="@+id/mode7"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_height="wrap_content"
-        android:textSize="18dp" />
-    <TextView
-        android:id="@+id/mode8"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_height="wrap_content"
-        android:textSize="18dp" />
-    <TextView
-        android:id="@+id/mode9"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_height="wrap_content"
-        android:textSize="18dp" />
-    <TextView
-        android:id="@+id/mode10"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_height="wrap_content"
-        android:textSize="18dp" />
+        android:overScrollMode="never"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/mode1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:id="@+id/mode2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:id="@+id/mode3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:id="@+id/mode4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:id="@+id/mode5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:id="@+id/mode6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:id="@+id/mode7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:id="@+id/mode8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:id="@+id/mode9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:id="@+id/mode10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="18dp"/>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>
