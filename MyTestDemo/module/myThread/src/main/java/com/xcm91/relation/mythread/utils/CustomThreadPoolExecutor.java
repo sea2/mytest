@@ -1,4 +1,4 @@
-package com.xcm91.relation.mythread;
+package com.xcm91.relation.mythread.utils;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
@@ -16,19 +16,20 @@ public class CustomThreadPoolExecutor {
 
 
     private ThreadPoolExecutor pool = null;
-
+    private final String TAG = this.getClass().getSimpleName();
+    private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
+    private static final int MAXIMUM_POOL_SIZE = CPU_COUNT * 2 + 1;
 
     /**
      * 线程池初始化方法
-     *
-     * corePoolSize 核心线程池大小----1
-     * maximumPoolSize 最大线程池大小----3
-     * keepAliveTime 线程池中超过corePoolSize数目的空闲线程最大存活时间----30+单位TimeUnit
-     * TimeUnit keepAliveTime时间单位----TimeUnit.MINUTES
-     * workQueue 阻塞队列----new ArrayBlockingQueue<Runnable>(5)====5容量的阻塞队列
+     * corePoolSize 核心线程池大小----1--- 线程池维护线程的最少数量
+     * maximumPoolSize 最大线程池大小----3---线程池维护线程的最大数量
+     * keepAliveTime 线程池中超过corePoolSize数目的空闲线程最大存活时间----30+单位TimeUnit--线程池维护线程所允许的空闲时间
+     * TimeUnit keepAliveTime时间单位----TimeUnit.MINUTES--线程池维护线程所允许的空闲时间的单位
+     * workQueue 阻塞队列----new ArrayBlockingQueue<Runnable>(5)==线程池所使用的缓冲队列==5容量的阻塞队列
      * threadFactory 新建线程工厂----new CustomThreadFactory()====定制的线程工厂
-     * rejectedExecutionHandler 当提交任务数超过maxmumPoolSize+workQueue之和时,
-     *                          即当提交第41个任务时(前面线程都没有执行完,此测试方法中用sleep(100)),
+     * rejectedExecutionHandler 线程池对拒绝任务的处理策略，当提交任务数超过maxmumPoolSize+workQueue之和时,
+     *                          即当提交第41个任务时(前面线程都没有执行完),
      *                                任务会交给RejectedExecutionHandler来处理
      */
     public void init() {
@@ -43,6 +44,11 @@ public class CustomThreadPoolExecutor {
     }
 
 
+    /**
+     * 线程关闭
+     * 　shutdown()：不会立即终止线程池，而是要等所有任务缓存队列中的任务都执行完后才终止，但再也不会接受新的任务
+     　　shutdownNow()：立即终止线程池，并尝试打断正在执行的任务，并且清空任务缓存队列，返回尚未执行的任务
+     */
     public void destory() {
         if(pool != null) {
             pool.shutdownNow();
@@ -98,8 +104,9 @@ public class CustomThreadPoolExecutor {
                 @Override
                 public void run() {
                     try {
-                        System.out.println(">>>task is running=====");
-                        TimeUnit.SECONDS.sleep(10);
+                        System.out.println(">>>task is 开始=====");
+                        TimeUnit.SECONDS.sleep(5);
+                        System.out.println(">>>task is 结束=====");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

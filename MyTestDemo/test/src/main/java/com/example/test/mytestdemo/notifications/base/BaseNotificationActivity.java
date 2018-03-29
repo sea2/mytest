@@ -1,12 +1,13 @@
 package com.example.test.mytestdemo.notifications.base;
 
-import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class BaseNotificationActivity extends Activity {
+import com.example.test.mytestdemo.app.BaseActivity;
+
+public class BaseNotificationActivity extends BaseActivity{
 	/** Notification管理 */
 	public NotificationManager mNotificationManager;
 

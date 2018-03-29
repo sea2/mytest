@@ -3,6 +3,7 @@ package com.example.test.mytestdemo.utils;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -196,11 +197,34 @@ public class IntentUtils {
      * @param outUri 输出的uri
      * @return 拍照的意图
      */
-    public static Intent getCaptureIntent(Uri outUri) {
+    public static Intent getCaptureIntent(Uri outUri, Context context) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, outUri);
+        if (context.getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) == null) {
+            return null;
+        }
         return intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
     }
+
+
+
+
+    /**
+     * 查询Intent是否有效
+     * 意图是否有效
+     */
+    public static boolean getIntentValid(Context context, Intent intent) {
+        if (context.getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) == null) {
+            return false;
+        } else return true;
+
+    }
+
+
+
+
+
+
 /*
     *//**
      * 获取选择照片的Intent

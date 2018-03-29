@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * @author Leo
  */
-class MainActivity2 extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity {
 
 
 

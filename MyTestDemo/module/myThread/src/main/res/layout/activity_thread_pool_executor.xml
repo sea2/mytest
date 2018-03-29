@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,4 +7,18 @@
     android:layout_height="match_parent"
     tools:context="com.xcm91.relation.mythread.ThreadPoolExecutorActivity">
 
-</android.support.constraint.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btn_start_thread_pool"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开启线程"/>
+
+    <Button
+        android:id="@+id/btn_stop_thread_pool"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="关闭线程"
+      />
+
+</LinearLayout>

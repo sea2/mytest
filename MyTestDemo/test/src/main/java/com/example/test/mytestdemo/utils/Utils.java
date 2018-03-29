@@ -35,7 +35,6 @@ public class Utils {
      * @return ApplicationContext
      */
     public static Context getContext() {
-        if (context != null) return context;
-        else return MyApplication.getInstance();
+        return MyApplication.getInstance().getApplicationContext();
     }
 }

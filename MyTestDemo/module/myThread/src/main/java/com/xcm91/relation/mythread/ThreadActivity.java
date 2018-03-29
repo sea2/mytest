@@ -1,5 +1,6 @@
-package com.example.test.mytestdemo.activity;
+package com.xcm91.relation.mythread;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,23 +11,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
-import com.example.test.mytestdemo.R;
-import com.example.test.mytestdemo.app.BaseActivity;
-
 import java.lang.ref.WeakReference;
 
 /**
  * Created by lhy on 2017/1/13.
  */
 
-public class ThreadActivity extends BaseActivity {
+public class ThreadActivity extends Activity {
 
 
-    private android.widget.Button btnnotification;
-    private android.widget.Button btnwebview;
-    private android.widget.Button btnhorizontalscrollView;
-    private android.widget.Button btnthread;
-    private android.widget.ProgressBar pbtest;
+    private Button btnnotification;
+    private Button btnwebview;
+    private Button btnhorizontalscrollView;
+    private Button btnthread;
+    private ProgressBar pbtest;
     private int progressInt = 0;
     private DialogHelper task;
     private boolean flag;
@@ -142,7 +140,6 @@ public class ThreadActivity extends BaseActivity {
             if (msg != null) {
                 switch (msg.what) {
                     case 1:
-                        showToast("呵呵" + 1);
                         break;
                 }
             }
@@ -230,7 +227,6 @@ public class ThreadActivity extends BaseActivity {
                         task = new DialogHelper();
                         task.execute(1);
                     } else {
-                        showToast("完成进度");
                     }
 
                     Log.e("进度", "" + progressInt);

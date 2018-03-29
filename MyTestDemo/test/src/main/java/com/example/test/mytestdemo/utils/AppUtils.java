@@ -3,12 +3,16 @@ package com.example.test.mytestdemo.utils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -502,13 +506,13 @@ public class AppUtils {
      */
     public static class AppInfo {
 
-        private String   name;
+        private String name;
         private Drawable icon;
-        private String   packageName;
-        private String   packagePath;
-        private String   versionName;
-        private int      versionCode;
-        private boolean  isSystem;
+        private String packageName;
+        private String packagePath;
+        private String versionName;
+        private int versionCode;
+        private boolean isSystem;
 
         public Drawable getIcon() {
             return icon;
@@ -702,4 +706,29 @@ public class AppUtils {
         }
         return isSuccess;
     }
+
+    /**
+     * 打开别的app,打开别的应用，启动别的app，启动其他的应用
+     *   对应的另外的那个activty应该在清单问价加入 android:exported="true" 属性，标记别的应用能打开
+     * @param activity
+     */
+    public static void StartOtherApp(Activity activity, String packageName, String packageClass) {
+        try {
+            //ComponentName componentName = new ComponentName("com.tangguo.tangguoxianjin", "com.tangguo.tangguoxianjin.activity.MainActivity");
+            ComponentName componentName = new ComponentName(packageName, packageClass);
+            Intent intent = new Intent();
+            //  Intent intent = new Intent("chroya.foo");
+            Bundle bundle = new Bundle();
+            bundle.putString("args", "我就是跳转过来的");
+            intent.putExtras(bundle);
+            intent.setComponent(componentName);
+            activity.startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            //判断是否安装B应用，提供下载链接
+            ToastUtils.showShortToast("请下载----" + "com.example.intentActivity2");
+            e.printStackTrace();
+        }
+    }
+
+
 }

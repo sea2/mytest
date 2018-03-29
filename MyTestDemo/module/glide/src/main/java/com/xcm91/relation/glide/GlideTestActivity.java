@@ -3,19 +3,21 @@ package com.xcm91.relation.glide;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.Target;
+import com.xcm91.relation.glide.imageload.ImageLoader;
 
 import java.io.File;
 
@@ -34,6 +36,7 @@ public class GlideTestActivity extends Activity {
     private ImageView iv4;
     private ImageView iv5;
     private ImageView iv6;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,61 +52,161 @@ public class GlideTestActivity extends Activity {
         iv6 = (ImageView) findViewById(R.id.iv6);
 
 
+        ViewTreeObserver vto2 = iv6.getViewTreeObserver();
+        vto2.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                Log.e("glide", iv6.getMeasuredWidth() + "----" + iv6.getMeasuredHeight());
+            }
+        });
+
+
         String url = "http://imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=ae4e87268d94a4c21e2eef68669d71a0/7c1ed21b0ef41bd5d5a88edd5bda81cb39db3d1b.jpg";
         String url2 = "http://imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=ae4e87268d94a4c21e2eef68669d71a0/7c1ed21b0ef41bd5d5a88edd5bda81cb39db3d1b.jpg";
 
         String url3 = "http://pic49.nipic.com/file/20140927/19617624_230415502002_2.jpg";
 
-        with(this).load("http://imgsrc.baidu.com/imgad/pic/item/267f9e2f07082838b5168c32b299a9014c08f1f9.jpg").into(iv1);
+        ImageLoader.getIntance(this).bindBitmap(url3, iv1);
 
-        with(this).load(R.drawable.widget_bar_user_press).into(iv2);
+        with(this).
+
+                load("http://imgsrc.baidu.com/imgad/pic/item/267f9e2f07082838b5168c32b299a9014c08f1f9.jpg").
+
+                into(iv1);
+
+        with(this).
+
+                load(R.drawable.widget_bar_user_press).
+
+                into(iv2);
 
         // 设置加载中以及加载失败图片
-        with(this).load(url2).placeholder(R.drawable.actionbar_add_icon).error(R.drawable.actionbar_add_icon).into(iv3);
+        with(this).
+
+                load(url2).
+
+                placeholder(R.drawable.actionbar_add_icon).
+
+                error(R.drawable.actionbar_add_icon).
+
+                into(iv3);
 
         //设置跳过内存缓存
-        with(this).load(url2).skipMemoryCache(true).into(iv4);
+        with(this).
 
-        Glide.with(this).load(url).placeholder(R.drawable.actionbar_add_icon).into(new GlideDrawableImageViewTarget(iv4) {
+                load(url2).
 
-            @Override
-            public void onLoadStarted(Drawable placeholder) {
-                // 开始加载图片
-                // progressBar.setVisibility(View.VISIBLE);
-            }
+                skipMemoryCache(true).
 
-            @Override
-            public void onLoadFailed(Exception e, Drawable errorDrawable) {
-                //   progressBar.setVisibility(View.GONE);
-            }
+                into(iv4);
 
-            @Override
-            public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
-                super.onResourceReady(resource, glideAnimation);
-                // 图片加载完成
-                iv4.setImageDrawable(resource);
-                //  progressBar.setVisibility(View.GONE);
-            }
-        });
+        with(this).
+
+                load(url).
+
+                placeholder(R.drawable.actionbar_add_icon).
+
+                into(new GlideDrawableImageViewTarget(iv4) {
+
+                    @Override
+                    public void onLoadStarted(Drawable placeholder) {
+                        // 开始加载图片
+                        // progressBar.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                        //   progressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> glideAnimation) {
+                        super.onResourceReady(resource, glideAnimation);
+                        // 图片加载完成
+                        iv4.setImageDrawable(resource);
+                        //  progressBar.setVisibility(View.GONE);
+                    }
+                });
 
 
-        //设置下载优先级
-        /**  //设置缓存策略
-         * all:缓存源资源和转换后的资源
-         none:不作任何磁盘缓存
-         source:缓存源资源
+   /*     //设置下载优先级
+        *//**//**  //设置缓存策略
+         *all:
+         缓存源资源和转换后的资源
+         none:
+         不作任何磁盘缓存
+         source:
+         缓存源资源
          result：缓存转换后的资源
-         */
-        with(this).load(url2).diskCacheStrategy(DiskCacheStrategy.ALL).into(iv5);
+         *//**//**/
+        //  with(this).load(url2).diskCacheStrategy(DiskCacheStrategy.ALL).into(iv5);
 
 
-        for (int i = 1; i <= 5; i++) {
+        for (
+                int i = 1;
+                i <= 5; i++)
+
+        {
             getImageCacheAsyncTask mgetImageCacheAsyncTask = new getImageCacheAsyncTask(this);
             mgetImageCacheAsyncTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, url2);
         }
 
 
         Log.e("tag", GlideUtil.getCacheSize(this));
+
+
+        bitmap = BitmapFactory.decodeResource(this.
+
+                getResources(), R.drawable.widget_bar_user_press);
+        float height = bitmap.getHeight();
+        float width = bitmap.getWidth();
+        float screenWidth = ScreenUtil.getWidth(this.getApplicationContext());
+        float rale = screenWidth / width;
+        float drawableHeigthEnd = rale * height;
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) drawableHeigthEnd);
+        iv5.setLayoutParams(params);
+        iv5.setScaleType(ImageView.ScaleType.FIT_XY);
+        iv5.setImageBitmap(bitmap);
+
+
+        //图片适配，等比例放大缩小
+        with(this).
+
+                load(url3).
+
+                asBitmap().
+
+                into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(Bitmap bitmap, GlideAnimation glideAnimation) {
+                        //图片加载完成
+
+                        float height = bitmap.getHeight();
+                        float width = bitmap.getWidth();
+                        float screenWidth = ScreenUtil.getWidth(GlideTestActivity.this.getApplicationContext());
+                        float rale = screenWidth / width;
+                        float drawableHeigthEnd = rale * height;
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) drawableHeigthEnd);
+                        iv6.setLayoutParams(params);
+                        iv6.setScaleType(ImageView.ScaleType.FIT_XY);
+                        iv6.setImageBitmap(bitmap);
+                    }
+
+                    @Override
+                    public void onStart() {
+                        super.onStart();
+                    }
+                });
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        if (bitmap != null && !bitmap.isRecycled()) {
+            bitmap.recycle();
+            bitmap = null;
+        }
+        super.onDestroy();
     }
 
 
@@ -143,6 +246,40 @@ public class GlideTestActivity extends Activity {
             }
         }
     }
+
+
+    /**
+     * 获取指定url路径
+     */
+    private class getBitmapAsyncTask extends AsyncTask<String, Void, Bitmap> {
+
+        private final Context context;
+
+        public getBitmapAsyncTask(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            String imgUrl = params[0];
+            try {
+                return null;
+            } catch (Exception ex) {
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            if (bitmap == null) {
+                return;
+            }
+        }
+    }
+
+
+
+
   /*
    http://blog.csdn.net/wbwjx/article/details/51239627
    with():指定了声明周期
@@ -165,19 +302,6 @@ public class GlideTestActivity extends Activity {
     using() ：为单个的请求指定一个 model
     asGif()：Gif 检查，如果是图片且加了判断，则会显示error占位图，否则会显示图片
     asBitmap()：bitmap转化，如果是gif，则会显示第一帧*/
-
-
-    private SimpleTarget target = new SimpleTarget<Bitmap>() {
-        @Override
-        public void onResourceReady(Bitmap bitmap, GlideAnimation glideAnimation) {
-            //图片加载完成
-        }
-
-        @Override
-        public void onStart() {
-            super.onStart();
-        }
-    };
 
 
 }

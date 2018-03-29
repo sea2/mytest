@@ -2,11 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.xcm91.relation.mythread">
 
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"        />
+
+
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true">
-        <activity android:name=".HandleThreadActivity">
+        <activity android:name=".ThreadPoolExecutorActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -14,8 +19,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".LooperActivity">
-        </activity>
-        <activity android:name=".ThreadPoolExecutorActivity">
         </activity>
     </application>
 
