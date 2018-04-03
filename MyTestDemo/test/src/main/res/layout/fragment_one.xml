@@ -4,7 +4,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -23,7 +23,22 @@
                 android:progress="40"
                 android:progressDrawable="@drawable/progressbar_color"
                 android:secondaryProgress="90"
-                android:visibility="gone"/>
+                />
+
+            <!-- android:isIndicator  RatingBar是否是一个指示器（用户无法进行更改）
+                 android:numStars     显示的星型数量，必须是一个整形值，像“100”。
+                 android:rating       默认的评分，必须是浮点类型，像“1.2”。
+                 android:stepSize     评分的步长，设置进度的最小幅度，必须是浮点类型，像“1.2”。-->
+            <RatingBar
+                android:id="@+id/id_fragment_myself_vip_rating"
+                style="@style/vipRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:rating="4.5"
+                android:stepSize="0.5"/>
 
             <Button
                 android:id="@+id/btn_notification"
@@ -72,11 +87,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:text="右滑关闭"/>
+
             <Button
                 android:id="@+id/btn_animation"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:text="动画"/>
+
             <Button
                 android:id="@+id/btn_spannable_String"
                 android:layout_width="match_parent"
@@ -118,5 +135,5 @@
 
 
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

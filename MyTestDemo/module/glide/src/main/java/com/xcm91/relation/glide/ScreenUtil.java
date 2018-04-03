@@ -2,6 +2,7 @@ package com.xcm91.relation.glide;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Rect;
 import android.util.DisplayMetrics;
 
 import java.lang.reflect.Field;
@@ -78,7 +79,7 @@ public class ScreenUtil {
      * @param dipValue
      * @return
      */
-    public static int dip2px(  Context context,float dipValue) {
+    public static int dip2px(Context context, float dipValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
     }
@@ -118,4 +119,30 @@ public class ScreenUtil {
         }
         return statusBarHeight;
     }
+
+
+    /**
+     * 用于获取状态栏的高度。
+     *
+     * @return 返回状态栏高度的像素值。
+     */
+    public static int getStatusBarHeight2(Context context) {
+        int statusBarHeight = 0;
+        try {
+            Class<?> c = Class.forName("com.android.internal.R$dimen");
+            Object o = c.newInstance();
+            Field field = c.getField("status_bar_height");
+            int x = (Integer) field.get(o);
+            statusBarHeight = context.getResources().getDimensionPixelSize(x);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Rect frame = new Rect();
+            ((Activity) context).getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+            statusBarHeight = frame.top;
+            if (statusBarHeight == 0) statusBarHeight = 25;
+        }
+        return statusBarHeight;
+    }
+
+
 }

@@ -79,4 +79,13 @@
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
         <item name="android:background">@color/black_overlay</item>
     </style>
+
+
+
+    <!-- Vip等级BatingBar -->
+    <style name="vipRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/vip_rating_bar</item>
+        <item name="android:maxHeight">25dp</item>
+        <item name="android:minHeight">3dp</item>
+    </style>
 </resources>
