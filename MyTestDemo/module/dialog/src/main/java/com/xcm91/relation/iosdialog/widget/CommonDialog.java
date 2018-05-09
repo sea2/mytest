@@ -183,7 +183,7 @@ public class CommonDialog extends Dialog {
     public void show() {
         if (getWindow() != null) {
             WindowManager.LayoutParams p = getWindow().getAttributes(); // 获取对话框当前的参数值
-            p.width = (int) (new ScreenUtil(getContext()).getWidth() * 0.85); // 宽度设置为屏幕的0.9
+            p.width = (int) ( ScreenUtil.getInstance(getContext()).getWidth() * 0.85); // 宽度设置为屏幕的0.9
             this.getWindow().setAttributes(p);
         }
         super.show();

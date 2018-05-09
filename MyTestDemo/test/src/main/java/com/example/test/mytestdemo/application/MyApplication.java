@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
+import com.orhanobut.logger.Logger;
+
 
 public class MyApplication extends Application {
 
@@ -24,11 +26,14 @@ public class MyApplication extends Application {
 
     @Override
     public void onCreate() {
+        Logger.i("time-----");
         super.onCreate();
         appContext = this;
         t1 = System.currentTimeMillis(); // 取得当前时间
         CrashHandler crashHandler = CrashHandler.getInstance();
         crashHandler.init(getApplicationContext());
+        Logger.i("time-----");
+
     }
 
 

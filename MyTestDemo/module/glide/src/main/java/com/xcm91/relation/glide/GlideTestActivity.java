@@ -51,7 +51,6 @@ public class GlideTestActivity extends Activity {
         iv5 = (ImageView) findViewById(R.id.iv5);
         iv6 = (ImageView) findViewById(R.id.iv6);
 
-
         ViewTreeObserver vto2 = iv6.getViewTreeObserver();
         vto2.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -160,7 +159,7 @@ public class GlideTestActivity extends Activity {
                 getResources(), R.drawable.widget_bar_user_press);
         float height = bitmap.getHeight();
         float width = bitmap.getWidth();
-        float screenWidth = ScreenUtil.getWidth(this.getApplicationContext());
+        float screenWidth =new  ScreenUtil().getWidth(this.getApplicationContext());
         float rale = screenWidth / width;
         float drawableHeigthEnd = rale * height;
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) drawableHeigthEnd);
@@ -183,7 +182,7 @@ public class GlideTestActivity extends Activity {
 
                         float height = bitmap.getHeight();
                         float width = bitmap.getWidth();
-                        float screenWidth = ScreenUtil.getWidth(GlideTestActivity.this.getApplicationContext());
+                        float screenWidth = new ScreenUtil().getWidth(GlideTestActivity.this.getApplicationContext());
                         float rale = screenWidth / width;
                         float drawableHeigthEnd = rale * height;
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) drawableHeigthEnd);

@@ -4,7 +4,8 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
-import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 
 public class MyService2 extends Service {
 
@@ -25,7 +26,7 @@ public class MyService2 extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.i(TAG, "onCreate() executed");
+        Logger.i(TAG, "onCreate() executed");
 
 
     }
@@ -33,14 +34,14 @@ public class MyService2 extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i(TAG, "onStartCommand() executed");
+        Logger.i(TAG, "onStartCommand() executed");
         return super.onStartCommand(intent, flags, startId);
     }
 
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.i(TAG, "onBind() executed");
+        Logger.i(TAG, "onBind() executed");
         return mBinder;
     }
 
@@ -48,7 +49,7 @@ public class MyService2 extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.i(TAG, "onDestroy() executed");
+        Logger.i(TAG, "onDestroy() executed");
     }
 
     @Override
@@ -65,12 +66,12 @@ public class MyService2 extends Service {
 
 
         public void startDownLoad() {
-            Log.d("", "startDownLoad() inBinder-->");
+            Logger.d("", "startDownLoad() inBinder-->");
             new Thread(new Runnable() {
                 public void run() {
                     while (progress < MAX_PROGRESS) {
                         progress += 5;
-                        Log.d("", "startDownLoad() run-->");
+                        Logger.d("", "startDownLoad() run-->");
                         //进度发生变化通知调用方
                         if (myHandler != null) {
                             myHandler.sendEmptyMessage(progress);

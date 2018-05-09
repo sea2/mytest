@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.test.mytestdemo.R;
+import com.example.test.mytestdemo.activity.MainActivity;
 import com.example.test.mytestdemo.app.BaseActivity;
 
 public class ServiceTestActivity extends BaseActivity {
@@ -41,8 +42,11 @@ public class ServiceTestActivity extends BaseActivity {
 
         btnstartservice.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {//开启
-                Intent it = new Intent(ServiceTestActivity.this, MyService.class);
+            public void onClick(View view) {//开启   //要是service启动过不在调用onCtreate,调用onStartCommon
+                /*Intent it = new Intent(ServiceTestActivity.this, MyService.class);
+                startService(it);*/
+                Intent it = new Intent(ServiceTestActivity.this, MainActivity.class);
+                it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startService(it);
             }
         });
@@ -57,7 +61,7 @@ public class ServiceTestActivity extends BaseActivity {
 
         btnbindservice.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {//开启
+            public void onClick(View view) {//开启  bindService多次调用无效  调用者一旦退出，服务也就终止
                 Intent it = new Intent(ServiceTestActivity.this, MyService2.class);
                 bindService(it, connection, Context.BIND_AUTO_CREATE);
             }
@@ -101,5 +105,8 @@ public class ServiceTestActivity extends BaseActivity {
 
         }
     }
+
+
+
 
 }

@@ -254,8 +254,15 @@ public class ThreadActivity extends BaseActivity {
 
         if (mthread != null)
             mthread.interrupt();
+      /*  if (mWorking) {
+            if (mThread != null && mThread.isAlive()) {
+                mThread.interrupt();
+                mThread = null;
+            }
+            mWorking = false;*/
 
-        if (task != null && task.getStatus() == AsyncTask.Status.RUNNING) {
+
+            if (task != null && task.getStatus() == AsyncTask.Status.RUNNING) {
             task.cancel(true); // 如果Task还在运行，则先取消它
         }
     }

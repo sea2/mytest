@@ -10,6 +10,10 @@ import android.widget.Toast;
 import com.xcm91.relation.iosdialog.widget.ActionSheetDialog;
 import com.xcm91.relation.iosdialog.widget.AlertDialog;
 import com.xcm91.relation.iosdialog.widget.CommonDialog;
+import com.xcm91.relation.iosdialog.widget.CustomActionSheetDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class IosDialogActivity extends Activity implements OnClickListener {
@@ -18,12 +22,13 @@ public class IosDialogActivity extends Activity implements OnClickListener {
     private Button btn3;
     private Button btn4;
     private Button btn5;
+    private Button btn6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initView();
+       /* setContentView(R.layout.activity_main);
+        initView();*/
     }
 
     private void initView() {
@@ -37,6 +42,8 @@ public class IosDialogActivity extends Activity implements OnClickListener {
         btn4.setOnClickListener(this);
         btn5 = (Button) findViewById(R.id.btn5);
         btn5.setOnClickListener(this);
+        btn6 = (Button) findViewById(R.id.btn6);
+        btn6.setOnClickListener(this);
     }
 
     @Override
@@ -173,6 +180,14 @@ public class IosDialogActivity extends Activity implements OnClickListener {
                     }
                 });
                 mCommonDialog.show();
+                break;
+            case R.id.btn6:
+
+                 List<InvestDetialModel.OperationalItem> sheetItemList=new ArrayList<>();
+                sheetItemList.add(new InvestDetialModel.OperationalItem("1","2","1122"));
+                sheetItemList.add(new InvestDetialModel.OperationalItem("1","2","1122"));
+                new CustomActionSheetDialog(IosDialogActivity.this).builder().setList(sheetItemList).show();
+
                 break;
             default:
                 break;

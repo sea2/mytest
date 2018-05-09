@@ -3,7 +3,8 @@ package com.example.test.mytestdemo.service;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.util.Log;
+
+import com.orhanobut.logger.Logger;
 
 public class MyService extends Service {
 
@@ -13,14 +14,14 @@ public class MyService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.i(TAG, "onCreate() executed");
+        Logger.i(TAG, "onCreate() executed");
     }
 
 
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i(TAG, "onStartCommand() executed");
+        Logger.i(TAG, "onStartCommand() executed");
         Intent mintent = new Intent();
         //与清单文件的receiver的anction对应
         intent.setAction("com.test.login");
@@ -33,12 +34,12 @@ public class MyService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.i(TAG, "onDestroy() executed");
+        Logger.i(TAG, "onDestroy() executed");
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.i(TAG, "onCreate() executed");
+        Logger.i(TAG, "onCreate() executed");
         return null;
     }
 

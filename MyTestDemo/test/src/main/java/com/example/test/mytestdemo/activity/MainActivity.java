@@ -1,5 +1,8 @@
 package com.example.test.mytestdemo.activity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -16,6 +19,7 @@ import com.example.test.mytestdemo.fragment.ThreeFragment;
 import com.example.test.mytestdemo.fragment.TwoFragment;
 import com.example.test.mytestdemo.ui.MyDialog;
 import com.example.test.mytestdemo.utils.FileUtils;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,6 +45,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Logger.i("time-----");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         EventBus.getDefault().register(this);
@@ -54,7 +60,8 @@ public class MainActivity extends BaseActivity {
         FileUtils.getApplicationDirectories(this);
         FileUtils.getEnvironmentDirectories();
 
-
+        Bitmap bitmap = BitmapFactory. decodeResource (getResources(), R.drawable.test_dpi);
+        Logger.i("time---Width--"+bitmap.getWidth()+"---Height-"+bitmap.getHeight());
     }
 
 
@@ -183,5 +190,12 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
+    }
+
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Logger.i("Main+onNewIntent");
     }
 }

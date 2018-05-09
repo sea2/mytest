@@ -1,19 +1,20 @@
 package com.example.test.mytestdemo.xmlPull.XmlParserDemo;
 
 import android.app.ListActivity;
+import android.content.res.AssetManager;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Xml;
 import android.widget.SimpleAdapter;
 
 import com.example.test.mytestdemo.R;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
-import java.io.StringReader;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -64,43 +65,77 @@ public class PullPraserDemo extends ListActivity {
     }
 
 
-    /**
-     * xml格式字符串解析
-     *
-     * @param xmlData
-     * @throws Exception
-     */
-    public void parseXMLWithPull(String xmlData) throws Exception {
-        XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-        XmlPullParser parser = factory.newPullParser();
-        parser.setInput(new StringReader(xmlData));
-        int eventType = parser.getEventType();
-        String name = "";
-        String version = "";
-        while (eventType != XmlPullParser.END_DOCUMENT) {
-            String nodeName = parser.getName();
-            switch (eventType) {
-                // 开始解析某个结点
-                case XmlPullParser.START_TAG: {
-                    if ("name".equals(nodeName)) {
-                        name = parser.nextText();
-                    } else if ("version".equals(nodeName)) {
-                        version = parser.nextText();
-                    }
-                    break;
-                }
-                // 完成解析某个结点
-                case XmlPullParser.END_TAG: {
-                    if ("app".equals(nodeName)) {
-                        Log.d("MainActivity", "name is " + name);
-                        Log.d("MainActivity", "version is " + version);
-                    }
-                    break;
-                }
-                default:
-                    break;
+    public void pullGetRank360() {
+        AssetManager assetManager = this.getAssets();
+        //使用IO流读取json文件内容
+        try {
+            InputStream is = assetManager.open("rank360.xml");
+            List<Rank360Info> persons = getRank360Infos(is);
+            for (Rank360Info rank360Info : persons) {
+                Log.i("tag", rank360Info.toString());
             }
-            eventType = parser.next();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * ------------------------使用PULL解析XML-----------------------
+     *
+     * @param inStream
+     */
+    public List<Rank360Info> getRank360Infos(InputStream inStream) {
+        try {
+            List<Rank360Info> rank360Infos = null;
+            XmlPullParser pullParser = Xml.newPullParser();
+            pullParser.setInput(inStream, "UTF-8");
+            int event = pullParser.getEventType();// 触发第一個事件
+            Rank360Info rank360Info = null;
+            while (event != XmlPullParser.END_DOCUMENT) {
+                switch (event) {
+                    case XmlPullParser.START_DOCUMENT:
+                        rank360Infos = new ArrayList<Rank360Info>();
+                        break;
+                    case XmlPullParser.START_TAG:
+                        if ("a".equals(pullParser.getName())) {
+                            //获取class的属性
+                            String classStr = pullParser.getAttributeValue(null, "class");
+                            if (classStr != null && classStr.equals("doc-color-link")) {
+                                String name = pullParser.nextText().trim();
+                                rank360Info = new Rank360Info();
+                                rank360Info.setName(name);
+                            }
+                            if (classStr != null && classStr.equals("doc-color-link more-info")) {
+                                String url = pullParser.nextText().trim();
+                                if (rank360Info == null) rank360Info = new Rank360Info();
+                                rank360Info.setDetailUrl(url);
+                            }
+                        }
+                        if ("td".equals(pullParser.getName())) {
+                            String classStr = pullParser.getAttributeValue(null, "class");
+                            if (classStr != null && classStr.equals("pingji")) {
+                                String level = pullParser.nextText().trim();
+                                if (rank360Info == null) rank360Info = new Rank360Info();
+                                rank360Info.setLevel(level);
+                            }
+                        }
+                        break;
+                    case XmlPullParser.END_TAG:
+                        if ("tr".equals(pullParser.getName())) {
+                            if (rank360Infos != null && rank360Info != null) {
+                                rank360Infos.add(rank360Info);
+                                rank360Info = null;
+                            }
+                        }
+                        break;
+                }
+                event = pullParser.next();
+            }
+            return rank360Infos;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

@@ -100,6 +100,13 @@
                 android:layout_height="100dp"
                 android:text="SpannableStringBuilder"/>
 
+            <Button
+                android:id="@+id/btn_socket_main"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="socket"
+                android:textAllCaps="false"/>
+
             <com.example.test.mytestdemo.ui.FlowLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">

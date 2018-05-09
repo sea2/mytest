@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/ll_content_dialog_bottom"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@android:color/white"
+              android:orientation="vertical">
+
+
+    <ListView
+        android:id="@+id/lv_dialog_bottom_custom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:listSelector="@null"/>
+
+    <Button
+        android:id="@+id/btn_dialog_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="确定"/>
+
+
+</LinearLayout>

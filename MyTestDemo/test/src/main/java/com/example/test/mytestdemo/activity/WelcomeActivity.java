@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.test.mytestdemo.R;
 import com.example.test.mytestdemo.app.BaseActivity;
+import com.example.test.mytestdemo.utils.AppUtils;
 
 public class WelcomeActivity extends BaseActivity {
     private int counInt = 0;
@@ -24,6 +25,9 @@ public class WelcomeActivity extends BaseActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
+        String channl_name = AppUtils.getManifestMetaDataValue("CHANNEL_NAME_TEST");
+        String channl_value = AppUtils.getManifestMetaDataValue("CHANNEL_VALUE_TEST");
         initView();
         initListener();
         initData();

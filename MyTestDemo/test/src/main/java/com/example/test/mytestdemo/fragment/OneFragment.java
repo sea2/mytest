@@ -20,6 +20,7 @@ import com.example.test.mytestdemo.aidl.HelloSumAidlActivity;
 import com.example.test.mytestdemo.broadcast.BroadcastActivity;
 import com.example.test.mytestdemo.notifications.NotificationMainActivity;
 import com.example.test.mytestdemo.service.ServiceTestActivity;
+import com.example.test.mytestdemo.socket.SocketActivity;
 import com.example.test.mytestdemo.utils.LogUtils;
 import com.example.test.mytestdemo.webview.WebViewTestActivity;
 
@@ -35,7 +36,7 @@ public class OneFragment extends LazyFragment {
     Button btn_notification;
     Button btn_horizontalscrollView;
     Button btn_webview;
-    Button btn_thread,btn_swipeback,btn_animation;
+    Button btn_thread,btn_swipeback,btn_animation,btn_socket_main;
     Button btn_broadcast, btn_aidl, btn_service,btn_spannable_String;
 
     @Override
@@ -52,6 +53,7 @@ public class OneFragment extends LazyFragment {
             btn_service = (Button) view.findViewById(R.id.btn_service);
             btn_swipeback = (Button) view.findViewById(R.id.btn_swipeback);
             btn_animation = (Button) view.findViewById(R.id.btn_animation);
+            btn_socket_main = (Button) view.findViewById(R.id.btn_socket_main);
             isPrepared = true;
             lazyLoad();
         }
@@ -136,6 +138,12 @@ public class OneFragment extends LazyFragment {
             @Override
             public void onClick(View view) {
                 startAc(SpannableStringActivity.class);
+            }
+        });
+        btn_socket_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startAc(SocketActivity.class);
             }
         });
 

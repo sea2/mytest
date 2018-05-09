@@ -7,6 +7,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.BackgroundColorSpan;
@@ -158,6 +159,11 @@ public class SpannableStringActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(SpannableStringActivity.this, "请不要点我", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                ds.setUnderlineText(false);
             }
         };
         spannableString.setSpan(clickableSpan, 0,spannableString.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);

@@ -13,8 +13,17 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Xml;
+
+import com.example.test.mytestdemo.application.MyApplication;
+import com.example.test.mytestdemo.xmlPull.XmlParserDemo.Rank360Info;
+import com.orhanobut.logger.Logger;
+
+import org.xmlpull.v1.XmlPullParser;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -727,6 +736,94 @@ public class AppUtils {
             //判断是否安装B应用，提供下载链接
             ToastUtils.showShortToast("请下载----" + "com.example.intentActivity2");
             e.printStackTrace();
+        }
+    }
+
+
+
+
+    /**
+     * 获取manifest文件中meta-data中配置的参数
+     *
+     * @return String
+     */
+    public static String getManifestMetaDataValue(String mateName) {
+        if (TextUtils.isEmpty(mateName)) {
+            Logger.e("mateName is null");
+            return "";
+        }
+        try {
+            Context context = MyApplication.getInstance();
+            ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+            Object oValue = appInfo.metaData.get(mateName);
+            if (oValue != null) {
+                return oValue.toString();
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+
+
+
+    /**
+     * ------------------------使用PULL解析XML-----------------------
+     *
+     * @param inStream
+     */
+    public List<Rank360Info> getRank360Infos(InputStream inStream) {
+        try {
+            List<Rank360Info> rank360Infos = null;
+            XmlPullParser pullParser = Xml.newPullParser();
+            pullParser.setInput(inStream, "UTF-8");
+            int event = pullParser.getEventType();// 觸發第一個事件
+            Rank360Info rank360Info = null;
+            while (event != XmlPullParser.END_DOCUMENT) {
+                switch (event) {
+                    case XmlPullParser.START_DOCUMENT:
+                        rank360Infos = new ArrayList<Rank360Info>();
+                        break;
+                    case XmlPullParser.START_TAG:
+                        if ("a".equals(pullParser.getName())) {
+                            //获取class的属性
+                            String classStr = pullParser.getAttributeValue(null, "class");
+                            if (classStr != null && classStr.equals("doc-color-link")) {
+                                String name = pullParser.nextText().trim();
+                                rank360Info = new Rank360Info();
+                                rank360Info.setName(name);
+                            }
+                            if (classStr != null && classStr.equals("doc-color-link more-info")) {
+                                String url = pullParser.nextText().trim();
+                                if (rank360Info == null) rank360Info = new Rank360Info();
+                                rank360Info.setDetailUrl(url);
+                            }
+                        }
+                        if ("td".equals(pullParser.getName())) {
+                            String classStr = pullParser.getAttributeValue(null, "class");
+                            if (classStr != null && classStr.equals("pingji")) {
+                                String level = pullParser.nextText().trim();
+                                if (rank360Info == null) rank360Info = new Rank360Info();
+                                rank360Info.setLevel(level);
+                            }
+                        }
+                        break;
+                    case XmlPullParser.END_TAG:
+                        if ("tr".equals(pullParser.getName())) {
+                            if (rank360Infos != null && rank360Info != null) {
+                                rank360Infos.add(rank360Info);
+                                rank360Info = null;
+                            }
+                        }
+                        break;
+                }
+                event = pullParser.next();
+            }
+            return rank360Infos;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

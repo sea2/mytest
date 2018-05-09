@@ -14,15 +14,25 @@
     <uses-permission android:name="android.permission.READ_SMS"/>
     <uses-permission android:name="android.permission.READ_CALL_LOG"/>
     <uses-permission android:name="android.permission.GET_TASKS"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
 
     <application
         android:name=".application.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:icon="${APP_ICON}"
+        android:label="${APP_NAME}"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data android:name="CHANNEL_NAME_TEST"
+                   android:value="${CHANNEL_NAME}"
+            />
+        <meta-data android:name="CHANNEL_VALUE_TEST"
+                   android:value="${CHANNEL_VALUE}"
+            />
+
+
         <activity
             android:name=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -57,7 +67,7 @@
         </activity>
         <activity android:name=".broadcast.BroadcastActivity">
         </activity>
-        <activity android:name=".activity.XListViewActivity" />
+        <activity android:name=".activity.XListViewActivity"/>
 
         <receiver
             android:name=".broadcast.MyReceiver"
@@ -114,6 +124,9 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_fullscreen"
             android:theme="@style/FullscreenTheme">
+        </activity>
+        <activity android:name=".activity.ContentProvideActivity"/>
+        <activity android:name=".socket.SocketActivity">
         </activity>
     </application>
 

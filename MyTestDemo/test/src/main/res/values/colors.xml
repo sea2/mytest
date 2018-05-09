@@ -3,7 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="theme_color">#FF4081</color>
     <color name="colorCommonBg">#f0f0f0</color>
+    <color name="write">#ffffff</color>
     <color name="colorText">#4d4d4d</color>
     <color name="transparent">#00000000</color>
 

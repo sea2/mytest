@@ -11,6 +11,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        manifestPlaceholders << [APP_ICON: "@mipmap/ic_launcher"]
+        manifestPlaceholders << [APP_NAME: "我的测试-TEST"]
     }
 
     signingConfigs {
@@ -31,6 +33,8 @@ android {
 
     buildTypes {
         debug {
+
+
             //动态修改BuildConfig类中属性
             buildConfigField "boolean", "LOG_DEBUG", "true"
             //versionNameSuffix "-debug"
@@ -39,6 +43,7 @@ android {
             shrinkResources false
             //  applicationIdSuffix ".test"
             manifestPlaceholders << [CHANNEL_KEY: "1"]
+            manifestPlaceholders << [APP_ICON: "@drawable/chosen_normal_new"]
             manifestPlaceholders << [APP_NAME: "我的测试-test"]
             signingConfig signingConfigs.debug
         }
@@ -49,15 +54,17 @@ android {
             minifyEnabled true
             zipAlignEnabled true
             shrinkResources true
+            manifestPlaceholders << [APP_ICON: "@mipmap/ic_launcher"]
+            manifestPlaceholders << [APP_NAME: "我的测试"]
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
     }
     productFlavors {
 
-        "官方渠道_10000" {
-            manifestPlaceholders << [CHANNEL_KEY: "10000"]
-            manifestPlaceholders << [CHANNEL_VALUE: "官方"]
+        官方渠道_10000 {
+            manifestPlaceholders << [CHANNEL_VALUE: "10000"]
+            manifestPlaceholders << [CHANNEL_NAME: "官方"]
         }
     }
 
@@ -87,4 +94,8 @@ dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     testCompile 'junit:junit:4.12'
+    compile 'com.orhanobut:logger:1.15'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
