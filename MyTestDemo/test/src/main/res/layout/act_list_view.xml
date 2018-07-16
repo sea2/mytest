@@ -4,10 +4,10 @@
               android:layout_height="match_parent"
               android:background="#fff">
 
-   <Button
-       android:layout_width="wrap_content"
-       android:background="@drawable/bg_special_disease_circle"
-       android:layout_height="wrap_content"/>
+
+
+    <include layout="@layout/include_button"  />
+
 
     <com.pulltorefresh.xview.XListView
         android:id="@+id/list_view"

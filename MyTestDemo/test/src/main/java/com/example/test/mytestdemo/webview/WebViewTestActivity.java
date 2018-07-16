@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.test.mytestdemo.R;
 import com.example.test.mytestdemo.app.BaseActivity;
+import com.orhanobut.logger.Logger;
 
 public class WebViewTestActivity extends BaseActivity implements View.OnClickListener {
 
@@ -48,10 +49,12 @@ public class WebViewTestActivity extends BaseActivity implements View.OnClickLis
         String str = it.getStringExtra("key");
         Log.e("WebViewTestActivity", str + "");
 
-        url = "http://192.168.2.36:8080/html/抽奖/index.html";
+        url = "http://192.168.5.19:8080/html/index.html";
 
         //支持Html5标签……等
         webview.loadUrl(url);
+
+
         WebSettings webSettings = webview.getSettings();
         webSettings.setJavaScriptEnabled(true);//支持js调用
         webview.addJavascriptInterface(new JsInteration(), "android");//支持js调用android方法
@@ -81,7 +84,7 @@ public class WebViewTestActivity extends BaseActivity implements View.OnClickLis
         webview.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                Log.i(TAG, "shouldOverrideUrlLoading:old" + url);
+                Logger.i(TAG, "shouldOverrideUrlLoading:old= " + url);
                 if (url.equals("file:///android_asset/test2.html")) {
                     Log.e(TAG, "shouldOverrideUrlLoading: " + url);
                     startActivity(new Intent(WebViewTestActivity.this, WebViewTestActivity.class));
@@ -94,7 +97,9 @@ public class WebViewTestActivity extends BaseActivity implements View.OnClickLis
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                Log.i(TAG, "shouldOverrideUrlLoading:new" + request.getUrl().toString());
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Log.i(TAG, "shouldOverrideUrlLoading:new= " + request.getUrl().toString());
+                }
                 return super.shouldOverrideUrlLoading(view, request);
             }
 
@@ -104,27 +109,53 @@ public class WebViewTestActivity extends BaseActivity implements View.OnClickLis
                 String data = "出错了哦~\n您的页面找不到了！";
                 view.loadUrl("javascript:document.body.innerHTML=\"" + data + "\"");
             }
+
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+            }
         });
 
 
         //加载本地网页
         //  webview.loadData("file:///android_asset/test.html", "text/html", "utf-8");
 
-       /* // 返回上个页面
-        if (webview.canGoBack()) {【
-            webview.goBack();
-        }
+       /*
+//是否可以后退
+Webview.canGoBack()
+//后退网页
+Webview.goBack()
 
-        //去刚才浏览的页面
-        if (webview.canGoForward()) {
-            webview.goForward();
-        }
+//是否可以前进
+Webview.canGoForward()
+//前进网页
+Webview.goForward()
+
+//以当前的index为起始点前进或者后退到历史记录中指定的steps
+//如果steps为负数则为后退，正数则为前进
+Webview.goBackOrForward(intsteps)
+
 
         //刷新当前页面
         webview.reload();*/
 
 
         webview.setWebChromeClient(mWebChromeClient);
+
+
+
+
+
+
+
+
+
     }
 
     @Override
@@ -294,12 +325,16 @@ public class WebViewTestActivity extends BaseActivity implements View.OnClickLis
     public void onDestroy() {
         if (webview != null) {
             webview.stopLoading();
+
+            webview.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
             ((ViewGroup) webview.getParent()).removeView(webview);
+            webview.clearHistory();
             webview.removeAllViews();
             webview.setWebChromeClient(null);
             webview.setWebViewClient(null);
             unregisterForContextMenu(webview);
             webview.destroy();
+            webview = null;
         }
         super.onDestroy();
     }

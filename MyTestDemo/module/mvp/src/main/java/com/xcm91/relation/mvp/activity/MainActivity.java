@@ -9,21 +9,21 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.xcm91.relation.mvp.ILoginPresenter;
 import com.xcm91.relation.mvp.LoginPresenter;
-import com.xcm91.relation.mvp.LoginPresenterImpl;
-import com.xcm91.relation.mvp.LoginView;
+import com.xcm91.relation.mvp.ILoginView;
 import com.xcm91.relation.mvp.R;
 
 
 /**
  * 注意mvp使用的内存泄露
  */
-public class MainActivity extends Activity implements LoginView, View.OnClickListener {
+public class MainActivity extends Activity implements ILoginView, View.OnClickListener {
 
     private ProgressBar progressBar;
     private EditText username;
     private EditText password;
-    private LoginPresenter presenter;
+    private ILoginPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class MainActivity extends Activity implements LoginView, View.OnClickLis
         password = (EditText) findViewById(R.id.password);
         findViewById(R.id.button).setOnClickListener(this);
 
-        presenter = new LoginPresenterImpl(this);
+        presenter = new LoginPresenter(this);
 
         getdat();
 

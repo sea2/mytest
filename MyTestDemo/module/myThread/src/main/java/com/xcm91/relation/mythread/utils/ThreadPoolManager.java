@@ -1,5 +1,7 @@
 package com.xcm91.relation.mythread.utils;
 
+import android.util.Log;
+
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -29,6 +31,8 @@ public class ThreadPoolManager {
         if (mInstance == null) {
             synchronized (ThreadPoolManager.class) {
                 if (mInstance == null) {
+                    Log.i("ThreadPoolManager", "corePoolSize: " + CORE_POOL_SIZE + "----maximumPoolSize:" + MAX_POOL_SIZE);
+
                     mInstance = new ThreadPoolProxy(CORE_POOL_SIZE, MAX_POOL_SIZE);
                 }
             }

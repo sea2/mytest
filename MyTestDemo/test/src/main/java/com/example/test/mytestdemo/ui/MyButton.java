@@ -83,7 +83,7 @@ public class MyButton extends android.support.v7.widget.AppCompatButton {
                 this.layout(leftInt, topInt, rightInt, bottomInt);
                 lastX = (int) event.getRawX();
                 lastY = (int) event.getRawY();
-                  this.postInvalidate();
+               //   this.postInvalidate();
 
                 break;
             case MotionEvent.ACTION_CANCEL://超出布局

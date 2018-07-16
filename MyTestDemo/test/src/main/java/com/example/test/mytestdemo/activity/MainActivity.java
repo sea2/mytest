@@ -18,7 +18,9 @@ import com.example.test.mytestdemo.fragment.OneFragment;
 import com.example.test.mytestdemo.fragment.ThreeFragment;
 import com.example.test.mytestdemo.fragment.TwoFragment;
 import com.example.test.mytestdemo.ui.MyDialog;
+import com.example.test.mytestdemo.util.DensityUtils;
 import com.example.test.mytestdemo.utils.FileUtils;
+import com.example.test.mytestdemo.utils.StatusBarUtils;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
@@ -45,7 +47,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Logger.i("time-----");
+        Logger.i("size-----"+ DensityUtils.getEndSize(20,720));
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -118,15 +120,19 @@ public class MainActivity extends BaseActivity {
                 switch (position) {
                     case 0:
                         group.check(R.id.foot_bar_home);
+                        StatusBarUtils.setStatusTextColor(false, MainActivity.this);
                         break;
                     case 1:
                         group.check(R.id.foot_bar_im);
+                        StatusBarUtils.setStatusTextColor(true, MainActivity.this);
                         break;
                     case 2:
                         group.check(R.id.foot_bar_interest);
+                        StatusBarUtils.setStatusTextColor(true, MainActivity.this);
                         break;
                     case 3:
                         group.check(R.id.main_footbar_user);
+                        StatusBarUtils.setStatusTextColor(true, MainActivity.this);
                         break;
                     default:
                         break;

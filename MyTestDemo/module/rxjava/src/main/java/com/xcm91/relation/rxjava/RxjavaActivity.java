@@ -80,7 +80,7 @@ public class RxjavaActivity extends AppCompatActivity implements PullListener {
                 });
 
 
-       /*<-------------------------------------------------from操作符    just----------------------------------------------------------------------------------->*/
+        /*<-------------------------------------------------from操作符    just----------------------------------------------------------------------------------->*/
 
         List<String> list = new ArrayList<>();
         list.add("1");
@@ -136,7 +136,7 @@ public class RxjavaActivity extends AppCompatActivity implements PullListener {
         });
 
 
-    /*<-------------------------------------------------timer延时 interval循环执行 操作符----------------------------------------------------------------------------------->*/
+        /*<-------------------------------------------------timer延时 interval循环执行 操作符-------take也属于过滤操作符，过滤前几个执行---------------------------------------------------------------------------->*/
 
         Observable.timer(5, TimeUnit.SECONDS).
                 observeOn(AndroidSchedulers.mainThread())
@@ -209,7 +209,7 @@ public class RxjavaActivity extends AppCompatActivity implements PullListener {
 
                     @Override
                     public void onNext(Long aLong) { //接受到一条就是会操作一次UI
-                        tv_send.setText("剩余时间" + aLong + "秒");
+                        tv_send.setText("剩余时间".concat(aLong + "秒"));
                         tv_send.setEnabled(true);
                         tv_send.setTextColor(Color.WHITE);
 
@@ -224,7 +224,7 @@ public class RxjavaActivity extends AppCompatActivity implements PullListener {
 
 
 
-            /*<-------------------------------------------------组合concat顺序执行 操作符----------------------------------------------------------------------------------->*/
+        /*<-------------------------------------------------组合concat顺序执行 操作符----------------------------------------------------------------------------------->*/
 
 
         Observable<String> ob = Observable.create(new Observable.OnSubscribe<String>() {
@@ -275,7 +275,7 @@ public class RxjavaActivity extends AppCompatActivity implements PullListener {
             }
         });
 
-    /*<-------------------------------------------------merge并行 操作符----------------------------------------------------------------------------------->*/
+        /*<-------------------------------------------------merge并行 操作符----------------------------------------------------------------------------------->*/
         Observable<String> obm = Observable.create(new Observable.OnSubscribe<String>() {
             @Override
             public void call(Subscriber<? super String> subscriber) {
@@ -323,12 +323,11 @@ public class RxjavaActivity extends AppCompatActivity implements PullListener {
         });
 
 
-
-        Observable.just(3,4,5,6)
+        Observable.just(3, 4, 5, 6)
                 .filter(new Func1<Integer, Boolean>() {
                     @Override
                     public Boolean call(Integer integer) {
-                        return integer>4;
+                        return integer > 4;
                     }
                 })
                 .subscribe(new Action1<Integer>() {
@@ -337,6 +336,51 @@ public class RxjavaActivity extends AppCompatActivity implements PullListener {
                         Log.i("test_filter", "Observer--onNext---" + integer + "----" + Thread.currentThread().getName());
                     }
                 });
+
+
+
+        /*-------------------------------------------map-------------------------------------------------*/
+
+        Observable.just("a", "b", "c")
+                //使用map进行转换，参数1：转换前的类型，参数2：转换后的类型
+                .map(new Func1<String, String>() {
+                    @Override
+                    public String call(String i) {
+                        String name = i;
+                        Log.i("map", "map--1----" + i);
+                        return name;
+                    }
+                })
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String s) {
+                        Log.i("map", "map--2----" + s);
+                    }
+                });
+
+
+        /*--------------------------------------------flatMap-------------------------------------------------*/
+
+        Observable.just("a", "b", "c")
+                .flatMap(
+                        new Func1<String, Observable<String>>() {
+                            @Override
+                            public Observable<String> call(String s) {
+                                Log.i("flatMap", "map--1----" + s);
+                                return Observable.just(s + "!!!","d");
+                            }
+                        })
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String s) {
+                        Log.i("flatMap", "map--2----" + s);
+
+                    }
+                });
+
+
 
 
 

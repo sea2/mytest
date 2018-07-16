@@ -1,12 +1,10 @@
 package com.example.test.mytestdemo.app;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 
 import com.example.test.mytestdemo.ui.ToastShow;
 
@@ -21,12 +19,6 @@ public abstract class BaseActivity extends FragmentActivity {
         toastShow = new ToastShow(this);
 
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            // 系统 6.0 以上 状态栏白底黑字的实现方法
-            this.getWindow()
-                    .getDecorView()
-                    .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
 
 
 

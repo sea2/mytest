@@ -9,8 +9,8 @@
     </item>
 
     <!--上面一层距离底层的顶部1dp,距离底部1dp,类似marginTop,填充色为白色，这样就形成了一个带有蓝色顶部边线和底部边线的白色背景的图-->
-    <item android:bottom="10dp"
-          android:top="10dp">
+    <item android:bottom="5dp"
+          android:top="5dp">
         <shape>
             <solid android:color="#fff"/>
         </shape>

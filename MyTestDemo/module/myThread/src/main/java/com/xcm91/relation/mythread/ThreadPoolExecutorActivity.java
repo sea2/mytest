@@ -30,6 +30,7 @@ public class ThreadPoolExecutorActivity extends Activity {
                 }
             };
             fixedThreadPool.execute(runnable);
+
         }
 
 
@@ -66,14 +67,12 @@ public class ThreadPoolExecutorActivity extends Activity {
             Runnable runnable = new Runnable() {
                 @Override
                 public void run() {
-                    SystemClock.sleep(500);
+                    SystemClock.sleep(1000);
                     Log.e("ThreadPoolManager", "run: " + Thread.currentThread().getName() + "----" + finalI);
                 }
             };
             ThreadPoolManager.getInstance().execute(runnable);
         }
-
-
 
 
 
