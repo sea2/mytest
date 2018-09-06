@@ -50,6 +50,7 @@ public class MyButton extends android.support.v7.widget.AppCompatButton {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                getParent().requestDisallowInterceptTouchEvent(true);
                 lastX = (int) event.getRawX();// 获取触摸事件触摸位置的原始X坐标
                 lastY = (int) event.getRawY();
                 break;

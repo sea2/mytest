@@ -8,7 +8,7 @@ import com.jude.swipbackhelper.SwipeBackHelper;
  * Created by Administrator on 2017/2/15.
  */
 
-public class SwipeBackBaseActivity extends BaseActivity {
+public abstract class SwipeBackBaseActivity extends BaseActivity {
 
 
     @Override

@@ -114,7 +114,7 @@
             android:hardwareAccelerated="true"
             android:label=""
             android:process=":web"
-            android:screenOrientation="portrait"/>
+            />
         <activity android:name=".activity.SwipeBackActivity">
         </activity>
         <activity android:name=".ui.recyclerview.StaggeredGridLayoutActivity"/>
