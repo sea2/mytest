@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.test.mytestdemo.R;
+import com.example.test.mytestdemo.app.BaseActivity;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -97,7 +98,7 @@ public class StatusBarUtils {
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
             decorView.setSystemUiVisibility(option);
             if (useThemestatusBarColor) {
-                activity.getWindow().setStatusBarColor(activity.getResources().getColor(R.color.write));
+                activity.getWindow().setStatusBarColor(activity.getResources().getColor(R.color.white));
             } else {
                 activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
             }
@@ -164,7 +165,7 @@ public class StatusBarUtils {
 
     public static boolean ismeuzu() {
         try {
-            if ("Meizu".equals(android.os.Build.MANUFACTURER)) {
+            if ("Meizu".equals(Build.MANUFACTURER)) {
                 //魅族手机
                 return true;
             }
@@ -180,7 +181,7 @@ public class StatusBarUtils {
      * @param useDart  是否使用深色调
      * @param activity
      */
-    public static void setStatusTextColor(boolean useDart, Activity activity) {
+    public static void setStatusTextColor(boolean useDart, BaseActivity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (useDart) {//黑色状态栏字体
                 int vis = activity.getWindow().getDecorView().getSystemUiVisibility();
@@ -189,7 +190,7 @@ public class StatusBarUtils {
             } else {
                 int vis = activity.getWindow().getDecorView().getSystemUiVisibility();
                 vis &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-               // vis |= View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+                //vis |= View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
                 activity.getWindow().getDecorView().setSystemUiVisibility(vis);
             }
         } else {
@@ -197,6 +198,10 @@ public class StatusBarUtils {
                 FlymeSetStatusBarLightMode(activity.getWindow(), useDart);
             } else if (isMIUI()) {//是否是小米
                 MIUISetStatusBarLightMode(activity, useDart);
+            }else{//23一下版本，并且不是魅族小米的，采用黑子状态栏字体的状态栏90%透明，采用白色状态栏字体的全透明
+                if(useDart){
+                    activity.setStatusBarTintResource(R.color.bg_transparent_90);
+                }else   activity.setStatusBarTintResource(R.color.transparent);
             }
         }
     }

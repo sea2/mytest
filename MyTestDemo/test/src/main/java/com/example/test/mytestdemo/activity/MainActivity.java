@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 
 import com.example.test.mytestdemo.R;
@@ -19,10 +20,11 @@ import com.example.test.mytestdemo.fragment.ThreeFragment;
 import com.example.test.mytestdemo.fragment.TwoFragment;
 import com.example.test.mytestdemo.ui.MyDialog;
 import com.example.test.mytestdemo.util.DensityUtils;
+import com.example.test.mytestdemo.utils.BitmapUtils;
 import com.example.test.mytestdemo.utils.FileUtils;
-import com.example.test.mytestdemo.utils.StatusBarUtils;
 import com.orhanobut.logger.Logger;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,10 +49,11 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Logger.i("size-----"+ DensityUtils.getEndSize(20,720));
+        Logger.i("size-----" + DensityUtils.getEndSize(20, 720));
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ImageView iv_main_test = (ImageView) findViewById(R.id.iv_main_test);
         EventBus.getDefault().register(this);
         if (savedInstanceState == null) {
             initView();
@@ -59,11 +62,17 @@ public class MainActivity extends BaseActivity {
             initFromSavedInstantsState(savedInstanceState);
         }
 
+        //文件路径
         FileUtils.getApplicationDirectories(this);
         FileUtils.getEnvironmentDirectories();
 
-        Bitmap bitmap = BitmapFactory. decodeResource (getResources(), R.drawable.test_dpi);
-        Logger.i("time---Width--"+bitmap.getWidth()+"---Height-"+bitmap.getHeight());
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bg_welcome);
+        File file = BitmapUtils.writeBitmapToFile(bitmap, "welcome_bg.jpg");
+        Logger.i("time---Width--" + bitmap.getWidth() + "---Height-" + bitmap.getHeight() + "--内存size--" + BitmapUtils.getBitmapSize(bitmap));
+        Logger.i("time---Width--" + bitmap.getWidth() + "---Height-" + bitmap.getHeight() + "--文件size--" + FileUtils.getFileSize(file));
+        Bitmap bitmapNew= Bitmap.createBitmap(bitmap, 0, 0, 300, 300);
+        iv_main_test.setImageBitmap(bitmapNew);
     }
 
 
@@ -100,7 +109,6 @@ public class MainActivity extends BaseActivity {
         mFragmentList.add(mFragmentFour);
 
 
-
         homePageFragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), mFragmentList);
         viewpager_container.setOffscreenPageLimit(3);
         viewpager_container.setAdapter(homePageFragmentAdapter);
@@ -120,19 +128,15 @@ public class MainActivity extends BaseActivity {
                 switch (position) {
                     case 0:
                         group.check(R.id.foot_bar_home);
-                        StatusBarUtils.setStatusTextColor(false, MainActivity.this);
                         break;
                     case 1:
                         group.check(R.id.foot_bar_im);
-                        StatusBarUtils.setStatusTextColor(true, MainActivity.this);
                         break;
                     case 2:
                         group.check(R.id.foot_bar_interest);
-                        StatusBarUtils.setStatusTextColor(true, MainActivity.this);
                         break;
                     case 3:
                         group.check(R.id.main_footbar_user);
-                        StatusBarUtils.setStatusTextColor(true, MainActivity.this);
                         break;
                     default:
                         break;

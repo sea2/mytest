@@ -83,7 +83,7 @@ public class HandleThreadActivity extends Activity {
     }
 
 
-    private Handler mhandler = new Handler() {
+    private Handler mhandler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             if (msg == null) return;
@@ -223,6 +223,14 @@ public class HandleThreadActivity extends Activity {
             // mhandler.removeCallbacks();
             mhandler.removeMessages(100);
             mhandler = null;
+        }
+
+
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+            mTimerTask.cancel();
+            mTimerTask = null;
         }
     }
 

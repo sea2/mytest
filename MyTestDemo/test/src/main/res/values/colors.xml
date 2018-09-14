@@ -31,10 +31,16 @@
     <color name="colorAccent">#FF4081</color>
     <color name="theme_color">#FF4081</color>
     <color name="colorCommonBg">#f0f0f0</color>
-    <color name="write">#ffffff</color>
+    <color name="white">#ffffff</color>
     <color name="colorText">#4d4d4d</color>
     <color name="transparent">#00000000</color>
+    <!-- 透明度参照表；
+      00%=FF（不透明）    5%=F2    10%=E5    15%=D8    20%=CC    25%=BF    30%=B2    35%=A5    40%=99    45%=8c    50%=7F
+      55%=72    60%=66    65%=59    70%=4c    75%=3F    80%=33    85%=21    90%=19    95%=0c    100%=00（全透明）-->
+    <color name="bg_transparent_90">#19000000</color>
 
+    <!-- 共它常用的颜色 -->
+    <drawable name="transparent">#00000000</drawable>
     <!-- 底栏字体颜色 -->
     <color name="footer_text_color_normal">#343434</color>
     <color name="footer_text_color_selected">#FF601C</color>

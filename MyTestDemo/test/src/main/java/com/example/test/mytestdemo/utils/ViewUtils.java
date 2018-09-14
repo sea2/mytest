@@ -13,6 +13,33 @@ import java.text.DecimalFormat;
 
 public class ViewUtils {
 
+
+
+    /**
+     * 计算图片要显示的高度
+     *
+     * @param pixel 原始分辨率
+     * @param width 要显示的宽度
+     * @return
+     */
+    public static int calcPhotoHeight(String pixel, int width) {
+        int height = -1;
+        int index = pixel.indexOf("*");
+        if (index != -1) {
+            try {
+                int widthPixel = Integer.parseInt(pixel.substring(0, index));
+                int heightPixel = Integer.parseInt(pixel.substring(index + 1));
+                height = (int) (heightPixel * (width * 1.0f / widthPixel));
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                return -1;
+            }
+        }
+
+        return height;
+    }
+
+
     /**
      * 获取控件宽度（适用于LinearLayout,View）
      *

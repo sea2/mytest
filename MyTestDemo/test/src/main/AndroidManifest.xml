@@ -16,7 +16,6 @@
     <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
-
     <application
         android:name=".application.MyApplication"
         android:allowBackup="true"
@@ -24,14 +23,12 @@
         android:label="${APP_NAME}"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <meta-data android:name="CHANNEL_NAME_TEST"
-                   android:value="${CHANNEL_NAME}"
-            />
-        <meta-data android:name="CHANNEL_VALUE_TEST"
-                   android:value="${CHANNEL_VALUE}"
-            />
-
+        <meta-data
+            android:name="CHANNEL_NAME_TEST"
+            android:value="${CHANNEL_NAME}"/>
+        <meta-data
+            android:name="CHANNEL_VALUE_TEST"
+            android:value="${CHANNEL_VALUE}"/>
 
         <activity
             android:name=".activity.MainActivity"
@@ -113,8 +110,7 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:hardwareAccelerated="true"
             android:label=""
-            android:process=":web"
-            />
+            android:process=":web"/>
         <activity android:name=".activity.SwipeBackActivity">
         </activity>
         <activity android:name=".ui.recyclerview.StaggeredGridLayoutActivity"/>
@@ -127,6 +123,8 @@
         </activity>
         <activity android:name=".activity.ContentProvideActivity"/>
         <activity android:name=".socket.SocketActivity">
+        </activity>
+        <activity android:name=".activity.EventBusTestActivity">
         </activity>
     </application>
 

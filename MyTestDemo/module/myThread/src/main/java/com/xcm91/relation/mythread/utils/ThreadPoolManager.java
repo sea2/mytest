@@ -32,7 +32,6 @@ public class ThreadPoolManager {
             synchronized (ThreadPoolManager.class) {
                 if (mInstance == null) {
                     Log.i("ThreadPoolManager", "corePoolSize: " + CORE_POOL_SIZE + "----maximumPoolSize:" + MAX_POOL_SIZE);
-
                     mInstance = new ThreadPoolProxy(CORE_POOL_SIZE, MAX_POOL_SIZE);
                 }
             }
@@ -45,7 +44,7 @@ public class ThreadPoolManager {
     /**
      * 线程池代理
      * <p>
-     *  线程池初始化方法
+     * 线程池初始化方法
      * corePoolSize 核心线程池大小----2--- 线程池维护线程的最少数量
      * maximumPoolSize 最大线程池大小----5---线程池维护线程的最大数量
      * keepAliveTime 线程池中超过corePoolSize数目的空闲线程最大存活时间----30+单位TimeUnit--线程池维护线程所允许的空闲时间
@@ -98,6 +97,29 @@ public class ThreadPoolManager {
                 mThreadPoolExecutor.remove(task);
             }
         }
+
+
+        /**
+         * 线程关闭
+         * 　shutdown()：不会立即终止线程池，而是要等所有任务缓存队列中的任务都执行完后才终止，但再也不会接受新的任务
+         * 　　shutdownNow()：立即终止线程池，并尝试打断正在执行的任务，并且清空任务缓存队列，返回尚未执行的任务
+         */
+        public void destroy() {
+            if (mThreadPoolExecutor != null) {
+                try {
+                    mThreadPoolExecutor.shutdown();
+                    // (所有的任务都结束的时候，返回TRUE)
+                    if (!mThreadPoolExecutor.awaitTermination(1000L, TimeUnit.MILLISECONDS)) {
+                        // 超时的时候向线程池中所有的线程发出中断(interrupted)。
+                        mThreadPoolExecutor.shutdownNow();
+                    }
+                } catch (InterruptedException e) {
+                    // awaitTermination方法被中断的时候也中止线程池中全部的线程的执行。
+                    mThreadPoolExecutor.shutdownNow();
+                }
+            }
+        }
+
 
     }
 

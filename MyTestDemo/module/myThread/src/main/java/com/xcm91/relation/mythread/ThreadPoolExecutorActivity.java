@@ -2,13 +2,10 @@ package com.xcm91.relation.mythread;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.SystemClock;
+import android.os.Handler;
 import android.util.Log;
 
-import com.xcm91.relation.mythread.utils.ThreadPoolManager;
-
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class ThreadPoolExecutorActivity extends Activity {
@@ -19,7 +16,7 @@ public class ThreadPoolExecutorActivity extends Activity {
         setContentView(R.layout.activity_thread_pool_executor);
 
 
-        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
+      /*  ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
         for (int i = 0; i < 30; i++) {
             final int finalI = i;
             Runnable runnable = new Runnable() {
@@ -73,6 +70,24 @@ public class ThreadPoolExecutorActivity extends Activity {
             };
             ThreadPoolManager.getInstance().execute(runnable);
         }
+*/
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.e("Handler", "run: " + Thread.currentThread().getName() + "----");
+            }
+        }, 100);
+
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Log.e("runOnUiThread", "run: " + Thread.currentThread().getName() + "----");
+            }
+        });
+
+
 
 
 

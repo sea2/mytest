@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -16,15 +17,19 @@ import com.example.test.mytestdemo.utils.ToastUtils;
 
 /**
  * 总结:
-
- 1)静态注册：在AndroidManifest.xml注册，android不能自动销毁广播接收器，也就是说当应用程序关闭后，还是会接收广播。
- 2)动态注册：在代码中通过registerReceiver()手工注册.当程序关闭时,该接收器也会随之销毁。当然，也可手工调用unregisterReceiver()进行销毁。
-
- android:enabled:
- 这个属性用于定义系统是否能够实例化这个广播接收器，如果设置为true，则能够实例化，如果设置为false，则不能被实例化。默认值是true。
-
- android:exported:
- 这个属性用于指示该广播接收器是否能够接收来自应用程序外部的消息，
+ * <p>
+ * 1)静态注册：在AndroidManifest.xml注册，android不能自动销毁广播接收器，也就是说当应用程序关闭后，还是会接收广播。
+ * 2)动态注册：在代码中通过registerReceiver()手工注册.当程序关闭时,该接收器也会随之销毁。当然，也可手工调用unregisterReceiver()进行销毁。
+ * <p>
+ * android:enabled:
+ * 这个属性用于定义系统是否能够实例化这个广播接收器，如果设置为true，则能够实例化，如果设置为false，则不能被实例化。默认值是true。
+ * <p>
+ * android:exported:
+ * 这个属性用于指示该广播接收器是否能够接收来自应用程序外部的消息，
+ * <p>
+ * <p>
+ * BroadcastReceiver是针对应用间、应用与系统间、应用内部进行通信的一种方式
+ * LocalBroadcastManager仅在自己的应用内发送接收广播，也就是只有自己的应用能收到
  */
 public class BroadcastActivity extends BaseActivity {
 
@@ -83,6 +88,9 @@ public class BroadcastActivity extends BaseActivity {
         filter.addAction("com.test.logout");// 退出动作
         filter.addAction("com.test.login");// 登录动作
         registerReceiver(acReceiver, filter);
+
+       LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(this);
+
 
     }
 

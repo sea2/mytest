@@ -5,6 +5,9 @@ import android.os.Build;
 import android.os.Environment;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by Administrator on 2017/2/22.
@@ -66,4 +69,42 @@ public class FileDirectoryUtil {
         return perm == 0;
     }
 
+
+
+
+
+
+    /**
+     * 将输入流写入文件
+     */
+    private static void writeFile(InputStream inputString, String pathDirectorStr, String fileName) {
+        try {
+            //创建目录
+            File fileDirector = new File(pathDirectorStr);
+            if (!fileDirector.exists()) {
+                fileDirector.mkdirs();
+            }
+
+            //创建文件
+            File file = new File(pathDirectorStr.concat(fileName));
+            if (file.exists()) {
+                file.delete();
+            }
+
+            FileOutputStream fos = null;
+
+            fos = new FileOutputStream(file);
+            byte[] b = new byte[1024];
+            int len;
+            while ((len = inputString.read(b)) != -1) {
+                fos.write(b, 0, len);
+            }
+            inputString.close();
+            fos.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
