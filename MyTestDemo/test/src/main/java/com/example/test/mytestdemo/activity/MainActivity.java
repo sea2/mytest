@@ -24,13 +24,14 @@ import com.example.test.mytestdemo.utils.BitmapUtils;
 import com.example.test.mytestdemo.utils.FileUtils;
 import com.orhanobut.logger.Logger;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import de.greenrobot.event.EventBus;
-import de.greenrobot.event.Subscribe;
 
 public class MainActivity extends BaseActivity {
 

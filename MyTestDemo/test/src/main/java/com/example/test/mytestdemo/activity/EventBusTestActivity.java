@@ -7,9 +7,10 @@ import com.example.test.mytestdemo.R;
 import com.example.test.mytestdemo.event.BaseEvent;
 import com.example.test.mytestdemo.event.TestEvent;
 
-import de.greenrobot.event.EventBus;
-import de.greenrobot.event.Subscribe;
-import de.greenrobot.event.ThreadMode;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 
 public class EventBusTestActivity extends AppCompatActivity {
 
@@ -34,7 +35,7 @@ public class EventBusTestActivity extends AppCompatActivity {
      *
      * @param baseEvent
      */
-    @Subscribe(threadMode = ThreadMode.BackgroundThread)
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void Event(BaseEvent baseEvent) {
         if (baseEvent != null) {
             if (baseEvent instanceof TestEvent) {

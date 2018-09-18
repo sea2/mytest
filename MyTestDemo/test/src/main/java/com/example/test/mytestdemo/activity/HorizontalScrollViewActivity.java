@@ -10,7 +10,8 @@ import com.example.test.mytestdemo.app.BaseActivity;
 import com.example.test.mytestdemo.event.TestEvent;
 import com.example.test.mytestdemo.ui.MyHorizontalScrollView;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
+
 
 public class HorizontalScrollViewActivity extends BaseActivity {
 

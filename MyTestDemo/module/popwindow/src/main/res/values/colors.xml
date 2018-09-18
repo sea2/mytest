@@ -6,4 +6,5 @@
 
     <color name="text_color">#FEBB50</color>
     <color name="white">#FFFFFF</color>
+    <color name="trans_70">#4c000000</color>
 </resources>

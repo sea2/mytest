@@ -19,6 +19,7 @@ import android.widget.PopupWindow;
 /**
  *
  * 自定义PopWindow类，封装了PopWindow的一些常用属性，用Builder模式支持链式调用
+ * 处理popwindow半透明背景的方法  CustomPopWindow和SelectPopupWindow两种实现方法
  * Created by zhouwei on 16/11/28.
  */
 
