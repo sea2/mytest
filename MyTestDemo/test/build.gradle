@@ -33,8 +33,6 @@ android {
 
     buildTypes {
         debug {
-
-
             //动态修改BuildConfig类中属性
             buildConfigField "boolean", "LOG_DEBUG", "true"
             //versionNameSuffix "-debug"

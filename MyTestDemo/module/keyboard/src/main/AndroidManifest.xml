@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
           package="com.lhy.ndk.keyboard">
 
     <application
@@ -17,7 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".MainListActivity">
+        <activity android:name=".MainListActivity"
+                  android:windowSoftInputMode="adjustResize|stateVisible"
+                  android:theme="@style/BaseTheme_TranslucentStatus"
+            >
         </activity>
         <activity
             android:name=".custom.Keyboard1Activity"

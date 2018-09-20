@@ -1,8 +1,12 @@
 package com.lhy.ndk.keyboard;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,13 +42,14 @@ public class Main2Activity extends AppCompatActivity {
     LinearLayout llOperate;
     @BindView(R.id.et_custom_keyboard_safe)
     EditText etCustomKeyboardSafe;
+    @BindView(R.id.btn_dialog_test)
+    Button btn_dialog_test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         ButterKnife.bind(this);
-
 
 
         KeyBoardDialogUtils keyBoardDialogUtils = new KeyBoardDialogUtils(Main2Activity.this);
@@ -71,5 +76,38 @@ public class Main2Activity extends AppCompatActivity {
                 keyBoardDialogUtils.show(etCustomKeyboardSafe);
             }
         });
+        btn_dialog_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showWebViewDialog();
+            }
+        });
     }
+
+    private void showWebViewDialog() {
+        final Dialog webviewDialog = new Dialog(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_test_layout, null);
+        final EditText et_test = view.findViewById(R.id.et_test_dialog);
+        webviewDialog.setTitle("请输入");
+        webviewDialog.setCanceledOnTouchOutside(true);
+        webviewDialog.setCancelable(true);
+        webviewDialog.setContentView(view);
+
+        /** 3.自动弹出软键盘
+         *  不能弹出的使用延迟弹出
+         * **/
+        webviewDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            public void onShow(DialogInterface dialog) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        KeyBoardUtil.showSoftInput(Main2Activity.this, et_test);
+                    }
+                },100);
+            }
+        });
+        webviewDialog.show();
+    }
+
+
 }

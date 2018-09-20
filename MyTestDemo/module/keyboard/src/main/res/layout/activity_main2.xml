@@ -39,6 +39,14 @@
             android:layout_marginRight="12dp"
             android:text="列表测试-顶起底部按钮"
             />
+        <Button
+            android:id="@+id/btn_dialog_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:text="dialog软键盘"
+            />
 
         <ImageView
             android:id="@+id/iv_top_bar"

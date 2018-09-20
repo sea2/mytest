@@ -19,6 +19,8 @@ public class MainListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_list);
+        AndroidBug5497Workaround.assistActivity(this);
+
         this.etcontent = (EditText) findViewById(R.id.et_content);
         this.listview = (ListView) findViewById(R.id.list_view);
 
