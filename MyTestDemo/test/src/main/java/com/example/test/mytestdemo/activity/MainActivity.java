@@ -1,13 +1,15 @@
 package com.example.test.mytestdemo.activity;
 
+import android.Manifest;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
-import android.widget.ImageView;
 import android.widget.RadioGroup;
 
 import com.example.test.mytestdemo.R;
@@ -20,14 +22,13 @@ import com.example.test.mytestdemo.fragment.ThreeFragment;
 import com.example.test.mytestdemo.fragment.TwoFragment;
 import com.example.test.mytestdemo.ui.MyDialog;
 import com.example.test.mytestdemo.util.DensityUtils;
-import com.example.test.mytestdemo.utils.BitmapUtils;
+import com.example.test.mytestdemo.util.PermissionsUtil;
 import com.example.test.mytestdemo.utils.FileUtils;
 import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,11 +36,13 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
     private static final String FRAGMENT_TAGS = "fragmentTags";
     private static final String CURR_INDEX = "currIndex";
+    private final String ONE_FRAGMENT_KEY = "one_fragment__key";
+    private final String TWO_FRAGMENT_KEY = "two__fragment_key";
+    private final String THREE_FRAGMENT_KEY = "three__fragment_key";
+    private final String FOUR_FRAGMENT_KEY = "four__fragment_key";
     private static int currIndex = 0;
-
     private RadioGroup group;
     //fragment
     private Fragment mFragmentOne, mFragmentTwo, mFragmentThree, mFragmentFour;
@@ -47,6 +50,7 @@ public class MainActivity extends BaseActivity {
     private ArrayList<String> fragmentTags;
     private FragmentAdapter homePageFragmentAdapter;
     private ViewPager viewpager_container;
+    private final int READ_PHONE_STATE_CODE = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,26 +58,21 @@ public class MainActivity extends BaseActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ImageView iv_main_test = (ImageView) findViewById(R.id.iv_main_test);
+
         EventBus.getDefault().register(this);
-        if (savedInstanceState == null) {
-            initView();
-            initData();
-        } else {
-            initFromSavedInstantsState(savedInstanceState);
+        if (savedInstanceState != null) {
+            currIndex = savedInstanceState.getInt(CURR_INDEX);
+            fragmentTags = savedInstanceState.getStringArrayList(FRAGMENT_TAGS);
         }
 
-        //文件路径
+        initView();
+        initData();
+
+
+        //文件路径测试
         FileUtils.getApplicationDirectories(this);
         FileUtils.getEnvironmentDirectories();
 
-
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.bg_welcome);
-        File file = BitmapUtils.writeBitmapToFile(bitmap, "welcome_bg.jpg");
-        Logger.i("time---Width--" + bitmap.getWidth() + "---Height-" + bitmap.getHeight() + "--内存size--" + BitmapUtils.getBitmapSize(bitmap));
-        Logger.i("time---Width--" + bitmap.getWidth() + "---Height-" + bitmap.getHeight() + "--文件size--" + FileUtils.getFileSize(file));
-        Bitmap bitmapNew= Bitmap.createBitmap(bitmap, 0, 0, 300, 300);
-        iv_main_test.setImageBitmap(bitmapNew);
     }
 
 
@@ -82,42 +81,28 @@ public class MainActivity extends BaseActivity {
         super.onSaveInstanceState(outState);
         outState.putInt(CURR_INDEX, currIndex);
         outState.putStringArrayList(FRAGMENT_TAGS, fragmentTags);
-    }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        initFromSavedInstantsState(savedInstanceState);
-    }
-
-    private void initFromSavedInstantsState(Bundle savedInstanceState) {
-        currIndex = savedInstanceState.getInt(CURR_INDEX);
-        fragmentTags = savedInstanceState.getStringArrayList(FRAGMENT_TAGS);
 
     }
 
-    private void initData() {
-        currIndex = 0;
-        fragmentTags = new ArrayList<>(Arrays.asList("OneFragment", "TwoFragment", "ThreeFragment", "FourFragment"));
 
-        mFragmentOne = new OneFragment();
-        mFragmentTwo = new TwoFragment();
-        mFragmentThree = new ThreeFragment();
-        mFragmentFour = new FourFragment();
-        mFragmentList.add(mFragmentOne);
-        mFragmentList.add(mFragmentTwo);
-        mFragmentList.add(mFragmentThree);
-        mFragmentList.add(mFragmentFour);
-
-
-        homePageFragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), mFragmentList);
-        viewpager_container.setOffscreenPageLimit(3);
-        viewpager_container.setAdapter(homePageFragmentAdapter);
-    }
 
     private void initView() {
         group = (RadioGroup) findViewById(R.id.group);
         viewpager_container = (ViewPager) findViewById(R.id.viewpager_container);
+        if (mFragmentOne == null) mFragmentOne = new OneFragment();
+        if (mFragmentTwo == null) mFragmentTwo = new TwoFragment();
+        if (mFragmentThree == null) mFragmentThree = new ThreeFragment();
+        if (mFragmentFour == null) mFragmentFour = new FourFragment();
+        mFragmentList.add(mFragmentOne);
+        mFragmentList.add(mFragmentTwo);
+        mFragmentList.add(mFragmentThree);
+        mFragmentList.add(mFragmentFour);
+        homePageFragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), mFragmentList);
+        viewpager_container.setOffscreenPageLimit(2);
+        viewpager_container.setAdapter(homePageFragmentAdapter);
+
+
         viewpager_container.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -174,6 +159,43 @@ public class MainActivity extends BaseActivity {
     }
 
 
+    private void initData() {
+
+        viewpager_container.setCurrentItem(currIndex);
+        fragmentTags = new ArrayList<>(Arrays.asList("OneFragment", "TwoFragment", "ThreeFragment", "FourFragment"));
+
+        appPermissionApply();
+    }
+
+
+
+    /**
+     * 权限申请
+     */
+    private void appPermissionApply() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            String[] strPermission = new String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.SEND_SMS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+            String[] strNeed = PermissionsUtil.getNeedApplyPermissions(strPermission);
+            if (strNeed != null && strNeed.length > 0) {
+                ActivityCompat.requestPermissions(this, strNeed, READ_PHONE_STATE_CODE);
+            }
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == READ_PHONE_STATE_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Logger.i("Main+onRequestPermissionsResult PERMISSION_GRANTED"+grantResults.length);
+            } else {
+                Logger.i("Main+onRequestPermissionsResult"+grantResults.length);
+            }
+        }
+    }
+
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -195,12 +217,6 @@ public class MainActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-    }
-
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
     }
 
 
