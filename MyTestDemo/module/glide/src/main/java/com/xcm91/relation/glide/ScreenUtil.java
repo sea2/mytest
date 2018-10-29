@@ -1,8 +1,5 @@
 package com.xcm91.relation.glide;
 
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Rect;
 import android.util.DisplayMetrics;
 
 import java.lang.reflect.Field;
@@ -18,19 +15,11 @@ public class ScreenUtil {
     private int width;
     private float density;
     private int densityDpi;
-    private Context context;
     private ScreenUtil mScreenUtil = null;
 
 
-    public ScreenUtil getInstance(Context ct) {
-        context = ct.getApplicationContext();
-        if (mScreenUtil == null) mScreenUtil = new ScreenUtil();
-        return mScreenUtil;
-    }
-
-
     public ScreenUtil() {
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        DisplayMetrics metrics = MyApplication.getInstance().getResources().getDisplayMetrics();
         // 设置单位为像素单位
         height = metrics.heightPixels;
         width = metrics.widthPixels;
@@ -43,7 +32,7 @@ public class ScreenUtil {
      */
     public int getHeight() {
         if (height == 0) {
-            DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+            DisplayMetrics metrics = MyApplication.getInstance().getResources().getDisplayMetrics();
             // 设置单位为像素单位
             return metrics.heightPixels;
         } else {
@@ -54,9 +43,9 @@ public class ScreenUtil {
     /**
      * int 返回屏幕宽度
      */
-    public int getWidth(Context context) {
+    public int getWidth() {
         if (density == 0) {
-            DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+            DisplayMetrics metrics = MyApplication.getInstance().getResources().getDisplayMetrics();
             // 设置单位为像素单位
             return metrics.widthPixels;
         } else {
@@ -69,7 +58,7 @@ public class ScreenUtil {
      */
     public float getDensity() {
         if (density == 0) {
-            DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+            DisplayMetrics metrics = MyApplication.getInstance().getResources().getDisplayMetrics();
             // 设置单位为像素单位
             return metrics.density;
         } else {
@@ -80,9 +69,9 @@ public class ScreenUtil {
     /**
      *
      */
-    public int getDensityDpi(Context context) {
+    public int getDensityDpi() {
         if (densityDpi == 0) {
-            DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+            DisplayMetrics metrics = MyApplication.getInstance().getResources().getDisplayMetrics();
             // 设置单位为像素单位
             return metrics.densityDpi;
         } else {
@@ -93,11 +82,11 @@ public class ScreenUtil {
     /**
      * 将dip转成px
      */
-    public int dip2px(Context context, float dipValue) {
+    public int dip2px(float dipValue) {
         return (int) (dipValue * getDensity() + 0.5f);
     }
 
-    public int sp2px(Context context, float spValue) {
+    public int sp2px(float spValue) {
         return (int) (spValue * getDensity() + 0.5f);
     }
 
@@ -105,7 +94,7 @@ public class ScreenUtil {
      * 获得屏幕宽度
      */
     public int getScreenHeight() {
-        return getHeight() - getStatusBarHeight(context);// 天线高度
+        return getHeight() - getStatusBarHeight();// 天线高度
     }
 
 
@@ -114,41 +103,17 @@ public class ScreenUtil {
      *
      * @return 返回状态栏高度的像素值。
      */
-    public  int getStatusBarHeight(Context context) {
+    public int getStatusBarHeight() {
         int statusBarHeight = 0;
         try {
             Class<?> c = Class.forName("com.android.internal.R$dimen");
             Object o = c.newInstance();
             Field field = c.getField("status_bar_height");
             int x = (Integer) field.get(o);
-            statusBarHeight = context.getResources().getDimensionPixelSize(x);
+            statusBarHeight = MyApplication.getInstance().getResources().getDimensionPixelSize(x);
         } catch (Exception e) {
             e.printStackTrace();
             statusBarHeight = 25;
-        }
-        return statusBarHeight;
-    }
-
-
-    /**
-     * 用于获取状态栏的高度。
-     *
-     * @return 返回状态栏高度的像素值。
-     */
-    public int getStatusBarHeight2(Context context) {
-        int statusBarHeight = 0;
-        try {
-            Class<?> c = Class.forName("com.android.internal.R$dimen");
-            Object o = c.newInstance();
-            Field field = c.getField("status_bar_height");
-            int x = (Integer) field.get(o);
-            statusBarHeight = context.getResources().getDimensionPixelSize(x);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Rect frame = new Rect();
-            ((Activity) context).getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
-            statusBarHeight = frame.top;
-            if (statusBarHeight == 0) statusBarHeight = 25;
         }
         return statusBarHeight;
     }

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.test.mytestdemo.Interface.IClickListener;
 import com.example.test.mytestdemo.R;
 import com.trello.rxlifecycle.components.support.RxFragmentActivity;
 
@@ -39,6 +40,14 @@ public class RxJavaActivity extends RxFragmentActivity {
             public void onClick(View v) {
             }
         });
+        btnone.setOnClickListener(new IClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        }) );
+
+
         btnone2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

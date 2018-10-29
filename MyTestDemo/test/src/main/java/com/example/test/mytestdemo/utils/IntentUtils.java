@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
 import android.webkit.MimeTypeMap;
 
 import java.io.File;
@@ -46,20 +45,15 @@ public class IntentUtils {
     public static Intent getInstallAppIntent(File file) {
         if (file == null) return null;
         Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         String type;
-
         if (Build.VERSION.SDK_INT < 23) {
             type = "application/vnd.android.package-archive";
         } else {
             type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(FileUtils.getFileExtension(file));
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            Uri contentUri = FileProvider.getUriForFile(Utils.getContext(), "com.your.package.fileProvider", file);
-            intent.setDataAndType(contentUri, type);
-        }
-        intent.setDataAndType(Uri.fromFile(file), type);
-        return intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        FileProvider7.setIntentDataAndType(intent, type, file, false);
+        return intent;
     }
 
     /**
@@ -207,8 +201,6 @@ public class IntentUtils {
     }
 
 
-
-
     /**
      * 查询Intent是否有效
      * 意图是否有效
@@ -221,12 +213,26 @@ public class IntentUtils {
     }
 
 
+    /**
+     * 打开pdf
+     *
+     * @param content
+     * @param file
+     */
+    public static void openApplication(Context content, File file) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.addCategory("android.intent.category.DEFAULT");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri uri = FileProvider7.getUriForFile(file);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setDataAndType(uri, "application/pdf");
+        content.startActivity(intent);
+    }
 
 
-
-
-/*
-    *//**
+    /*
+     *//**
      * 获取选择照片的Intent
      *
      * @return

@@ -16,11 +16,11 @@ import java.util.Map;
 
 
 /**
+ * RecyclerView刷新和加载
+ *
  * @author Leo
  */
 public class MainActivity2 extends AppCompatActivity {
-
-
 
 
     boolean isLoading;
@@ -122,7 +122,7 @@ public class MainActivity2 extends AppCompatActivity {
      * 获取测试数据
      */
     private void getData() {
-        for (int i = 1; i <=10; i++) {
+        for (int i = 1; i <= 10; i++) {
             Map<String, Object> map = new HashMap<>();
             data.add(map);
         }

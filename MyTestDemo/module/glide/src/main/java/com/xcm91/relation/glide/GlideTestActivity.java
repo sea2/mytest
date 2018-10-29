@@ -12,6 +12,9 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
@@ -60,18 +63,24 @@ public class GlideTestActivity extends Activity {
         });
 
 
-        String url = "http://imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=ae4e87268d94a4c21e2eef68669d71a0/7c1ed21b0ef41bd5d5a88edd5bda81cb39db3d1b.jpg";
+        String url = "";
+
         String url2 = "http://imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=ae4e87268d94a4c21e2eef68669d71a0/7c1ed21b0ef41bd5d5a88edd5bda81cb39db3d1b.jpg";
 
         String url3 = "http://pic49.nipic.com/file/20140927/19617624_230415502002_2.jpg";
 
         ImageLoader.getIntance(this).bindBitmap(url3, iv1);
 
-        with(this).
 
-                load("http://imgsrc.baidu.com/imgad/pic/item/267f9e2f07082838b5168c32b299a9014c08f1f9.jpg").
-
-                into(iv1);
+        GlideUrl glideUrl = new GlideUrl("http://i.meizitu.net/thumbs/2018/10/154998_18a30_236.jpg", new LazyHeaders.Builder()
+                .addHeader("Referer", "http://www.mzitu.com")
+                .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:55.0) Gecko/20100101 Firefox/55.0")
+                .addHeader("Accept", "  text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
+                .addHeader("Accept-Language", "zh-cn,zh;q=0.5")
+                .addHeader("Accept-Charset", "  GB2312,utf-8;q=0.7,*;q=0.7")
+                .addHeader("Connection", "keep-alive")
+                .build());
+        Glide.with(this).load(glideUrl).into(iv1);
 
         with(this).
 
@@ -128,8 +137,8 @@ public class GlideTestActivity extends Activity {
                 });
 
 
-   /*     //设置下载优先级
-        *//**//**  //设置缓存策略
+        /*     //设置下载优先级
+         *//**//**  //设置缓存策略
          *all:
          缓存源资源和转换后的资源
          none:
@@ -141,11 +150,7 @@ public class GlideTestActivity extends Activity {
         //  with(this).load(url2).diskCacheStrategy(DiskCacheStrategy.ALL).into(iv5);
 
 
-        for (
-                int i = 1;
-                i <= 5; i++)
-
-        {
+        for (int i = 1; i <= 5; i++) {
             getImageCacheAsyncTask mgetImageCacheAsyncTask = new getImageCacheAsyncTask(this);
             mgetImageCacheAsyncTask.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, url2);
         }
@@ -154,12 +159,10 @@ public class GlideTestActivity extends Activity {
         Log.e("tag", GlideUtil.getCacheSize(this));
 
 
-        bitmap = BitmapFactory.decodeResource(this.
-
-                getResources(), R.drawable.widget_bar_user_press);
+        bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.widget_bar_user_press);
         float height = bitmap.getHeight();
         float width = bitmap.getWidth();
-        float screenWidth =new  ScreenUtil().getWidth(this.getApplicationContext());
+        float screenWidth = new ScreenUtil().getWidth();
         float rale = screenWidth / width;
         float drawableHeigthEnd = rale * height;
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) drawableHeigthEnd);
@@ -182,7 +185,7 @@ public class GlideTestActivity extends Activity {
 
                         float height = bitmap.getHeight();
                         float width = bitmap.getWidth();
-                        float screenWidth = new ScreenUtil().getWidth(GlideTestActivity.this.getApplicationContext());
+                        float screenWidth = new ScreenUtil().getWidth();
                         float rale = screenWidth / width;
                         float drawableHeigthEnd = rale * height;
                         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, (int) drawableHeigthEnd);
