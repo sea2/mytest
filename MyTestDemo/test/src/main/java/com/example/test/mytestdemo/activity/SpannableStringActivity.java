@@ -54,7 +54,7 @@ public class SpannableStringActivity extends BaseActivity {
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
         SpannableString spannableString = new SpannableString("设置样式——字体颜色");
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#009ad6"));
-        spannableString.setSpan(colorSpan, 6, 10, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        spannableString.setSpan(colorSpan, 5, 10, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         spannableStringBuilder.append(spannableString);
 
         ((TextView) findViewById(R.id.mode2)).setText(spannableStringBuilder);

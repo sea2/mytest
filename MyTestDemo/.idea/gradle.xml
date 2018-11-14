@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/module" />
+            <option value="$PROJECT_DIR$/module/RecyclerViewHelper" />
             <option value="$PROJECT_DIR$/module/contentprovider" />
             <option value="$PROJECT_DIR$/module/dialog" />
             <option value="$PROJECT_DIR$/module/glide" />

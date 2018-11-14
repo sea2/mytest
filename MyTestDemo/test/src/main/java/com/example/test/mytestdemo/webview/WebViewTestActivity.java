@@ -1,8 +1,8 @@
 package com.example.test.mytestdemo.webview;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.DownloadListener;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
@@ -22,6 +23,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.test.mytestdemo.R;
@@ -31,28 +33,40 @@ import com.orhanobut.logger.Logger;
 public class WebViewTestActivity extends BaseActivity implements View.OnClickListener {
 
     private WebView webview;
-    private String TAG = this.getClass().getSimpleName();
+
     private String url;
     private android.widget.LinearLayout llbottomtext;
     private android.widget.Button btnsubmit;
+    private ProgressBar networkProgressBar;
 
-    @SuppressLint("JavascriptInterface")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view_test);
+        networkProgressBar = (ProgressBar) findViewById(R.id.myProgressBar);
         this.llbottomtext = (LinearLayout) findViewById(R.id.ll_bottom_text);
         this.btnsubmit = (Button) findViewById(R.id.btn_submit);
         this.btnsubmit.setOnClickListener(this);
         this.webview = (WebView) findViewById(R.id.webview);
         Intent it = getIntent();
         String str = it.getStringExtra("key");
-        Log.e("WebViewTestActivity", str + "");
+        Log.i(TAG, str + "");
 
         url = "http://192.168.5.19:8080/html/index.html";
 
         //支持Html5标签……等
         webview.loadUrl(url);
+       /*//方式1. 加载一个网页：
+        webview.loadUrl("http://www.google.com/");
+
+        //方式2：加载apk包中的html页面
+        webview.loadUrl("file:///android_asset/test.html");
+
+        //方式3：加载手机本地的html页面
+        webview.loadUrl("content://com.android.htmlfileprovider/sdcard/test.html");
+
+        // 方式4： 加载 HTML 页面的一小段内容
+        webview.loadData(String data, String mimeType, String encoding);*/
 
 
         WebSettings webSettings = webview.getSettings();
@@ -61,12 +75,15 @@ public class WebViewTestActivity extends BaseActivity implements View.OnClickLis
 
         //支持获取手势焦点，输入用户名、密码或其他
         webview.requestFocusFromTouch();
+        webSettings.setSavePassword(false);
+        webSettings.setAppCacheEnabled(false);
 
-        webSettings.setUseWideViewPort(true);  //将图片调整到适合webview的大小
-        webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
 
         webSettings.setSupportZoom(true);  //支持缩放，默认为true。是下面那个的前提。
-        webSettings.setBuiltInZoomControls(true); //设置内置的缩放控件。
+        if (android.os.Build.VERSION.SDK_INT >= 11) {
+            webSettings.setBuiltInZoomControls(true);
+            webSettings.setDisplayZoomControls(false); //隐藏Zoom缩放按钮
+        }
         // 若上面是false，则该WebView不可缩放，这个不管设置什么都不能缩放。
 
         webSettings.setDisplayZoomControls(false); //隐藏原生的缩放控件
@@ -81,6 +98,17 @@ public class WebViewTestActivity extends BaseActivity implements View.OnClickLis
         webSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
 
 
+        //add by xiehy 修复HTML页面加载WEBVIEW 显示问题 不使用加载百分百显示
+        webSettings.setUseWideViewPort(true);
+        webSettings.setLoadWithOverviewMode(true);
+
+        //在Android5.0及5.0以上版本，WebView通过https访问的资源，该资源里面又通过http访问了别的资源，默认WebView阻止的后面的http资源的访问，报Mixed Content
+        //以下设置为不阻止，可以访问
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+
+
         webview.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -90,8 +118,7 @@ public class WebViewTestActivity extends BaseActivity implements View.OnClickLis
                     startActivity(new Intent(WebViewTestActivity.this, WebViewTestActivity.class));
                     return true;
                 } else {
-                    webview.loadUrl(url);
-                    return false;
+                    return super.shouldOverrideUrlLoading(view, url);
                 }
             }
 
@@ -114,6 +141,8 @@ public class WebViewTestActivity extends BaseActivity implements View.OnClickLis
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
+
+                String pageFinishedTitle = view.getTitle();
             }
 
             @Override
@@ -127,20 +156,19 @@ public class WebViewTestActivity extends BaseActivity implements View.OnClickLis
         //  webview.loadData("file:///android_asset/test.html", "text/html", "utf-8");
 
        /*
-//是否可以后退
-Webview.canGoBack()
-//后退网页
-Webview.goBack()
+       //是否可以后退
+       Webview.canGoBack()
+        //后退网页
+       Webview.goBack()
 
-//是否可以前进
-Webview.canGoForward()
-//前进网页
-Webview.goForward()
+        //是否可以前进
+        Webview.canGoForward()
+        //前进网页
+         Webview.goForward()
 
-//以当前的index为起始点前进或者后退到历史记录中指定的steps
-//如果steps为负数则为后退，正数则为前进
-Webview.goBackOrForward(intsteps)
-
+          //以当前的index为起始点前进或者后退到历史记录中指定的steps
+          //如果steps为负数则为后退，正数则为前进
+          Webview.goBackOrForward(intsteps)
 
         //刷新当前页面
         webview.reload();*/
@@ -149,11 +177,15 @@ Webview.goBackOrForward(intsteps)
         webview.setWebChromeClient(mWebChromeClient);
 
 
-
-
-
-
-
+        webview.setDownloadListener(new DownloadListener() {
+            @Override
+            public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
+                // 监听下载功能，当用户点击下载链接的时候，直接调用系统的浏览器来下载
+                Uri uri = Uri.parse(url);
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
 
 
     }
@@ -217,9 +249,12 @@ Webview.goBackOrForward(intsteps)
         //获得网页的加载进度，显示在右上角的TextView控件中
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
-            if (newProgress < 100) {
-                String progress = newProgress + "%";
+            networkProgressBar.setProgress(newProgress);
+            networkProgressBar.postInvalidate();
+            if (newProgress == 100) {
+                networkProgressBar.setVisibility(View.GONE);
             } else {
+                networkProgressBar.setVisibility(View.VISIBLE);
             }
         }
 

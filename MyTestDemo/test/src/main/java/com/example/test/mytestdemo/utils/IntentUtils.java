@@ -1,5 +1,7 @@
 package com.example.test.mytestdemo.utils;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +11,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.webkit.MimeTypeMap;
+
+import com.example.test.mytestdemo.util.ToastUtils;
 
 import java.io.File;
 
@@ -55,6 +59,20 @@ public class IntentUtils {
         FileProvider7.setIntentDataAndType(intent, type, file, false);
         return intent;
     }
+
+
+    /**
+     * 返回
+     *
+     * @param activity
+     * @param backClass
+     */
+    public static void backActivity(Activity activity, Class backClass) {
+        Intent intent = new Intent(activity, backClass);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        activity.startActivity(intent);
+    }
+
 
     /**
      * 获取卸载App的意图
@@ -228,6 +246,28 @@ public class IntentUtils {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.setDataAndType(uri, "application/pdf");
         content.startActivity(intent);
+    }
+
+
+    /**
+     * 打开别的app
+     * 打开的activity应该设置android:exported="true"
+     */
+    private void openOther(Activity activity) {
+        try {
+            ComponentName componentName = new ComponentName("com.tangguo.tangguoxianjin", "com.tangguo.tangguoxianjin.activity.MainActivity");
+            Intent intent = new Intent();
+            //  Intent intent = new Intent("chroya.foo");
+            Bundle bundle = new Bundle();
+            bundle.putString("args", "我就是跳转过来的");
+            intent.putExtras(bundle);
+            intent.setComponent(componentName);
+            activity.startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            //判断是否安装B应用，提供下载链接
+            ToastUtils.showShortToast("请下载----" + "com.example.intentActivity2");
+            e.printStackTrace();
+        }
     }
 
 

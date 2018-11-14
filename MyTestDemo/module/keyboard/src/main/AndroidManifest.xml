@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-
           package="com.lhy.ndk.keyboard">
 
     <application
@@ -10,24 +9,26 @@
         android:theme="@style/BaseTheme">
         <activity
             android:name=".Main2Activity"
-            android:windowSoftInputMode="stateHidden|stateUnchanged"
-            android:configChanges="orientation|keyboardHidden|screenSize">
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|stateUnchanged">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".MainListActivity"
-                  android:windowSoftInputMode="adjustResize|stateVisible"
-                  android:theme="@style/BaseTheme_TranslucentStatus"
-            >
+        <activity
+            android:name=".MainListActivity"
+            android:theme="@style/BaseTheme_TranslucentStatus"
+            android:windowSoftInputMode="adjustResize|stateVisible">
         </activity>
         <activity
             android:name=".custom.Keyboard1Activity"
             android:alwaysRetainTaskState="true"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:windowSoftInputMode="stateHidden|stateUnchanged"
+            android:windowSoftInputMode="stateHidden|stateUnchanged"/>
+        <activity android:name=".EditTextUpAndButtonDownActivity"
+                  android:windowSoftInputMode="adjustResize|stateVisible"
             />
     </application>
 

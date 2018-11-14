@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 
+import com.example.test.mytestdemo.Interface.ClickProxy;
 import com.example.test.mytestdemo.R;
 import com.example.test.mytestdemo.activity.AnimationActivity;
 import com.example.test.mytestdemo.activity.HorizontalScrollViewActivity;
@@ -77,12 +78,12 @@ public class OneFragment extends LazyFragment {
 
 
     private void initListener() {
-        btn_notification.setOnClickListener(new View.OnClickListener() {
+        btn_notification.setOnClickListener(new ClickProxy(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 startAc(NotificationMainActivity.class);
             }
-        });
+        }));
         btn_webview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

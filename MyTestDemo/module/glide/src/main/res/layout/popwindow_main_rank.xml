@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/rg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            android:orientation="vertical">
+
+
+    <RadioButton
+        android:id="@+id/btn_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:checked="true"
+        android:text="最新"
+        />
+
+    <RadioButton
+        android:id="@+id/btn_hot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="最热"
+        />
+
+    <RadioButton
+        android:id="@+id/btn_best"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="推荐"
+        />
+
+    <RadioButton
+        android:id="@+id/btn_xinggan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="性感美女"
+        />
+
+    <RadioButton
+        android:id="@+id/btn_baoru"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="爆乳(酥胸)"
+        />
+
+    <RadioButton
+        android:id="@+id/btn_leg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="美腿"
+        />
+
+    <RadioButton
+        android:id="@+id/btn_youhuo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="诱惑"
+        />
+
+    <RadioButton
+        android:id="@+id/btn_zouguang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="走光"
+        />
+
+    <RadioButton
+        android:id="@+id/btn_zhifu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="制服诱惑"
+        />
+
+    <RadioButton
+        android:id="@+id/btn_meitun"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="美臀"
+        />
+
+    <RadioButton
+        android:id="@+id/btn_shishen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="湿身诱惑"
+        />
+
+    <RadioButton
+        android:id="@+id/btn_taiwan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="台湾"
+        />
+
+    <RadioButton
+        android:id="@+id/btn_mm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="清纯"
+        />
+</RadioGroup>
+

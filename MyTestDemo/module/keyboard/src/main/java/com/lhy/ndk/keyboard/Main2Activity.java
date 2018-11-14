@@ -44,6 +44,8 @@ public class Main2Activity extends AppCompatActivity {
     EditText etCustomKeyboardSafe;
     @BindView(R.id.btn_dialog_test)
     Button btn_dialog_test;
+    @BindView(R.id.btn_btn_and_et)
+    Button btn_btn_and_et;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,13 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent it = new Intent(Main2Activity.this, Keyboard1Activity.class);
+                startActivity(it);
+            }
+        });
+        btn_btn_and_et.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(Main2Activity.this, EditTextUpAndButtonDownActivity.class);
                 startActivity(it);
             }
         });

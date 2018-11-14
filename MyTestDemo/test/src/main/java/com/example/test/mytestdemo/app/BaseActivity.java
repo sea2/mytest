@@ -20,13 +20,14 @@ import com.example.test.mytestdemo.utils.StatusBarUtils;
 
 public abstract class BaseActivity extends FragmentActivity {
     public ToastShow toastShow;
-    private boolean isUserDefinedColorForStatusBar=true;
+    private boolean isUserDefinedColorForStatusBar = true;
     private SystemBarTintManager tintManager;
+    protected final String TAG = this.getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i(this.getClass().getSimpleName(), "onCreate");
+        Log.i(TAG, "onCreate");
         toastShow = new ToastShow(this);
 
 
@@ -107,45 +108,50 @@ public abstract class BaseActivity extends FragmentActivity {
         return res;
     }
 
-
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.i(TAG, "onRestart");
+    }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.i(this.getClass().getSimpleName(), "onStart");
+        Log.i(TAG, "onStart");
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i(this.getClass().getSimpleName(), "onResume");
+        Log.i(TAG, "onResume");
 
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.i(this.getClass().getSimpleName(), "onRestart");
-    }
 
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.i(this.getClass().getSimpleName(), "onPause");
+        Log.i(TAG, "onPause");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.i(this.getClass().getSimpleName(), "onStop");
+        Log.i(TAG, "onStop");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.i(TAG, "onSaveInstanceState");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.i(this.getClass().getSimpleName(), "onDestroy");
+        Log.i(TAG, "onDestroy");
     }
 
 
@@ -179,5 +185,10 @@ public abstract class BaseActivity extends FragmentActivity {
         startActivity(it);
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.i(TAG, "onNewIntent");
 
+    }
 }

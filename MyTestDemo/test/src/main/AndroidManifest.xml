@@ -44,7 +44,7 @@
             android:value="${CHANNEL_VALUE}"/>
 
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.intent.IntentAActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -139,6 +139,8 @@
         <activity android:name=".socket.SocketActivity">
         </activity>
         <activity android:name=".activity.EventBusTestActivity">
+        </activity>
+        <activity android:name=".activity.intent.ScrollingActivity">
         </activity>
     </application>
 
