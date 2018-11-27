@@ -46,7 +46,7 @@ public class ServiceTestActivity extends BaseActivity {
                 /*Intent it = new Intent(ServiceTestActivity.this, MyService.class);
                 startService(it);*/
                 Intent it = new Intent(ServiceTestActivity.this, MainActivity.class);
-                it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startService(it);
             }
         });
@@ -71,7 +71,6 @@ public class ServiceTestActivity extends BaseActivity {
             public void onClick(View view) {//关闭
               /*  unbindService(connection);
                 connection = null;*/
-
                 myBinder.startDialog();
             }
         });
@@ -105,8 +104,6 @@ public class ServiceTestActivity extends BaseActivity {
 
         }
     }
-
-
 
 
 }

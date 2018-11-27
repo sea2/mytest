@@ -46,7 +46,7 @@ public class NotificationMainActivity extends BaseNotificationActivity implement
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.main_notification);
         initView();
         initNotify();
     }
@@ -157,8 +157,10 @@ public class NotificationMainActivity extends BaseNotificationActivity implement
                 .setContentTitle("测试标题").setContentText("点击跳转").setTicker("点我");
         //点击的意图ACTION是跳转到Intent
         Intent resultIntent = new Intent(this, NotificationMainActivity.class);
-        resultIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         mBuilder.setContentIntent(pendingIntent);
         mNotificationManager.notify(notifyId, mBuilder.build());
     }

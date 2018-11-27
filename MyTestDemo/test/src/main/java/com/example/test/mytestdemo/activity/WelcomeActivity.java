@@ -2,6 +2,7 @@ package com.example.test.mytestdemo.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.View;
 import android.view.Window;
@@ -17,7 +18,7 @@ public class WelcomeActivity extends BaseActivity {
     private int counInt = 0;
     private Button btnstop;
     private android.widget.TextView tvtimeend;
-    private int delayedTime = 2;
+    private final int delayedTime = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +48,6 @@ public class WelcomeActivity extends BaseActivity {
             }
         });
 
-        
-
 
     }
 
@@ -61,7 +60,7 @@ public class WelcomeActivity extends BaseActivity {
         super.onResume();
     }
 
-    private Handler myHandler = new Handler() {
+    private Handler myHandler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);

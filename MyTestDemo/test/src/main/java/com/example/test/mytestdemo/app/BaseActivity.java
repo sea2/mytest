@@ -6,7 +6,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -18,7 +18,7 @@ import com.example.test.mytestdemo.util.SystemBarTintManager;
 import com.example.test.mytestdemo.utils.StatusBarUtils;
 
 
-public abstract class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends AppCompatActivity {
     public ToastShow toastShow;
     private boolean isUserDefinedColorForStatusBar = true;
     private SystemBarTintManager tintManager;

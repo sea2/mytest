@@ -34,8 +34,12 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths"/>
         </provider>
+        <!-- 全面屏手机-->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1"/>
 
-
+        <!-- 渠道配置-->
         <meta-data
             android:name="CHANNEL_NAME_TEST"
             android:value="${CHANNEL_NAME}"/>
@@ -44,8 +48,8 @@
             android:value="${CHANNEL_VALUE}"/>
 
         <activity
-            android:name=".activity.intent.IntentAActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".activity.WelcomeActivity"
+            android:theme="@style/AppThemeBackgroundTransparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -53,6 +57,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.PermissionsActivity">
+        </activity>
+        <activity android:name=".activity.MainActivity">
         </activity>
         <activity
             android:name=".activity.SpannableStringActivity"

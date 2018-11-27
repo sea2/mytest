@@ -116,7 +116,6 @@ public class HandleThreadActivity extends Activity {
     Thread mThread = new Thread(new Runnable() {
         @Override
         public void run() {
-
             while (thread_flag) {
                 try {
                     Thread.sleep(1000);

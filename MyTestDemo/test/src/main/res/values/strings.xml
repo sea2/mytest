@@ -126,4 +126,11 @@
 
     <string name="action_share">Share</string>
     <string name="action_reply">Reply</string>
+
+
+
+
+
+    <string name="notice_click_into">点击进入&#8230;</string>
+
 </resources>

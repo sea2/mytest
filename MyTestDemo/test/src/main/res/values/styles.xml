@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="android:colorBackground">@color/theme_color</item>
@@ -11,8 +11,9 @@
 
     </style>
 
-    <style name="AppThemeBackgroundTransparent" parent="Theme.AppCompat.Light">
-
+    <style name="AppThemeBackgroundTransparent" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/transparent</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
