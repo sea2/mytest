@@ -36,6 +36,7 @@ public class AddPhotoActivity extends AppCompatActivity {
     private static final int REQ_PERMISSION_CODE_SDCARD = 0X111;
     private static final int REQ_PERMISSION_CODE_TAKE_PHOTO = 0X112;
     private static final int PHOTO_CROP_RESULT = 0x1113;
+    //相册
     private static final int PHOTO_PICKED_WITH_DATA = 0x1114;
     //拍照的图片路径
     private String mCurrentPhotoPath;
@@ -173,6 +174,7 @@ public class AddPhotoActivity extends AppCompatActivity {
             mIvPhoto.setImageBitmap(BitmapFactory.decodeFile(cropPath));
         } else if (resultCode == RESULT_OK && requestCode == PHOTO_PICKED_WITH_DATA) {
             mIvPhoto.setImageBitmap(BitmapFactory.decodeFile(getPathStr(data)));
+            //  也可以用工具类                    RealPathFromUriUtils
         }
     }
 
@@ -253,7 +255,7 @@ public class AddPhotoActivity extends AppCompatActivity {
 
 
     /**
-     * 4.4及以上系统处理图片的方法
+     * 系统处理图片的方法
      */
     private String getPathStr(Intent data) {
         String imagePath = null;
@@ -272,6 +274,8 @@ public class AddPhotoActivity extends AppCompatActivity {
 
             } else if (uri != null && "content".equalsIgnoreCase(uri.getScheme())) {
                 imagePath = getImagePath(uri, null);
+            } else {
+                if (uri != null) imagePath = uri.getPath();
             }
         } else {
             Uri uri = data.getData();
@@ -279,6 +283,7 @@ public class AddPhotoActivity extends AppCompatActivity {
         }
         return imagePath;
     }
+
 
     /**
      * 通过uri和selection来获取真实的图片路径,从相册获取图片时要用

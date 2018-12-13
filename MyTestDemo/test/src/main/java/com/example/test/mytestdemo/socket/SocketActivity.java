@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
@@ -33,11 +34,11 @@ public class SocketActivity extends BaseActivity {
     private Socket socket = null;
     private BufferedReader mBufferedReader = null;
     private PrintWriter mPrintWriter = null;
-    private  boolean mWorking = true;
+    private boolean mWorking = true;
 
     private Thread mThread;
     //接收线程发送过来信息，并用TextView追加显示
-    public Handler mHandler = new Handler() {
+    public Handler mHandler = new Handler(Looper.getMainLooper()) {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             tv_msg.append((CharSequence) msg.obj);
@@ -122,12 +123,10 @@ public class SocketActivity extends BaseActivity {
         try {
             // 步骤1：连接服务器
             socket = new Socket(HOST, PORT);
-
             // 步骤2：创建输入流对象InputStream //接收消息的流对象
             mBufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             //发送消息的流对象
             mPrintWriter = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
-
         } catch (IOException ex) {
             ex.printStackTrace();
             ShowDialog("连接服务器失败：" + ex.getMessage());

@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/module/kotlin" />
             <option value="$PROJECT_DIR$/module/mvp" />
             <option value="$PROJECT_DIR$/module/myThread" />
+            <option value="$PROJECT_DIR$/module/okhttputils" />
             <option value="$PROJECT_DIR$/module/popwindow" />
             <option value="$PROJECT_DIR$/module/refreshview" />
             <option value="$PROJECT_DIR$/module/rxjava" />
