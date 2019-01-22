@@ -76,7 +76,6 @@ public class ThreadActivity extends Activity {
      /*   task = new DialogHelper();
         task.execute(1);*/
 
-
     }
 
 
@@ -162,6 +161,20 @@ public class ThreadActivity extends Activity {
             super.handleMessage(msg);
             //  mActivity.get()
 
+        }
+    }
+
+    class MyHandler extends Handler {
+        WeakReference<Activity> mActivityReference;
+        MyHandler(Activity activity) {
+            mActivityReference = new WeakReference<Activity>(activity);
+        }
+        @Override
+        public void handleMessage(Message msg) {
+            final Activity activity = mActivityReference.get();
+            if (activity != null) {
+                btnnotification.setText("");
+            }
         }
     }
 

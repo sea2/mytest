@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/module/RecyclerViewHelper" />
             <option value="$PROJECT_DIR$/module/contentprovider" />
             <option value="$PROJECT_DIR$/module/dialog" />
+            <option value="$PROJECT_DIR$/module/doubleprocess" />
             <option value="$PROJECT_DIR$/module/glide" />
             <option value="$PROJECT_DIR$/module/keyboard" />
             <option value="$PROJECT_DIR$/module/keyboardlibrary" />
@@ -23,6 +24,7 @@
             <option value="$PROJECT_DIR$/module/refreshview" />
             <option value="$PROJECT_DIR$/module/rxjava" />
             <option value="$PROJECT_DIR$/module/statusbarutil" />
+            <option value="$PROJECT_DIR$/module/testdemo" />
             <option value="$PROJECT_DIR$/swipebackhelper" />
             <option value="$PROJECT_DIR$/test" />
             <option value="$PROJECT_DIR$/xview" />

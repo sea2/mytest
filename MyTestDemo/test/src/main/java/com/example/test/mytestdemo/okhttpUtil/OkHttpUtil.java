@@ -5,6 +5,8 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
+import android.support.v4.util.ArrayMap;
+
 import android.util.Log;
 
 import com.example.test.mytestdemo.application.MyApplication;
@@ -77,8 +79,8 @@ public class OkHttpUtil {
     }
 
 
-    public void requestData(String url, int method, Map<String, String> params, final ResponseListener mResponseListener) {
-        Map<String, String> paramsAll = addCommonParams(params);
+    public void requestData(String url, int method, ArrayMap<String, String> params, final ResponseListener mResponseListener) {
+        ArrayMap<String, String> paramsAll = addCommonParams(params);
         String urlTag = getUrl(url, paramsAll);
         //创建OkHttpClient请求对象
         OkHttpClient okHttpClient = getOkHttpClient();
@@ -287,7 +289,7 @@ public class OkHttpUtil {
      * @param uri
      * @return
      */
-    private static String getUrl(String uri, Map<String, String> map) {
+    private static String getUrl(String uri, ArrayMap<String, String> map) {
         StringBuilder mStringBuilder = new StringBuilder(uri);
         if (uri != null && map != null && map.size() > 0) {
             if (!uri.contains("?")) mStringBuilder.append("?");
@@ -314,7 +316,7 @@ public class OkHttpUtil {
      *
      * @param map
      */
-    public static Map<String, String> addCommonParams(Map<String, String> map) {
+    public static ArrayMap<String, String> addCommonParams(ArrayMap<String, String> map) {
         //1.app_version 2. version 3. channel 4. current_time 5. sign
       /*  map.put("app_version", MyApplication.APP_VERSION);
         map.put("market", ManifestMetaDataHelper.getMetaDataChannelKey());

@@ -21,7 +21,8 @@ import java.util.List;
 
 /**
  * Created by lhy on 2018/3/26.
- * HandlerThread 它就是一个帮我们创建 Looper 的线程，让我们可以直接在线程中使用 Handler 来处理异步任务。
+ * HandlerThread 它就是一个帮我们创建 Looper 的线程，让我们可以直接在线程中创建 Handler 来处理异步任务,
+ * 因为new Handler必须有Loop,省去了Loop.prepare   Loop.looper步骤，和主线程main里的操作类似主线程创建Handler不需要Loop.prepare。
  *  串行
  */
 

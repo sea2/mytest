@@ -6,11 +6,13 @@
       <module fileurl="file://$PROJECT_DIR$/module/RecyclerViewHelper/RecyclerViewHelper.iml" filepath="$PROJECT_DIR$/module/RecyclerViewHelper/RecyclerViewHelper.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/contentprovider/contentprovider.iml" filepath="$PROJECT_DIR$/module/contentprovider/contentprovider.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/dialog/dialog.iml" filepath="$PROJECT_DIR$/module/dialog/dialog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module/doubleprocess/doubleprocess.iml" filepath="$PROJECT_DIR$/module/doubleprocess/doubleprocess.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/glide/glide.iml" filepath="$PROJECT_DIR$/module/glide/glide.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/keyboard/keyboard.iml" filepath="$PROJECT_DIR$/module/keyboard/keyboard.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/keyboardlibrary/keyboardlibrary.iml" filepath="$PROJECT_DIR$/module/keyboardlibrary/keyboardlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/kotlin/kotlin.iml" filepath="$PROJECT_DIR$/module/kotlin/kotlin.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/module.iml" filepath="$PROJECT_DIR$/module/module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/module/testdemo/module-testdemo.iml" filepath="$PROJECT_DIR$/module/testdemo/module-testdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/mvp/mvp.iml" filepath="$PROJECT_DIR$/module/mvp/mvp.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/myThread/myThread.iml" filepath="$PROJECT_DIR$/module/myThread/myThread.iml" />
       <module fileurl="file://$PROJECT_DIR$/module/okhttputils/okhttputils.iml" filepath="$PROJECT_DIR$/module/okhttputils/okhttputils.iml" />

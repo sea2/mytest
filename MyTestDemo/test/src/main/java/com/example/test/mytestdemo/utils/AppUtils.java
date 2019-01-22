@@ -14,6 +14,7 @@ import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Xml;
 
 import com.example.test.mytestdemo.application.MyApplication;
@@ -718,7 +719,8 @@ public class AppUtils {
 
     /**
      * 打开别的app,打开别的应用，启动别的app，启动其他的应用
-     *   对应的另外的那个activty应该在清单问价加入 android:exported="true" 属性，标记别的应用能打开
+     * 对应的另外的那个activty应该在清单问价加入 android:exported="true" 属性，标记别的应用能打开
+     *
      * @param activity
      */
     public static void StartOtherApp(Activity activity, String packageName, String packageClass) {
@@ -740,6 +742,15 @@ public class AppUtils {
     }
 
 
+    public static void openOther(Activity activity) {
+        Intent LaunchIntent = activity.getPackageManager().getLaunchIntentForPackage("com.example.test.mytestdemo1");
+        if (LaunchIntent != null) {
+            LaunchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//跨进程需要加此flags
+            activity.startActivity(LaunchIntent);
+        } else {
+            Log.e("openOther", "未找到所启动的包名");
+        }
+    }
 
 
     /**

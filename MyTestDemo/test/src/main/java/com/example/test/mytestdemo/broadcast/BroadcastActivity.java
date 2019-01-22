@@ -89,8 +89,13 @@ public class BroadcastActivity extends BaseActivity {
         filter.addAction("com.test.login");// 登录动作
         registerReceiver(acReceiver, filter);
 
-       LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(this);
 
+        //发送本地广播
+        LocalBroadcastManager lbm = LocalBroadcastManager.getInstance(this);
+        Intent loginSucessIntent = new Intent();
+        loginSucessIntent.setAction("com.test.logout");
+        loginSucessIntent.putExtra("KEY_LOGIN_SUCESS", false);
+        lbm.sendBroadcast(loginSucessIntent);
 
     }
 

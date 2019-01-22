@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.test.lhy.doubleprocess">
+
+
+    <!--设置Persistent-->
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".LocalService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter android:priority="1000"><action android:name="com.lhy.local_service"/> </intent-filter>
+        </service>
+
+        <service
+            android:name=".RemoteService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":RemoteProcess"/>
+
+
+        <receiver
+            android:name=".WatchBroadcast"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.broadcast.watch_service"/>
+            </intent-filter>
+        </receiver>
+
+
+    </application>
+
+</manifest>

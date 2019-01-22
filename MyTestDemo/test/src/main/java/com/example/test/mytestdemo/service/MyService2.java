@@ -50,6 +50,9 @@ public class MyService2 extends Service {
     public void onDestroy() {
         super.onDestroy();
         Logger.i(TAG, "onDestroy() executed");
+
+
+
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapRegionDecoder;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorMatrix;
@@ -49,6 +50,7 @@ public class BitmapUtils {
 
 
     /**
+     * 裁剪
      * 将拍照得到的图片按照取景框（亮色区域）的范围进行裁剪.
      * 对于1280x720的屏幕，裁剪起始点为坐标(52, 80)，裁剪后，位图尺寸为896x588.（由layout xml定义的布局计算得到）
      * 以上参数将按照图片的实际大小，进行等比例换算。
@@ -73,6 +75,35 @@ public class BitmapUtils {
         int height = (int) originalHeight - 2 * y;
         return Bitmap.createBitmap(originalBitmap, x, y, width, height);
     }
+
+
+    /**
+     * 截取不同区域显示
+     *
+     * @param inputStream
+     * @return
+     */
+    public static Bitmap bitmapRegionDecoder(InputStream inputStream) {
+        //获得图片的宽、高
+        BitmapFactory.Options tmpOptions = new BitmapFactory.Options();
+        tmpOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeStream(inputStream, null, tmpOptions);
+        int width = tmpOptions.outWidth;
+        int height = tmpOptions.outHeight;
+
+        //设置显示图片的中心区域
+        BitmapRegionDecoder bitmapRegionDecoder = null;
+        try {
+            bitmapRegionDecoder = BitmapRegionDecoder.newInstance(inputStream, false);
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = Bitmap.Config.RGB_565;
+            return bitmapRegionDecoder.decodeRegion(new Rect(width / 2 - 100, height / 2 - 100, width / 2 + 100, height / 2 + 100), options);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
     /**
      * 若图片宽小于高，则逆时针旋转90° ; 否则，返回原图片.
@@ -151,7 +182,7 @@ public class BitmapUtils {
             //90%的品质已高于超精细(85%)的标准，已非常精细
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
             fos.flush();
-           // bitmap.recycle();
+            // bitmap.recycle();
             fos.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -285,6 +316,7 @@ public class BitmapUtils {
 
     /**
      * bitmap压缩转file
+     *
      * @param bitmap
      * @param filepath 类似压缩方法 只是将压缩比设置为100（不压缩） 通过输入输出流转换
      * @return
@@ -305,8 +337,6 @@ public class BitmapUtils {
     }
 
 
-
-
     /**
      * 得到bitmap的内存大小
      */
@@ -321,13 +351,13 @@ public class BitmapUtils {
 
 
     /**
-     * 格式化单位
-     *
+     * 格式化单位   ,
+     * 传递getBitmapSize()获取内存占用大小
+     * 参数是 file.length()获取硬盘占用大小
      * @param size size
      * @return size
      */
     private static String getFormatSize(double size) {
-
         double kiloByte = size / 1024;
         if (kiloByte < 1) {
             return size + "Byte";
@@ -354,9 +384,6 @@ public class BitmapUtils {
 
         return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString() + "TB";
     }
-
-
-
 
 
     /**

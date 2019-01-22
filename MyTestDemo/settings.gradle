@@ -1,6 +1,7 @@
-include ':test', ':swipebackhelper', 'module:keyboardlibrary', 'module:keyboard', 'module:refreshview', 'module:popwindow', ':xview',
+include ':test', ':swipebackhelper',  'module:testdemo', 'module:keyboardlibrary', 'module:keyboard', 'module:refreshview', 'module:popwindow', ':xview',
         'module:statusbarutil', 'module:glide', 'module:dialog', 'module:contentprovider', 'module:rxjava', 'module:mvp',
         'module:kotlin',
         'module:myThread',
         'module:RecyclerViewHelper',
+        'module:doubleprocess',
         'module:okhttputils'
