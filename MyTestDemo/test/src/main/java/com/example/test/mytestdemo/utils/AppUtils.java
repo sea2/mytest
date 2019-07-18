@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import org.xmlpull.v1.XmlPullParser;
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -777,7 +779,36 @@ public class AppUtils {
     }
 
 
+    /**
+     * 打印手机所有应用，包名，应用名
+     */
+    public static void plintPkgAndCls() {
+        List<ResolveInfo> appList = null;
+        Intent intent = new Intent(Intent.ACTION_MAIN, null);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        PackageManager pm = Utils.getContext().getPackageManager();
+        appList = pm.queryIntentActivities(intent, 0);
+        Collections.sort(appList, new ResolveInfo.DisplayNameComparator(pm));
+        PackageManager packageManager = Utils.getContext().getPackageManager();
 
+        Log.i("pkg", "####################start######################");
+        for (int i = 0; i < appList.size(); i++) {
+            String pkg = appList.get(i).activityInfo.packageName;
+            String cls = appList.get(i).activityInfo.name;
+            String title = null;
+
+            try {
+                ApplicationInfo applicationInfo = packageManager.getPackageInfo(pkg, i).applicationInfo;
+                title = applicationInfo.loadLabel(packageManager).toString();
+            } catch (Exception e) {
+
+            }
+
+
+            Log.i("pkg", title + "：" + pkg + "/" + cls);
+        }
+        Log.i("pkg", "#####################end#######################");
+    }
 
     /**
      * ------------------------使用PULL解析XML-----------------------

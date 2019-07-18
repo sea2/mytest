@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.bm.library.PhotoView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
@@ -38,7 +39,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import uk.co.senab.photoview.PhotoView;
 
 public class ViewPageActivity extends AppCompatActivity {
 

@@ -42,11 +42,12 @@ public class IntentUtils {
 
     /**
      * 获取安装App(支持6.0)的意图
-     *
+     *      <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
      * @param file 文件
      * @return intent
      */
     public static Intent getInstallAppIntent(File file) {
+
         if (file == null) return null;
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

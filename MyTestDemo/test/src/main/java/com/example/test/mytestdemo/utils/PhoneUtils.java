@@ -1,25 +1,43 @@
 package com.example.test.mytestdemo.utils;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.SystemClock;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.util.Xml;
 
+import com.example.test.mytestdemo.application.MyApplication;
+
 import org.xmlpull.v1.XmlSerializer;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.Writer;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * <pre>
@@ -51,8 +69,24 @@ public class PhoneUtils {
      *
      * @return IMEI码
      */
-    @SuppressLint("HardwareIds")
     public static String getIMEI() {
+        TelephonyManager tm = (TelephonyManager) Utils.getContext().getSystemService(Context.TELEPHONY_SERVICE);
+        if (ActivityCompat.checkSelfPermission(MyApplication.getInstance(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            return "";
+        }
+        return tm != null ? tm.getDeviceId() : null;
+    }
+
+    /**
+     * 获取DeviceId码
+     * <p>需添加权限 {@code <uses-permission android:name="android.permission.READ_PHONE_STATE"/>}</p>
+     *
+     * @return IMEI码
+     */
+    public static String getDeviceId() {
+        if (ActivityCompat.checkSelfPermission(MyApplication.getInstance(), Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            return "";
+        }
         TelephonyManager tm = (TelephonyManager) Utils.getContext().getSystemService(Context.TELEPHONY_SERVICE);
         return tm != null ? tm.getDeviceId() : null;
     }
@@ -392,4 +426,61 @@ public class PhoneUtils {
             e.printStackTrace();
         }
     }
+
+
+    public static String getMacAddress() {
+        String macAddress = null;
+        StringBuffer buf = new StringBuffer();
+        NetworkInterface networkInterface = null;
+        try {
+            networkInterface = NetworkInterface.getByName("eth1");
+            if (networkInterface == null) {
+                networkInterface = NetworkInterface.getByName("wlan0");
+            }
+            if (networkInterface == null) {
+                return "02:00:00:00:00:02";
+            }
+            byte[] addr = networkInterface.getHardwareAddress();
+            for (byte b : addr) {
+                buf.append(String.format("%02X:", b));
+            }
+            if (buf.length() > 0) {
+                buf.deleteCharAt(buf.length() - 1);
+            }
+            macAddress = buf.toString();
+        } catch (SocketException e) {
+            e.printStackTrace();
+            return "02:00:00:00:00:02";
+        }
+        return macAddress;
+    }
+
+    public static String getANDROID_ID() {
+        return Settings.System.getString(MyApplication.getInstance().getContentResolver(), Settings.System.ANDROID_ID);
+    }
+
+
+    /**
+     * 获取设备唯一标识符
+     *
+     * @return
+     */
+    public static String getMyDeviceId() {
+        //读取保存的在sd卡中的唯一标识符
+        String deviceId = getDeviceId();
+        if (StringUtils.isEmpty(deviceId)) {
+            deviceId = getMacAddress();
+        }
+
+        if (StringUtils.isEmpty(deviceId)) {
+            UUID uuid = UUID.randomUUID();
+            deviceId = uuid.toString();
+        }
+        if (StringUtils.isEmpty(deviceId)) {
+            deviceId = Settings.System.getString(MyApplication.getInstance().getContentResolver(), Settings.System.ANDROID_ID);
+        }
+        return deviceId;
+    }
+
+
 }

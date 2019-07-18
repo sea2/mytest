@@ -13,6 +13,9 @@ android {
         multiDexEnabled true
         manifestPlaceholders << [APP_ICON: "@mipmap/ic_launcher"]
         manifestPlaceholders << [APP_NAME: "我的测试-TEST"]
+        jackOptions {
+            enabled true
+        }
     }
 
     signingConfigs {
@@ -67,6 +70,11 @@ android {
     }
 
 
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -86,15 +94,12 @@ dependencies {
     compile 'com.trello:rxlifecycle-components:0.3.0'
     compile 'org.reactivestreams:reactive-streams:1.0.0'
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta3'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     testCompile 'junit:junit:4.12'
     compile 'com.orhanobut:logger:1.15'
     compile 'com.squareup.okhttp3:okhttp:3.12.0'
     compile 'com.google.code.gson:gson:2.3.1'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     compile 'com.android.support:support-v4:25.3.1'
 }
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'

@@ -162,7 +162,6 @@ public class AddPhotoActivity extends AppCompatActivity {
                 Toast.makeText(AddPhotoActivity.this, "Permission Denied", Toast.LENGTH_SHORT).show();
             }
         }
-
     }
 
     @Override
@@ -286,7 +285,7 @@ public class AddPhotoActivity extends AppCompatActivity {
 
 
     /**
-     * 通过uri和selection来获取真实的图片路径,从相册获取图片时要用
+     * 通过uri和selection来获取真实的图片路径,从相册获取图片时要用doCropPhoto
      */
     private String getImagePath(Uri uri, String selection) {
         String path = null;

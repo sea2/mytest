@@ -8,6 +8,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/MaterialDesignDemo" />
+            <option value="$PROJECT_DIR$/junittest" />
             <option value="$PROJECT_DIR$/module" />
             <option value="$PROJECT_DIR$/module/RecyclerViewHelper" />
             <option value="$PROJECT_DIR$/module/contentprovider" />

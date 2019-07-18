@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <meta-data
-        android:name="com.xcm91.relation.glide.MyGlideModule"
+        android:name="com.xcm91.relation.glide.MyAppGlideModule"
         android:value="GlideModule"/>
     <application
         android:name=".MyApplication"
@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="com.spidertool.Login"
+            android:name=".GlideTestActivity"
             android:windowSoftInputMode="adjustPan|stateVisible">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

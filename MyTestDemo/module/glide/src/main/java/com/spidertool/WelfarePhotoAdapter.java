@@ -51,6 +51,9 @@ public class WelfarePhotoAdapter extends BaseQuickAdapter<ImgInfo> {
                 mContext.startActivity(it);
             }
         });
-
     }
+
+
+
+
 }

@@ -66,7 +66,7 @@ public class RecyclerViewHomeActivity extends ActionBarActivity {
     }
 
     private void initEvent() {
-        mAdapter.setOnItemClickLitener(new RecyclerViewHomeAdapter.OnItemClickLitener() {
+        mAdapter.setOnItemClickListener(new RecyclerViewHomeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Toast.makeText(RecyclerViewHomeActivity.this, position + " click", Toast.LENGTH_SHORT).show();

@@ -180,7 +180,6 @@ public class OkHttpUtil {
     }
 
 
-
     /**
      * 参数一：请求Url
      * 参数二：保存文件的路径名
@@ -220,12 +219,18 @@ public class OkHttpUtil {
                                 sum += len;
                                 fos.write(buf, 0, len);
                                 final long finalSum = sum;
-                                if (mDownLoadListener != null) mDownLoadListener.inProgress(finalSum * 1.0f / total, total);
+                                handler.post(() -> {
+                                    if (mDownLoadListener != null) mDownLoadListener.inProgress(finalSum * 1.0f / total, total);
+                                });
                             }
                             fos.flush();
-                            if (mDownLoadListener != null) mDownLoadListener.onResponse(file);
+                            handler.post(() -> {
+                                if (mDownLoadListener != null) mDownLoadListener.onResponse(file);
+                            });
                         }
-                        if (mDownLoadListener != null) mDownLoadListener.onResponse(null);
+                        handler.post(() -> {
+                            if (mDownLoadListener != null) mDownLoadListener.onResponse(null);
+                        });
                     } finally {
                         try {
                             if (is != null) is.close();

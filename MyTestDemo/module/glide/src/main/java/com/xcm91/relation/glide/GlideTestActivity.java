@@ -80,6 +80,28 @@ public class GlideTestActivity extends Activity {
             }
         });
 
+        //占位图
+        GlideApp.with(this)
+                .load("https://vrtest-10070225.image.myqcloud.com/app/images/1562059005156_49.jpg")
+                .placeholder(R.drawable.ic_launcher)
+                .error(R.drawable.ic_launcher)
+                .into(iv1);
+        //监听
+        Glide.with(this).load("https://vrtest-10070225.image.myqcloud.com/app/images/1562059005156_49.jpg").listener(new RequestListener<Drawable>() {
+            @Override
+            public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
+                return b;
+            }
+
+            @Override
+            public boolean onResourceReady(Drawable drawable, Object o, Target<Drawable> target, DataSource dataSource, boolean b) {
+                iv1.setImageDrawable(drawable);
+                Log.e("time", "完成-----------");
+                return b;
+            }
+        }).into(iv1);
+        Log.e("time", "后----------");
+
 
         String url = "";
 
@@ -98,8 +120,6 @@ public class GlideTestActivity extends Activity {
                 .addHeader("Accept-Charset", "  GB2312,utf-8;q=0.7,*;q=0.7")
                 .addHeader("Connection", "keep-alive")
                 .build());
-        Glide.with(this).load(glideUrl).into(iv1);
-
 
         // 加载本地图片
         File file = new File(getExternalCacheDir() + "/image.jpg");
@@ -111,19 +131,33 @@ public class GlideTestActivity extends Activity {
         Uri imageUri;
         // 加载网络  GlideUrl 或者String url;
 
-        with(this).
+        Glide.with(this).
                 load(R.drawable.widget_bar_user_press).
                 listener(new RequestListener<Drawable>() {
                     @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                    public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
                         return false;
                     }
 
                     @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                    public boolean onResourceReady(Drawable drawable, Object o, Target<Drawable> target, DataSource dataSource, boolean b) {
                         return false;
                     }
                 }).into(iv2);
+
+
+        SimpleTarget<Drawable> simpleTarget = new SimpleTarget<Drawable>() {
+
+            @Override
+            public void onResourceReady(@NonNull Drawable drawable, @Nullable Transition<? super Drawable> transition) {
+
+            }
+        };
+        Glide.with(this)
+                .load("http://cn.bing.com/az/hprichbg/rb/TOAD_ZH-CN7336795473_1920x1080.jpg")
+                .into(simpleTarget);
+
+
         RequestOptions options = new RequestOptions()
                 .placeholder(R.drawable.actionbar_add_icon)                //加载成功之前占位图
                 .error(R.drawable.actionbar_add_icon)                    //加载错误之后的错误图

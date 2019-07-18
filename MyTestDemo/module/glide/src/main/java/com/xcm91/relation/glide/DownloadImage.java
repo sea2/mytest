@@ -5,9 +5,6 @@ import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.Target;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -54,17 +51,7 @@ public class DownloadImage implements Runnable {
         Bitmap bitmap = null;
         FileOutputStream fos = null;
         try {
-            if (width == 0) {
-                width = Target.SIZE_ORIGINAL;
-            }
-            if (height == 0) {
-                height = Target.SIZE_ORIGINAL;
-            }
-            bitmap = Glide.with(context)
-                    .load(url)
-                    .asBitmap()
-                    .into(width, height)
-                    .get();
+
             if (bitmap != null) {
                 //上级文件夹不存在则创建
                 if (!mFile.getParentFile().exists()) {

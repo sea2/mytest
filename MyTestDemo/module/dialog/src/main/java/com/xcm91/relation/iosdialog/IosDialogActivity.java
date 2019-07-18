@@ -27,8 +27,8 @@ public class IosDialogActivity extends Activity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       /* setContentView(R.layout.activity_main);
-        initView();*/
+        setContentView(R.layout.activity_main);
+        initView();
     }
 
     private void initView() {

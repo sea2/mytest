@@ -6,8 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -20,16 +18,16 @@ class RecyclerViewHomeAdapter extends RecyclerView.Adapter<RecyclerViewHomeAdapt
     private List<String> mDatas;
     private LayoutInflater mInflater;
 
-    public interface OnItemClickLitener {
+    public interface OnItemClickListener {
         void onItemClick(View view, int position);
 
         void onItemLongClick(View view, int position);
     }
 
-    private OnItemClickLitener mOnItemClickLitener;
+    private OnItemClickListener mOnItemClickListener;
 
-    public void setOnItemClickLitener(OnItemClickLitener mOnItemClickLitener) {
-        this.mOnItemClickLitener = mOnItemClickLitener;
+    public void setOnItemClickListener(OnItemClickListener mOnItemClickLitener) {
+        this.mOnItemClickListener = mOnItemClickLitener;
     }
 
 
@@ -40,8 +38,7 @@ class RecyclerViewHomeAdapter extends RecyclerView.Adapter<RecyclerViewHomeAdapt
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        MyViewHolder holder = new MyViewHolder(mInflater.inflate(R.layout.item_recycle_home, parent, false));
-        return holder;
+        return new MyViewHolder(mInflater.inflate(R.layout.item_recycle_home, parent, false));
     }
 
     @Override
@@ -49,23 +46,17 @@ class RecyclerViewHomeAdapter extends RecyclerView.Adapter<RecyclerViewHomeAdapt
         holder.tv.setText(mDatas.get(position));
 
         // 如果设置了回调，则设置点击事件
-        if (mOnItemClickLitener != null) {
-            holder.itemView.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = holder.getLayoutPosition();
-                    mOnItemClickLitener.onItemClick(holder.itemView, pos);
-                }
+        if (mOnItemClickListener != null) {
+            holder.itemView.setOnClickListener(v -> {
+                int pos = holder.getLayoutPosition();
+                mOnItemClickListener.onItemClick(holder.itemView, pos);
             });
 
-            holder.itemView.setOnLongClickListener(new OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    int pos = holder.getLayoutPosition();
-                    mOnItemClickLitener.onItemLongClick(holder.itemView, pos);
-                    removeData(pos);
-                    return false;
-                }
+            holder.itemView.setOnLongClickListener(v -> {
+                int pos = holder.getLayoutPosition();
+                mOnItemClickListener.onItemLongClick(holder.itemView, pos);
+                removeData(pos);
+                return false;
             });
         }
     }

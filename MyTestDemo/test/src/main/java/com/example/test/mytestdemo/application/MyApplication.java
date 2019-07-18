@@ -12,9 +12,9 @@ import android.os.Bundle;
 import android.support.multidex.MultiDex;
 
 import com.example.test.mytestdemo.notifications.NotificationUtil;
-import com.orhanobut.logger.Logger;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 
 public class MyApplication extends Application {
@@ -37,13 +37,11 @@ public class MyApplication extends Application {
 
     @Override
     public void onCreate() {
-        Logger.i("time-----");
         super.onCreate();
         appContext = this;
         t1 = System.currentTimeMillis(); // 取得当前时间
         CrashHandler crashHandler = CrashHandler.getInstance();
         crashHandler.init(getApplicationContext());
-        Logger.i("time-----");
 
 
         listenForForeground();
@@ -117,18 +115,21 @@ public class MyApplication extends Application {
      * 判断当前应用程序处于前台还是后台
      */
     public boolean isApplicationBroughtToBackground(Activity activity) {
-        ActivityManager am = (ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE);
-        if (am != null) {
-            List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
-            if (!tasks.isEmpty()) {
-                ComponentName topActivity = tasks.get(0).topActivity;
-                if (!topActivity.getPackageName().equals(activity.getPackageName())) {
-                    notifyBackground(activity);
-                    return true;
+        try {
+            ActivityManager am = (ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE);
+            if (am != null) {
+                List<ActivityManager.RunningTaskInfo> tasks = am.getRunningTasks(1);
+                if (!tasks.isEmpty()) {
+                    ComponentName topActivity = tasks.get(0).topActivity;
+                    if (!topActivity.getPackageName().equals(activity.getPackageName())) {
+                        notifyBackground(activity);
+                        return true;
+                    }
                 }
             }
+        } catch (Exception e) {
+            return false;
         }
-        return false;
     }
 
     public boolean isBackground() {
