@@ -36,7 +36,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import static com.bumptech.glide.Glide.with;
 import static com.xcm91.relation.glide.GlideUtil.getFileSize;
 
 
@@ -86,21 +85,6 @@ public class GlideTestActivity extends Activity {
                 .placeholder(R.drawable.ic_launcher)
                 .error(R.drawable.ic_launcher)
                 .into(iv1);
-        //监听
-        Glide.with(this).load("https://vrtest-10070225.image.myqcloud.com/app/images/1562059005156_49.jpg").listener(new RequestListener<Drawable>() {
-            @Override
-            public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Drawable> target, boolean b) {
-                return b;
-            }
-
-            @Override
-            public boolean onResourceReady(Drawable drawable, Object o, Target<Drawable> target, DataSource dataSource, boolean b) {
-                iv1.setImageDrawable(drawable);
-                Log.e("time", "完成-----------");
-                return b;
-            }
-        }).into(iv1);
-        Log.e("time", "后----------");
 
 
         String url = "";
@@ -120,6 +104,14 @@ public class GlideTestActivity extends Activity {
                 .addHeader("Accept-Charset", "  GB2312,utf-8;q=0.7,*;q=0.7")
                 .addHeader("Connection", "keep-alive")
                 .build());
+
+
+        //指定图片格式
+        GlideApp.with(this)
+                .asBitmap()
+                .load(url)
+                .into(iv2);
+
 
         // 加载本地图片
         File file = new File(getExternalCacheDir() + "/image.jpg");
@@ -145,6 +137,15 @@ public class GlideTestActivity extends Activity {
                     }
                 }).into(iv2);
 
+        //监听加载结果
+
+
+        Glide.with(this).load("https://vrtest-10070225.image.myqcloud.com/app/images/1562059005156_49.jpg").into(new SimpleTarget<Drawable>() {
+            @Override
+            public void onResourceReady(@NonNull Drawable drawable, @Nullable Transition<? super Drawable> transition) {
+
+            }
+        });
 
         SimpleTarget<Drawable> simpleTarget = new SimpleTarget<Drawable>() {
 
@@ -174,20 +175,7 @@ public class GlideTestActivity extends Activity {
                 //.diskCacheStrategy(DiskCacheStrategy.DATA)        //只缓存原来分辨率的图片
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE);    //只缓存最终的图片
         // 设置加载中以及加载失败图片
-        with(this).
-                load(url2).apply(options).
-                into(iv3);
-
-
-        //加载监听
-        with(this).
-                load(url).
-                into(new SimpleTarget<Drawable>() {
-                    @Override
-                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-
-                    }
-                });
+        Glide.with(this).load(url2).apply(options).into(iv3);
 
 
         for (int i = 1; i <= 5; i++) {
@@ -233,30 +221,32 @@ public class GlideTestActivity extends Activity {
                     }
 
                 });
-        
-        
-        
-        
-   /* 4.7.1版本    RequestOptions options = new RequestOptions()
-        .placeholder(R.mipmap.ic_launcher)				//加载成功之前占位图
-        .error(R.mipmap.ic_launcher)					//加载错误之后的错误图
-        .override(400,400)								//指定图片的尺寸
-        //指定图片的缩放类型为fitCenter （等比例缩放图片，宽或者是高等于ImageView的宽或者是高。）
-        .fitCenter()
-        //指定图片的缩放类型为centerCrop （等比例缩放图片，直到图片的狂高都大于等于ImageView的宽度，然后截取中间的显示。）
-        .centerCrop()
-        .circleCrop()//指定图片的缩放类型为centerCrop （圆形）
-        .skipMemoryCache(true)							//跳过内存缓存
-        .diskCacheStrategy(DiskCacheStrategy.ALL)		//缓存所有版本的图像
-        .diskCacheStrategy(DiskCacheStrategy.NONE)		//跳过磁盘缓存
-        .diskCacheStrategy(DiskCacheStrategy.DATA)		//只缓存原来分辨率的图片
-        .diskCacheStrategy(DiskCacheStrategy.RESOURCE);	//只缓存最终的图片
+
+
+        RequestOptions options2 = new RequestOptions()
+                .placeholder(R.drawable.ic_launcher)                //加载成功之前占位图
+                .error(R.drawable.ic_launcher)                    //加载错误之后的错误图
+                .override(400, 400)                                //指定图片的尺寸
+                //指定图片的缩放类型为fitCenter （等比例缩放图片，宽或者是高等于ImageView的宽或者是高。）
+                .fitCenter()
+                //指定图片的缩放类型为centerCrop （等比例缩放图片，直到图片的狂高都大于等于ImageView的宽度，然后截取中间的显示。）
+                .centerCrop()
+                .circleCrop()//指定图片的缩放类型为centerCrop （圆形）
+                .skipMemoryCache(true)                            //跳过内存缓存
+                .diskCacheStrategy(DiskCacheStrategy.ALL)        //缓存所有版本的图像
+                .diskCacheStrategy(DiskCacheStrategy.NONE)        //跳过磁盘缓存
+                .diskCacheStrategy(DiskCacheStrategy.DATA)        //只缓存原来分辨率的图片
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE);    //只缓存最终的图片
 
         Glide.with(this)
-        .load(url)
-        .apply(options)
-        .into(imageView);
-*/
+                .load(url)
+                .apply(options)
+                .into(iv6);
+
+        Glide.with(this).load(url).preload();
+
+
+
 
     }
 
@@ -271,6 +261,7 @@ public class GlideTestActivity extends Activity {
     }
 
 
+    
     /**
      * 获取指定url路径
      */
@@ -317,34 +308,7 @@ public class GlideTestActivity extends Activity {
     }
 
 
-    /**
-     * 获取指定url路径
-     */
-    private class getBitmapAsyncTask extends AsyncTask<String, Void, Bitmap> {
 
-        private final Context context;
-
-        public getBitmapAsyncTask(Context context) {
-            this.context = context;
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... params) {
-            String imgUrl = params[0];
-            try {
-                return null;
-            } catch (Exception ex) {
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            if (bitmap == null) {
-                return;
-            }
-        }
-    }
 
 
     private void downImg(String imgUrl) {
@@ -397,33 +361,6 @@ public class GlideTestActivity extends Activity {
             }
         }
     }
-
-
-  /*  3.7.0
-   http://blog.csdn.net/wbwjx/article/details/51239627
-   with():指定了声明周期
-    load():加载资源，String/Uri/File/Integer/URL/byte[]/T,或者 loadFromMediaStore(Uri uri)
-    placeholder(resourceId/drawable)： 设置资源加载过程中的占位Drawable。
-    error()：load失败时显示的Drawable。
-    crossFade()/crossFade(int duration)：imageView改变时的动画，version 3.6.1后默认开启300毫秒
-    dontAnimate()：移除所有的动画。
-    override() ：调整图片大小  Target.SIZE_ORIGINAL默认尺寸
-    centerCrop()：图片裁剪，ImageView 可能会完全填充，但图像可能不会完整显示。
-    fitCenter()： 图像裁剪，图像将会完全显示，但可能不会填满整个 ImageView。
-    animate(): 指定加载动画。
-    transform():图片转换。
-    bitmapTransform(): bitmap转换，不可以和(centerCrop() 或 fitCenter())共用。
-    priority(Priority priority):当前线程的优先级,Priority.IMMEDIATE，Priority.HIGH，Priority.NORMAL(default)，Priority.LOW
-    thumbnail(): 缩略图.
-            listener():异常监听
-
-    preload(int width, int height): 预加载resource到缓存中（单位为pixel）
-    Glide.with(this).load("https://www.baidu.com/img/bd_logo1.png")     .preload();
-
-    fallback(Drawable drawable):设置model为空时显示的Drawable。
-    using() ：为单个的请求指定一个 model
-    asGif()：Gif 检查，如果是图片且加了判断，则会显示error占位图，否则会显示图片
-    asBitmap()：bitmap转化，如果是gif，则会显示第一帧*/
 
 
 }

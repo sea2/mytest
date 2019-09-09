@@ -82,7 +82,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-        payMobile();
+
+//        payMobile();
 
         Log.e("2344", "12");
     }
