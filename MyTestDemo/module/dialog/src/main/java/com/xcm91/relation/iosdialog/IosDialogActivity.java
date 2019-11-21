@@ -2,6 +2,7 @@ package com.xcm91.relation.iosdialog;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -29,6 +30,10 @@ public class IosDialogActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        String className = Thread.currentThread().getStackTrace()[2].getClassName();//调用的类名
+        String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();//调用的方法名
+        int lineNumber = Thread.currentThread().getStackTrace()[2].getLineNumber();//调用的行数
+        Log.i(TAG, className + "-" + methodName + "-" + lineNumber);
     }
 
     private void initView() {
@@ -195,5 +200,52 @@ public class IosDialogActivity extends Activity implements OnClickListener {
 
 
 
+    }
+
+    public String TAG = this.getClass().getSimpleName();
+    @Override
+    protected void onStart() {
+        super.onStart();
+        String className = Thread.currentThread().getStackTrace()[2].getClassName();//调用的类名
+        String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();//调用的方法名
+        int lineNumber = Thread.currentThread().getStackTrace()[2].getLineNumber();//调用的行数
+        Log.i(TAG, className + "-" + methodName + "-" + lineNumber);
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        String className = Thread.currentThread().getStackTrace()[2].getClassName();//调用的类名
+        String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();//调用的方法名
+        int lineNumber = Thread.currentThread().getStackTrace()[2].getLineNumber();//调用的行数
+        Log.i(TAG, className + "-" + methodName + "-" + lineNumber);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        String className = Thread.currentThread().getStackTrace()[2].getClassName();//调用的类名
+        String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();//调用的方法名
+        int lineNumber = Thread.currentThread().getStackTrace()[2].getLineNumber();//调用的行数
+        Log.i(TAG, className + "-" + methodName + "-" + lineNumber);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        String className = Thread.currentThread().getStackTrace()[2].getClassName();//调用的类名
+        String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();//调用的方法名
+        int lineNumber = Thread.currentThread().getStackTrace()[2].getLineNumber();//调用的行数
+        Log.i(TAG, className + "-" + methodName + "-" + lineNumber);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String className = Thread.currentThread().getStackTrace()[2].getClassName();//调用的类名
+        String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();//调用的方法名
+        int lineNumber = Thread.currentThread().getStackTrace()[2].getLineNumber();//调用的行数
+        Log.i(TAG, className + "-" + methodName + "-" + lineNumber);
     }
 }

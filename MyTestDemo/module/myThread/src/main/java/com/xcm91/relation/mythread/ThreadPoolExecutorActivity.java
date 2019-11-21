@@ -2,14 +2,15 @@ package com.xcm91.relation.mythread;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.View;
 
 import com.xcm91.relation.mythread.utils.ThreadPoolManager;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class ThreadPoolExecutorActivity extends Activity {
@@ -94,11 +95,10 @@ public class ThreadPoolExecutorActivity extends Activity {
 
 
 
-
     }
 
 
-    public void stopThreadPool(ExecutorService threadPool, long timeout, TimeUnit unit) throws InterruptedException {
+    public void stopThreadPool(ExecutorService threadPool, long timeout, TimeUnit unit)  {
         try {
             threadPool.shutdown();
             // (所有的任务都结束的时候，返回TRUE)
@@ -116,6 +116,34 @@ public class ThreadPoolExecutorActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
+    ScheduledExecutorService executorService;
+
+    public void open(View view) {
+        beginExecutorScan();
+    }
+
+
+    private void beginExecutorScan() {
+        //先取消上一个任务，防止重复的任务
+        endExecutorScan();
+        executorService = Executors.newSingleThreadScheduledExecutor();
+            executorService.scheduleAtFixedRate(new Runnable() {
+                @Override
+                public void run() {
+                    Log.e("GMSDK", "getName" + Thread.currentThread().getName());
+
+                }
+            }, 0,5, TimeUnit.SECONDS);
+    }
+
+    private void endExecutorScan() {
+        if (executorService != null) {
+            executorService.shutdownNow();
+            executorService = null;//非单例模式，置空防止重复的任务
+        }
+    }
+
 
 
 }

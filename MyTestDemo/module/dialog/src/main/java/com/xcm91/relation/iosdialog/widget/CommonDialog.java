@@ -2,8 +2,10 @@ package com.xcm91.relation.iosdialog.widget;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -22,14 +24,14 @@ public class CommonDialog extends Dialog {
     private View mView;
     private TextView tvTitle = null;// 标题
     private TextView tvContent = null;// 内容
-
+    private String TAG = this.getClass().getSimpleName();
 
     private Button btnConfirm = null;// PositiveButton
     private Button btnCancel = null;// NegativeButton
 
     public CommonDialog(Context context) {
         super(context, R.style.commonDialog);
-        setCanceledOnTouchOutside(false);
+        setCanceledOnTouchOutside(true);
         setCancelable(true);
         mView = getLayoutInflater().inflate(R.layout.dialog_common_for_ios, null);
         setContentView(mView);
@@ -181,12 +183,64 @@ public class CommonDialog extends Dialog {
 
     @Override
     public void show() {
+        String className = Thread.currentThread().getStackTrace()[2].getClassName();//调用的类名
+        String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();//调用的方法名
+        int lineNumber = Thread.currentThread().getStackTrace()[2].getLineNumber();//调用的行数
+        Log.i(TAG, className + "-" + methodName + "-" + lineNumber);
         if (getWindow() != null) {
             WindowManager.LayoutParams p = getWindow().getAttributes(); // 获取对话框当前的参数值
-            p.width = (int) ( ScreenUtil.getInstance(getContext()).getWidth() * 0.85); // 宽度设置为屏幕的0.9
+            p.width = (int) (ScreenUtil.getInstance(getContext()).getWidth() * 0.85); // 宽度设置为屏幕的0.9
             this.getWindow().setAttributes(p);
         }
         super.show();
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        String className = Thread.currentThread().getStackTrace()[2].getClassName();//调用的类名
+        String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();//调用的方法名
+        int lineNumber = Thread.currentThread().getStackTrace()[2].getLineNumber();//调用的行数
+        Log.i(TAG, className + "-" + methodName + "-" + lineNumber);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        String className = Thread.currentThread().getStackTrace()[2].getClassName();//调用的类名
+        String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();//调用的方法名
+        int lineNumber = Thread.currentThread().getStackTrace()[2].getLineNumber();//调用的行数
+        Log.i(TAG, className + "-" + methodName + "-" + lineNumber);
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        String className = Thread.currentThread().getStackTrace()[2].getClassName();//调用的类名
+        String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();//调用的方法名
+        int lineNumber = Thread.currentThread().getStackTrace()[2].getLineNumber();//调用的行数
+        Log.i(TAG, className + "-" + methodName + "-" + lineNumber);
+    }
+
+    @Override
+    public void cancel() {
+        String className = Thread.currentThread().getStackTrace()[2].getClassName();//调用的类名
+        String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();//调用的方法名
+        int lineNumber = Thread.currentThread().getStackTrace()[2].getLineNumber();//调用的行数
+        Log.i(TAG, className + "-" + methodName + "-" + lineNumber);
+        super.cancel();
+
+    }
+
+
+    @Override
+    public void dismiss() {
+        super.dismiss();
+        String className = Thread.currentThread().getStackTrace()[2].getClassName();//调用的类名
+        String methodName = Thread.currentThread().getStackTrace()[2].getMethodName();//调用的方法名
+        int lineNumber = Thread.currentThread().getStackTrace()[2].getLineNumber();//调用的行数
+        Log.i(TAG, className + "-" + methodName + "-" + lineNumber);
+    }
 }
