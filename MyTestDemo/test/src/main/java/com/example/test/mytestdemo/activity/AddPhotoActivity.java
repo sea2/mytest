@@ -51,7 +51,11 @@ public class AddPhotoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_add_photo);
         mIvPhoto = (ImageView) findViewById(R.id.id_iv);
 
-
+        //创建目录
+        File fileDirector = new File(Environment.getExternalStorageDirectory() + "/my_photo/");
+        if (!fileDirector.exists()) {
+            fileDirector.mkdirs();
+        }
     }
 
     public void installApk(View view) {

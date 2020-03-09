@@ -35,7 +35,7 @@ public class XmlUtils {
 
 
     private String getValue(String nodeName, String attrsName) {
-        if (configMap == null || configMap.size() <= 0) configMap = readXML2Map();
+//        if (configMap == null || configMap.size() <= 0) configMap = readXML2Map();
         if (nodeName != null && attrsName != null)
             return configMap.get(nodeName.trim().concat("_").concat(attrsName.trim()));
         else return "";

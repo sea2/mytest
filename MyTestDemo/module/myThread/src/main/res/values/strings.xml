@@ -1,3 +1,100 @@
-<resources>
-    <string name="app_name">My Library</string>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <string name="facebook_app_id">434430780481846</string>
+    <string name="fb_login_protocol_scheme">fb434430780481846</string>
+
+    <string name="gm_login_google">Google</string>
+    <string name="gm_login_line">LINE</string>
+
+
+
+
+    <string name="gm_login_account_yinsixieyi_ko_1">로그인 하면</string>
+    <string name="gm_login_account_yinsixieyi_ko_2">&lt;이용약관&gt;</string>
+    <string name="gm_login_account_yinsixieyi_ko_3">,</string>
+    <string name="gm_login_account_yinsixieyi_ko_4">&lt;개인 정보 처리 방침&gt;</string>
+    <string name="gm_login_account_yinsixieyi_ko_5">및&lt;홍보성 야간 알림 수신&gt;에 동의합니다.</string>
+
+
+    <string name="app_name">"Taoists"</string>
+    <string name="gm_paytype_title">"Payment Method"</string>
+    <string name="gm_change_acount">"Switch account"</string>
+    <string name="gm_choose_logintype">"Log in with"</string>
+    <string name="gm_order_creat_failed">"Order creation failed"</string>
+    <string name="gm_login_fast">"GUEST"</string>
+    <string name="gm_login_fast_tips">"With Guest Mode, your game data will be deleted if you uninstalling or reinstalling the game. Are you sure to login as guest?"</string>
+    <string name="gm_login_cancel">"Cancel"</string>
+    <string name="gm_exit_tips">"Notification"</string>
+    <string name="gm_exit_cancel">"Cancel"</string>
+    <string name="gm_exit_yes">"Quit"</string>
+    <string name="gm_exit_info">"Are you sure you want to exit the game?"</string>
+    <string name="gm_login_loading">"Loading..."</string>
+    <string name="gm_cant_pay_title">"Unable to pay"</string>
+    <string name="gm_pay_coming">"The item is being shipped right now"</string>
+    <string name="gm_cant_pay_info">"Go to Set app and allow Google Play store to access the Notification "</string>
+    <string name="gm_no_facebook">"Please install the Facebook app first for further action."</string>
+    <string name="gm_give_app_permission">"Please provide the APP with required permissions for all features to function correctly!"</string>
+    <string name="gm_app_need_permission">"Dear user,
+
+ some of the features require your permission. Please allow the APP to access the following permissions:"</string>
+    <string name="gm_app_send_permission">"Please authorize from [APP info -&gt; Permissions]!"</string>
+    <string name="gm_app_phone_permission">"Telephone"</string>
+    <string name="gm_app_file_permission">"Files"</string>
+    <string name="login_failed">"Network request failed"</string>
+    <string name="gm_login_in">"Log In"</string>
+    <string name="gm_account_reg">"Log In"</string>
+    <string name="gm_enter_account">"Account"</string>
+    <string name="gm_enter_pwd">"Password"</string>
+    <string name="gm_enter_email">"Email"</string>
+    <string name="gm_hasaccount_clickhere">"Already have an account?"</string>
+    <string name="gm_other_logintype">"Other ways to login"</string>
+    <string name="gm_account_bind">"Bind Account"</string>
+    <string name="gm_enter_bind">"Confirm to bind"</string>
+    <string name="gm_email_must_not_be_empty">"Email must not be empty"</string>
+    <string name="gm_account_reg_bind">"Account register&amp;bind"</string>
+    <string name="gm_reg">"Register"</string>
+    <string name="gm_pwd_again">"Please confirm the passwordn"</string>
+    <string name="gm_account_not_empty">"Username can't be empty"</string>
+    <string name="gm_pwd_not_empty">"Password must not be empty"</string>
+    <string name="gm_bind_success">"Bind successfully"</string>
+    <string name="gm_two_pwd_same">"The passwords entered must be the same."</string>
+    <string name="gm_email_must_currect">"Incorrect email format"</string>
+    <string name="gm_login_lastlogin">"Last Login"</string>
+    <string name="gm_login_delete_account_confirm">"Confirm"</string>
+    <string name="gm_bind_acount">"Bind Acount"</string>
+    <string name="gm_close">"Close"</string>
+    <string name="gm_login_delete_account_succ">"Delete successfully"</string>
+    <string name="gm_pingjia_info">"Do you have any suggestions for us?"</string>
+    <string name="gm_pingjia_like">"Like"</string>
+    <string name="gm_pingjia_dislike">"Dislike"</string>
+    <string name="gm_code_not_be_empty">"Verification code can’t be empty"</string>
+    <string name="gm_pwd_must_be_same">"Password entered must be the same."</string>
+    <string name="gm_account_enter_code">"Enter Verification Code"</string>
+    <string name="gm_toast_tips_title">"Important Notice"</string>
+    <string name="gm_forgetpass_success">"Password has been reset"</string>
+    <string name="gm_forgetpass_succ_tologin">"Login Page"</string>
+    <string name="gm_account_getcode">"Send"</string>
+    <string name="gm_forget_password">"Forgot Password "</string>
+    <string name="gm_account_reg_success">"Registration complete!"</string>
+    <string name="gm_getnew_password">"Reset Password"</string>
+    <string name="gm_enter_password_again">"Confirm Password"</string>
+    <string name="gm_neterror_tryagain">"Network Error Try again"</string>
+    <string name="gm_sendcode_succ">"Verification Code has been sent"</string>
+    <string name="gm_login_delete_account">"Do you confirm to delete all information of this account？"</string>
+    <string name="gm_share_shareto">"Share to"</string>
+    <string name="gm_cs_email_choose">"Select Email"</string>
+    <string name="gm_login_cs_title">"Service Center"</string>
+    <string name="gm_cs_emailadd">"Email:"</string>
+    <string name="gm_cs_msg">"Please contact us if you have any questions! We will be glad to help !"</string>
+    <string name="gm_cs_tofacebookpage">"Public Site"</string>
+    <string name="gm_login_account_yinsixieyi">"Logging in means you have read and agreed"</string>
+    <string name="gm_login_account_yinsixieyi_agree">"Service agreement"</string>
+
+
+
+    <string name="gm_bind_type_email">Email</string>
+    <string name="gm_bind_type_bind"><![CDATA[Bind>>]]></string>
+    <string name="gm_bind_type_bound">Bound</string>
+
+    <string name="gm_login_delete_account_cancel">Cancel</string>
+    <string name="gm_cs_email_theme">仙命决</string>
 </resources>

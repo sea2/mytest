@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v4.util.ArrayMap;
-
 import android.util.Log;
 
 import com.example.test.mytestdemo.application.MyApplication;
@@ -21,7 +20,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -65,10 +63,10 @@ public class OkHttpUtil {
 
     private static OkHttpClient getOkHttpClient() {
         if (okHttpClient == null) {
-            okHttpClient = new OkHttpClient.Builder()
-                    .addInterceptor(new LoggerInterceptor("OkHttpUtil"))
-                    .connectTimeout(10, TimeUnit.SECONDS)
-                    .build();
+//            okHttpClient = new OkHttpClient.Builder()
+//                    .addInterceptor(new LoggerInterceptor("OkHttpUtil"))
+//                    .connectTimeout(10, TimeUnit.SECONDS)
+//                    .build();
         }
         return okHttpClient;
     }

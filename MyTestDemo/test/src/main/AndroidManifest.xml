@@ -49,7 +49,7 @@
             android:value="${CHANNEL_VALUE}"/>
 
         <activity
-            android:name=".activity.WelcomeActivity"
+            android:name=".activity.AddPhotoActivity"
             android:theme="@style/AppThemeBackgroundTransparent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -85,7 +85,6 @@
         <activity android:name=".broadcast.BroadcastActivity">
         </activity>
         <activity android:name=".activity.XListViewActivity"/>
-        <activity android:name=".activity.AddPhotoActivity"/>
 
         <receiver
             android:name=".broadcast.MyReceiver"

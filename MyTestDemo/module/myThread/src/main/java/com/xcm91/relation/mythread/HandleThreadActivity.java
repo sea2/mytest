@@ -76,7 +76,7 @@ public class HandleThreadActivity extends Activity {
 
         //timer循环
         timer = new Timer();
-        timer.schedule(mTimerTask, 0, 1000); // 1s后执行task,经过1s再次执行
+        timer.schedule(mTimerTask, 1000, 1000); // 1s后执行task,经过1s再次执行
 
 
         initListener();

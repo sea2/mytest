@@ -14,7 +14,6 @@ import android.support.multidex.MultiDex;
 import com.example.test.mytestdemo.notifications.NotificationUtil;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 
 public class MyApplication extends Application {
@@ -130,6 +129,7 @@ public class MyApplication extends Application {
         } catch (Exception e) {
             return false;
         }
+        return false;
     }
 
     public boolean isBackground() {
