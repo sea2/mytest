@@ -150,6 +150,8 @@ public class ViewPageActivity extends AppCompatActivity {
             this.list = lists;
         }
 
+
+
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             View view = LayoutInflater.from(ViewPageActivity.this).inflate(R.layout.zoom_image_layout, null);
@@ -157,7 +159,7 @@ public class ViewPageActivity extends AppCompatActivity {
             final Button btn_down = (Button) view.findViewById(R.id.btn_down);
             final String mImgInfo = list.get(position);
             final GlideUrl glideUrl = new GlideUrl(mImgInfo, new LazyHeaders.Builder()
-                    .addHeader("Referer", "http://www.mzitu.com")
+                    .addHeader("Referer", "https://www.mzitu.com")
                     .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:55.0) Gecko/20100101 Firefox/55.0")
                     .addHeader("Accept", "  text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
                     .addHeader("Accept-Language", "zh-cn,zh;q=0.5")
