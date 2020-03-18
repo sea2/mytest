@@ -14,7 +14,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.spidertool.KaKaActivity"></activity>
         <activity
             android:name="com.spidertool.LoginActivity"
             android:windowSoftInputMode="adjustPan|stateVisible">
@@ -25,11 +24,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.spidertool.MainAct"
-            android:launchMode="singleTask"/>
-        <activity android:name="com.spidertool.WebActivity"   android:launchMode="singleTask"/>
-        <activity android:name="com.spidertool.ViewPageActivity"   android:launchMode="singleTop"/>
-        <activity android:name="com.spidertool.KaKaViewPageActivity"   android:launchMode="singleTask"/>
+        <activity
+            android:name="com.spidertool.MainAct"
+            android:launchMode="singleTask" />
+        <activity
+            android:name="com.spidertool.KaKaActivity"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name="com.spidertool.WebActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name="com.spidertool.ViewPageActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name="com.spidertool.KaKaViewPageActivity"
+            android:launchMode="singleTask" />
     </application>
 
 </manifest>

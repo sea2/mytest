@@ -9,11 +9,13 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -118,6 +120,36 @@ public class KaKaViewPageActivity extends AppCompatActivity {
         });
 
 
+    }
+
+
+    float startDown = 0;
+    float endDown = 0;
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        int action = MotionEventCompat.getActionMasked(event);
+
+        switch (action) {
+            case (MotionEvent.ACTION_DOWN):
+                startDown = event.getRawY();
+                break;
+            case (MotionEvent.ACTION_MOVE):
+                endDown = event.getRawY();
+                float moveFloat = endDown - startDown;
+                if (moveFloat > 800) {
+                    finish();
+                    return true;
+                }
+                break;
+            case (MotionEvent.ACTION_UP):
+            case (MotionEvent.ACTION_CANCEL):
+                endDown = event.getRawY();
+                break;
+            default:
+                break;
+        }
+        return super.dispatchTouchEvent(event);
     }
 
 

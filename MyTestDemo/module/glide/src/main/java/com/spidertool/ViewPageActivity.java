@@ -9,11 +9,13 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -127,6 +129,59 @@ public class ViewPageActivity extends AppCompatActivity {
     }
 
 
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        int action = MotionEventCompat.getActionMasked(event);
+//
+//        switch (action) {
+//            case (MotionEvent.ACTION_DOWN):
+//                Log.d(DEBUG_TAG, "Action was DOWN");
+//                break;
+//            case (MotionEvent.ACTION_MOVE):
+//                Log.d(DEBUG_TAG, "Action was MOVE");
+//                break;
+//            case (MotionEvent.ACTION_UP):
+//                Log.d(DEBUG_TAG, "Action was UP");
+//                break;
+//            case (MotionEvent.ACTION_CANCEL):
+//                Log.d(DEBUG_TAG, "Action was CANCEL");
+//                break;
+//            default:
+//                break;
+//        }
+//        return true;
+//    }
+
+    float startDown = 0;
+    float endDown = 0;
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        int action = MotionEventCompat.getActionMasked(event);
+
+        switch (action) {
+            case (MotionEvent.ACTION_DOWN):
+                startDown = event.getRawY();
+                break;
+            case (MotionEvent.ACTION_MOVE):
+                endDown = event.getRawY();
+                float moveFloat = endDown - startDown;
+                if (moveFloat > 800) {
+                    finish();
+                    return true;
+                }
+                break;
+            case (MotionEvent.ACTION_UP):
+            case (MotionEvent.ACTION_CANCEL):
+                endDown = event.getRawY();
+                break;
+            default:
+                break;
+        }
+        return super.dispatchTouchEvent(event);
+    }
+
+
     Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
@@ -161,6 +216,9 @@ public class ViewPageActivity extends AppCompatActivity {
         public Object instantiateItem(ViewGroup container, int position) {
             View view = LayoutInflater.from(ViewPageActivity.this).inflate(R.layout.zoom_image_layout, null);
             PhotoView iv_photo = (PhotoView) view.findViewById(R.id.iv_photo);
+            iv_photo.enable();
+
+
             final Button btn_down = (Button) view.findViewById(R.id.btn_down);
             final String mImgInfo = list.get(position);
             final GlideUrl glideUrl = new GlideUrl(mImgInfo, new LazyHeaders.Builder()
@@ -175,7 +233,7 @@ public class ViewPageActivity extends AppCompatActivity {
             btn_down.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DownLoadImage mDownLoadImage=new  DownLoadImage(ViewPageActivity.this,glideUrl);
+                    DownLoadImage mDownLoadImage = new DownLoadImage(ViewPageActivity.this, glideUrl);
                     new Thread(mDownLoadImage).start();
                     btn_down.setVisibility(View.GONE);
                 }
@@ -219,10 +277,6 @@ public class ViewPageActivity extends AppCompatActivity {
 
 
     }
-
-
-
-
 
 
 }
