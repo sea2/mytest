@@ -21,8 +21,6 @@ import android.widget.TextView;
 
 import com.bm.library.PhotoView;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.model.GlideUrl;
-import com.bumptech.glide.load.model.LazyHeaders;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.xcm91.relation.glide.R;
@@ -39,8 +37,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-
-public class ViewPageActivity extends AppCompatActivity {
+/**
+ * Created by lhy on 2020/3/17.
+ */
+public class KaKaViewPageActivity extends AppCompatActivity {
 
     private ViewPager viewpagercontainer;
     private ProgressDialog pd;
@@ -62,32 +62,26 @@ public class ViewPageActivity extends AppCompatActivity {
             public void run() {
                 try {
                     Document doc = Jsoup.connect(url).get();
-                    Elements div = doc.select(".main-image");
-                    Elements spans = doc.select("span");
+                    Elements div = doc.select(".dede_pages");
+                    String pageNum = div.get(0).child(0).child(0).child(0).html();
 
-                    for (Element element : spans) {
-                        try {
-                            if (element.parent().attr("href").contains(url)) {
-                                String pageStr = element.text();
-                                if (page < Integer.parseInt(pageStr)) page = Integer.parseInt(pageStr);
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    Log.e("tag", "" + page);
-
-                    for (Element element : div) {
-                        String url = element.child(0).child(0).child(0).attr("src");
-                        String startUrl = url.substring(0, url.length() - 6);
-                        if (page <= 0) page = 30;
-                        for (int i = 1; i < page; i++) {
-                            if (page < 100) {
-                                if (i < 10)
-                                    list.add(startUrl + "0" + i + ".jpg");
-                                else list.add(startUrl + "" + i + ".jpg");
+                    int pageInt = Integer.parseInt(Utils.getNumbers(pageNum));
+                    for (int i = 1; i <= pageInt; i++) {
+                        String urlImg;
+                        if (i == 1) urlImg = url;
+                        else urlImg = url.replace(".html", "_" + i + ".html");
+                        Document docImg = Jsoup.connect(urlImg).get();
+                        Elements divs = docImg.select(".content");
+                        Elements imgs = divs.get(0).children();
+                        for (Element element : imgs) {
+                            try {
+                                page++;
+                                list.add(element.attr("src"));
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
                         }
+                        Log.i("tag", "" + list.toString());
                     }
 
                 } catch (IOException e) {
@@ -113,7 +107,7 @@ public class ViewPageActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 int num = position + 1;
-                int totle = page - 1;
+                int totle = page;
                 tvnum.setText(num + "/" + totle);
             }
 
@@ -134,6 +128,7 @@ public class ViewPageActivity extends AppCompatActivity {
             pd.dismiss();
             ViewPagerAdapter adapter = new ViewPagerAdapter(list);
             viewpagercontainer.setAdapter(adapter);
+            tvnum.setText(1 + "/" + page);
         }
     };
 
@@ -159,23 +154,16 @@ public class ViewPageActivity extends AppCompatActivity {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            View view = LayoutInflater.from(ViewPageActivity.this).inflate(R.layout.zoom_image_layout, null);
+            View view = LayoutInflater.from(KaKaViewPageActivity.this).inflate(R.layout.zoom_image_layout, null);
             PhotoView iv_photo = (PhotoView) view.findViewById(R.id.iv_photo);
             final Button btn_down = (Button) view.findViewById(R.id.btn_down);
             final String mImgInfo = list.get(position);
-            final GlideUrl glideUrl = new GlideUrl(mImgInfo, new LazyHeaders.Builder()
-                    .addHeader("Referer", "http://www.mzitu.com")
-                    .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:55.0) Gecko/20100101 Firefox/55.0")
-                    .addHeader("Accept", "  text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-                    .addHeader("Accept-Language", "zh-cn,zh;q=0.5")
-                    .addHeader("Accept-Charset", "  GB2312,utf-8;q=0.7,*;q=0.7")
-                    .addHeader("Connection", "keep-alive")
-                    .build());
-            Glide.with(ViewPageActivity.this).load(glideUrl).into(iv_photo);
+            iv_photo.enable();
+            Glide.with(KaKaViewPageActivity.this).load(mImgInfo).into(iv_photo);
             btn_down.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    DownLoadImage mDownLoadImage=new  DownLoadImage(ViewPageActivity.this,glideUrl);
+                    DownLoadImage mDownLoadImage = new DownLoadImage(KaKaViewPageActivity.this, mImgInfo);
                     new Thread(mDownLoadImage).start();
                     btn_down.setVisibility(View.GONE);
                 }
@@ -190,6 +178,7 @@ public class ViewPageActivity extends AppCompatActivity {
             if (list == null) return 0;
             else return list.size();
         }
+
 
         @Override
         public boolean isViewFromObject(View arg0, Object arg1) {
@@ -221,8 +210,5 @@ public class ViewPageActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
 }
+

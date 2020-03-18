@@ -5,6 +5,9 @@ import android.content.pm.ApplicationInfo;
 
 import com.xcm91.relation.glide.MyApplication;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 /**
  * <pre>
@@ -21,7 +24,15 @@ public class Utils {
     private Utils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
-
+    //截取数字
+    public static String getNumbers(String content) {
+        Pattern pattern = Pattern.compile("\\d+");
+        Matcher matcher = pattern.matcher(content);
+        while (matcher.find()) {
+            return matcher.group(0);
+        }
+        return "";
+    }
     /**
      * 初始化工具类
      *

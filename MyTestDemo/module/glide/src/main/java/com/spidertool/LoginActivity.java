@@ -9,18 +9,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 
 import com.xcm91.relation.glide.R;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private EditText etpassword;
+    private RadioGroup mRadioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         this.etpassword = (EditText) findViewById(R.id.et_password);
+        this.mRadioGroup = (RadioGroup) findViewById(R.id.rg_login);
 
         etpassword.addTextChangedListener(new TextWatcher() {
             @Override
@@ -30,10 +33,22 @@ public class Login extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String str = etpassword.getText().toString();
+                int checkId = mRadioGroup.getCheckedRadioButtonId();
                 if (str.contains("2222")) {
-                    Intent it = new Intent(Login.this, MainAct.class);
-                    startActivity(it);
-                    finish();
+                    switch (checkId) {
+                        case R.id.rb_item1:
+                            Intent it = new Intent(LoginActivity.this, MainAct.class);
+                            startActivity(it);
+                            break;
+                        case R.id.rb_item2:
+                            Intent it_kaka = new Intent(LoginActivity.this, KaKaActivity.class);
+                            startActivity(it_kaka);
+                            break;
+                        default:
+                            break;
+                    }
+
+
                 }
             }
 
@@ -57,7 +72,19 @@ public class Login extends AppCompatActivity {
             }
         }
     }
+
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (intent != null && intent.hasExtra("close") && intent.getBooleanExtra("close", false)) {
+            System.exit(0);
+            finish();
+        }
+    }
 }
+
+
 
 
 
