@@ -1,6 +1,7 @@
 package com.spidertool;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,8 +21,8 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.model.GlideUrl;
-import com.bumptech.glide.load.model.LazyHeaders;
+import com.dl7.recycler.adapter.BaseQuickAdapter;
+import com.dl7.recycler.adapter.BaseViewHolder;
 import com.dl7.recycler.helper.RecyclerViewHelper;
 import com.dl7.recycler.listener.OnRequestDataListener;
 import com.xcm91.relation.glide.R;
@@ -33,7 +34,6 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 
@@ -46,10 +46,9 @@ import java.util.List;
  *     version: 1.0
  * </pre>
  */
-public class MainAct extends AppCompatActivity {
+public class KaKaActivity extends AppCompatActivity {
 
     private List<ImgInfo> list = new ArrayList<ImgInfo>();
-    private HashSet<String> urlList = new HashSet<String>();
     private ProgressDialog pd;
     private RecyclerView rv_photo_list;
     private long mExitTime = 0;
@@ -66,7 +65,7 @@ public class MainAct extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
         this.rv_photo_list = (RecyclerView) findViewById(R.id.rv_photo_list);
-        url = "http://www.mzitu.com/";
+        url = "https://www.kaka1234.com/HTM/pic/xiuren/list_101_1.html";
         pd = new ProgressDialog(this);
         pd.setCanceledOnTouchOutside(false);
         pd.setMessage("数据初始化中...");
@@ -76,6 +75,7 @@ public class MainAct extends AppCompatActivity {
         mAdapter = new WelfarePhotoAdapter(this);
         SlideInBottomAdapter slideAdapter = new SlideInBottomAdapter(mAdapter);
         RecyclerViewHelper.initRecyclerViewG(this, rv_photo_list, slideAdapter, 2);
+        mAdapter.enableLoadMore(true);
         mAdapter.setRequestDataListener(new OnRequestDataListener() {
             @Override
             public void onLoadMore() {
@@ -89,57 +89,27 @@ public class MainAct extends AppCompatActivity {
     private void initUrlData() {
         pageNum = 1;
         page = 0;
-        urlList.clear();
         list.clear();
-        urlList.add(url);
         pd.show();
         new Thread(new Runnable() {
             @Override
             public void run() {
-                //获取页码
                 try {
-                    Document doc = Jsoup.connect(url).get();
-                    Elements a_page = doc.select(".page-numbers");
 
-                    for (Element element : a_page) {
-                        String hrefStr = element.attr("href");
-                        String pageStr = hrefStr.replace(url + "page/", "").replace("/", "");
-                        try {
-                            if (pageStr != null && !pageStr.equals("")) {
-                                if (page < Integer.parseInt(pageStr)) page = Integer.parseInt(pageStr);
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                    Document doc = Jsoup.connect(url).get();
+                    Elements divs = doc.select(".zxgx_list");
+                    Element div=  divs.get(0);
+                    Elements lis=   div.children().get(0).children();
+                    for (Element element : lis) {
+                        String hrefStr = element.child(0).attr("href");
+                        String imgStr = element.child(0).child(0).attr("src");
+                        ImgInfo mImgInfo = new ImgInfo(hrefStr, imgStr);
+                        list.add(mImgInfo);
+                        Log.i("tag", mImgInfo.toString());
                     }
-                    Log.i("MainAct_page", page + "");
-                    if (page <= 0) page = 50;
-                    for (int i = 2; i <= page; i++) {
-                        urlList.add(url + "page/" + i + "/");
-                    }
+
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
-
-                int count = 0;
-                for (String url : urlList) {
-                    count++;
-                    try {
-                        Document doc = Jsoup.connect(url).get();
-                        Elements a = doc.select(".lazy");
-                        for (Element element : a) {
-                            Element parentElement = element.parent();
-                            String hrefStr = parentElement.attr("href");
-                            String imgStr = element.attr("data-original");
-                            ImgInfo mImgInfo = new ImgInfo(hrefStr, imgStr);
-                            list.add(mImgInfo);
-                            Log.i("tag", mImgInfo.toString());
-                        }
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    if (count >= pageSize) break;
                 }
                 handler.sendEmptyMessage(0);
             }
@@ -151,25 +121,22 @@ public class MainAct extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                int count = 0;
-                for (String url : urlList) {
-                    count++;
-                    if (count > 20 * (pageNum - 1)) {
-                        try {
-                            Document doc = Jsoup.connect(url).get();
-                            Elements a = doc.select(".lazy");
-                            for (Element element : a) {
-                                Element parentElement = element.parent();
-                                String hrefStr = parentElement.attr("href");
-                                String imgStr = element.attr("data-original");
-                                ImgInfo mImgInfo = new ImgInfo(hrefStr, imgStr);
-                                list.add(mImgInfo);
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        if (count >= 20 * pageNum) break;
+                url = "https://www.kaka1234.com/HTM/pic/xiuren/list_101_"+pageNum+".html";
+                try {
+
+                    Document doc = Jsoup.connect(url).get();
+                    Elements divs = doc.select(".zxgx_list");
+                    Element div=  divs.get(0);
+                    Elements lis=   div.children().get(0).children();
+                    for (Element element : lis) {
+                        String hrefStr = element.child(0).attr("href");
+                        String imgStr = element.child(0).child(0).attr("src");
+                        ImgInfo mImgInfo = new ImgInfo(hrefStr, imgStr);
+                        list.add(mImgInfo);
+                        Log.i("tag", mImgInfo.toString());
                     }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
                 handler.sendEmptyMessage(0);
             }
@@ -189,6 +156,7 @@ public class MainAct extends AppCompatActivity {
 
 
     public void showDialog(View view) {
+        if(1==1)return;
         if (mCustomPopWindow == null) {
             View contentView = LayoutInflater.from(this).inflate(R.layout.popwindow_main_rank, null);
             RadioGroup rg = (RadioGroup) contentView.findViewById(R.id.rg);
@@ -260,6 +228,43 @@ public class MainAct extends AppCompatActivity {
     }
 
 
+
+    public class WelfarePhotoAdapter extends BaseQuickAdapter<ImgInfo> {
+
+
+        public WelfarePhotoAdapter(Context context) {
+            super(context);
+        }
+
+
+
+        @Override
+        protected int attachLayoutRes() {
+            return R.layout.item_common_linetogo;
+        }
+
+        @Override
+        protected void convert(final BaseViewHolder holder, final ImgInfo mImgInfo) {
+            final ImageView ivPhoto = holder.getView(R.id.iv_show);
+
+            Glide.with(mContext).load(mImgInfo.getImgUrl()).into(ivPhoto);
+
+            ivPhoto.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent it = new Intent(mContext, KaKaViewPageActivity.class);
+                    it.putExtra("url", mImgInfo.getUrl());
+                    mContext.startActivity(it);
+                }
+            });
+        }
+
+
+
+
+    }
+
+
     class Adapter extends BaseAdapter {
 
         @Override
@@ -282,27 +287,20 @@ public class MainAct extends AppCompatActivity {
             ViewHolder viewHolder = null;
             if (null == convertView) {
                 viewHolder = new ViewHolder();
-                convertView = LayoutInflater.from(MainAct.this).inflate(R.layout.item_common_linetogo, null);
+                convertView = LayoutInflater.from(KaKaActivity.this).inflate(R.layout.item_common_linetogo, null);
                 viewHolder.iv_show = (ImageView) convertView.findViewById(R.id.iv_show);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
             final ImgInfo mImgInfo = list.get(position);
-            GlideUrl glideUrl = new GlideUrl(mImgInfo.getImgUrl(), new LazyHeaders.Builder()
-                    .addHeader("Referer", "http://www.mzitu.com")
-                    .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:55.0) Gecko/20100101 Firefox/55.0")
-                    .addHeader("Accept", "  text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-                    .addHeader("Accept-Language", "zh-cn,zh;q=0.5")
-                    .addHeader("Accept-Charset", "GB2312,utf-8;q=0.7,*;q=0.7")
-                    .addHeader("Connection", "keep-alive")
-                    .build());
-            Glide.with(MainAct.this).load(glideUrl).into(viewHolder.iv_show);
+
+            Glide.with(KaKaActivity.this).load(mImgInfo.getImgUrl()).into(viewHolder.iv_show);
 
             viewHolder.iv_show.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent it = new Intent(MainAct.this, ViewPageActivity.class);
+                    Intent it = new Intent(KaKaActivity.this, KaKaViewPageActivity.class);
                     it.putExtra("url", mImgInfo.getUrl());
                     startActivity(it);
                 }
@@ -330,9 +328,9 @@ public class MainAct extends AppCompatActivity {
             Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
             mExitTime = System.currentTimeMillis();
         } else {
-            Intent it = new Intent(MainAct.this, LoginActivity.class);
-            it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            it.putExtra("close",true);
+            Intent it = new Intent(KaKaActivity.this, LoginActivity.class);
+            it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            it.putExtra("close", true);
             startActivity(it);
         }
     }

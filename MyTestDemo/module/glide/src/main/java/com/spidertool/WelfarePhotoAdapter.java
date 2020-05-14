@@ -38,7 +38,7 @@ public class WelfarePhotoAdapter extends BaseQuickAdapter<ImgInfo> {
                 .addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:55.0) Gecko/20100101 Firefox/55.0")
                 .addHeader("Accept", "  text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
                 .addHeader("Accept-Language", "zh-cn,zh;q=0.5")
-                .addHeader("Accept-Charset", "  GB2312,utf-8;q=0.7,*;q=0.7")
+                .addHeader("Accept-Charset", "GB2312,utf-8;q=0.7,*;q=0.7")
                 .addHeader("Connection", "keep-alive")
                 .build());
         Glide.with(mContext).load(glideUrl).into(ivPhoto);
